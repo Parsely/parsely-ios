@@ -13,6 +13,8 @@
 @interface ParselyTracker : NSObject
 {
     NSString *_rootUrl, *_apikey;
+    NSNumber *_flushInterval;
+    NSTimer *_timer;
     NSMutableArray *eventQueue;
 }
 

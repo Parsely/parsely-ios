@@ -27,6 +27,7 @@ ParselyTracker *instance;
 
 -(void)flush{
     // remove all events from the queue and send pixel requests
+    
     for(NSMutableDictionary *event in eventQueue){
         NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", [self rootUrl],
                                [event objectForKey:@"rand"],
@@ -60,26 +61,24 @@ ParselyTracker *instance;
     [self setApikey:apikey];
 }
 
--(void)setApikey:(NSString *)key{
-    _apikey = key;
+-(void)setFlushTimer{
+    @synchronized(self){
+        [self stopFlushTimer];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:[self flushInterval]
+                                                  target:self
+                                                selector:@selector(flush)
+                                                userInfo:nil
+                                                 repeats:YES];
+    }
 }
 
--(NSString *)apikey{
-    return _apikey;
-}
-
--(NSString *)rootUrl{
-    return _rootUrl;
-}
-
--(NSString *)urlEncodeString:(NSString *)string{
-    NSString *retval = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                          NULL,
-                                                                          (__bridge CFStringRef) string,
-                                                                          NULL,
-                                                                          CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                          kCFStringEncodingUTF8));
-    return retval;
+-(void)stopFlushTimer{
+    @synchronized(self){
+        if(_timer){
+            [_timer invalidate];
+        }
+        _timer = nil;
+    }
 }
 
 // singleton boilerplate
@@ -100,6 +99,8 @@ ParselyTracker *instance;
 #else
             _rootUrl = @"http://the-actual-pixel-server";
 #endif
+            _flushInterval = [NSNumber numberWithInt:5];
+            [self setFlushTimer];
         }
         return self;
     }
@@ -117,6 +118,36 @@ ParselyTracker *instance;
 
 - (id)copyWithZone:(NSZone *)zone{
     return self;
+}
+
+// accessors
+
+-(void)setApikey:(NSString *)key{
+    _apikey = key;
+}
+
+-(NSString *)apikey{
+    return _apikey;
+}
+
+-(NSString *)rootUrl{
+    return _rootUrl;
+}
+
+-(int)flushInterval{
+    return [_flushInterval intValue];
+}
+
+// helpers
+
+-(NSString *)urlEncodeString:(NSString *)string{
+    NSString *retval = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                             NULL,
+                                                                                             (__bridge CFStringRef) string,
+                                                                                             NULL,
+                                                                                             CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                             kCFStringEncodingUTF8));
+    return retval;
 }
 
 @end

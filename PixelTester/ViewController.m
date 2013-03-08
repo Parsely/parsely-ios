@@ -18,7 +18,6 @@
     [super viewDidLoad];
     
     [[ParselyTracker sharedInstance] track:@"http://arstechnica.com/some-old-thing"];
-    [[ParselyTracker sharedInstance] flush];
 }
 
 - (void)didReceiveMemoryWarning
