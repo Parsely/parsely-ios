@@ -19,6 +19,7 @@ ParselyTracker *instance;
     [params setObject:[self urlEncodeString:[NSString stringWithFormat:@"{\"ts\": %f}", timestamp]] forKey:@"data"];
     
     [eventQueue addObject:params];
+    [self persistQueue];
     
     if(_timer == nil){
         [self setFlushTimer];
@@ -37,7 +38,7 @@ ParselyTracker *instance;
     }
     
     if(![self isReachable]){
-        PLog(@"Wifi network unreachable. Not flushing.");
+        PLog(@"Network unreachable. Not flushing.");
         [self persistQueue];
         return;
     }
@@ -184,7 +185,8 @@ ParselyTracker *instance;
 }
 
 -(BOOL)isReachable{
-    return [[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
+    return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
+    || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN)
 #ifdef DEBUG
     && !__debug_wifioff
 #endif
