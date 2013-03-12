@@ -23,6 +23,7 @@
 
 -(NSString *)rootUrl;
 -(NSInteger)queueSize;
+-(NSInteger)storedEventsCount;
 -(NSInteger)flushInterval;
 -(BOOL)flushTimerIsActive;
 #ifdef DEBUG

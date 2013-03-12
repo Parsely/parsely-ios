@@ -207,6 +207,10 @@ ParselyTracker *instance;
     return [eventQueue count];
 }
 
+-(NSInteger)storedEventsCount{
+    return [[self getStoredQueue] count];
+}
+
 #ifdef DEBUG
 -(void)__debugWifiOff{
     __debug_wifioff = YES;
