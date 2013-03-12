@@ -51,27 +51,31 @@ ParselyTracker *instance;
     
     PLog(@"Flushing queue...");
     for(NSMutableDictionary *event in newQueue){
-        PLog(@"Flushing event %@", event);
-        NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", [self rootUrl],
-                               [event objectForKey:@"rand"],
-                               [event objectForKey:@"idsite"],
-                               [event objectForKey:@"url"],
-                               [event objectForKey:@"urlref"],
-                               [event objectForKey:@"data"]];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                               cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                           timeoutInterval:10];
-        [request setHTTPMethod:@"GET"];
-        
-        NSError *requestError;
-        NSURLResponse *urlResponse = nil;
-        
-        [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+        [self flushEvent:event];
     }
     [eventQueue removeAllObjects];
     [self purgeStoredQueue];
     PLog(@"Done");
+}
+
+-(void)flushEvent:(NSDictionary *)event{
+    PLog(@"Flushing event %@", event);
+    NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", [self rootUrl],
+                     [event objectForKey:@"rand"],
+                     [event objectForKey:@"idsite"],
+                     [event objectForKey:@"url"],
+                     [event objectForKey:@"urlref"],
+                     [event objectForKey:@"data"]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    [request setHTTPMethod:@"GET"];
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
 }
 
 -(void)persistQueue{
