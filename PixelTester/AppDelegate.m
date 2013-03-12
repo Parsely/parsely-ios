@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  PixelTester
-//
-//  Created by Emmett Butler on 3/8/13.
-//  Copyright (c) 2013 Emmett Butler. All rights reserved.
-//
-
 #import "AppDelegate.h"
 
 #import "ViewController.h"

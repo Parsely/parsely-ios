@@ -1,11 +1,3 @@
-//
-//  ViewController.m
-//  PixelTester
-//
-//  Created by Emmett Butler on 3/8/13.
-//  Copyright (c) 2013 Emmett Butler. All rights reserved.
-//
-
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -45,7 +37,8 @@
     [self.view addSubview:connectionButton];
     
     queueStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, bounds.size.height-70, bounds.size.width, 40)];
-    [queueStatusLabel setText:[NSString stringWithFormat:@"%d queued events, flush rate %ds", [[ParselyTracker sharedInstance] queueSize], [[ParselyTracker sharedInstance] flushInterval]]];
+    [queueStatusLabel setText:[NSString stringWithFormat:@"%d queued events, flush rate %ds",
+                               [[ParselyTracker sharedInstance] queueSize], [[ParselyTracker sharedInstance] flushInterval]]];
     [queueStatusLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:queueStatusLabel];
     

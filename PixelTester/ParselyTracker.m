@@ -1,11 +1,3 @@
-//
-//  ParselyTracker.m
-//  PixelTester
-//
-//  Created by Emmett Butler on 3/8/13.
-//  Copyright (c) 2013 Emmett Butler. All rights reserved.
-//
-
 #import "ParselyTracker.h"
 #import "Reachability.h"
 

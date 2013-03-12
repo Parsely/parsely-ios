@@ -14,11 +14,9 @@
 		AABC76C916EF693800CEA20B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AABC76C616EF693800CEA20B /* Default-568h@2x.png */; };
 		AABC76CA16EF693800CEA20B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AABC76C716EF693800CEA20B /* Default.png */; };
 		AABC76CB16EF693800CEA20B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AABC76C816EF693800CEA20B /* Default@2x.png */; };
-		AABC76CE16EF6A1F00CEA20B /* ParselySDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABC76CC16EF6A1F00CEA20B /* ParselySDK-Info.plist */; };
 		AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2016EA66B300358E79 /* UIKit.framework */; };
 		AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2216EA66B300358E79 /* Foundation.framework */; };
 		AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2416EA66B300358E79 /* CoreGraphics.framework */; };
-		AAE37F2B16EA66B400358E79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F2916EA66B400358E79 /* InfoPlist.strings */; };
 		AAE37F2D16EA66B400358E79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F2C16EA66B400358E79 /* main.m */; };
 		AAE37F3116EA66B400358E79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F3016EA66B400358E79 /* AppDelegate.m */; };
 		AAE37F3A16EA66B400358E79 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F3916EA66B400358E79 /* ViewController.m */; };
@@ -40,7 +38,6 @@
 		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAE37F2416EA66B300358E79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		AAE37F2A16EA66B400358E79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AAE37F2C16EA66B400358E79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
 		AAE37F2F16EA66B400358E79 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AAE37F3016EA66B400358E79 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -70,7 +67,6 @@
 			children = (
 				AABC76CC16EF6A1F00CEA20B /* ParselySDK-Info.plist */,
 				AABC76CD16EF6A1F00CEA20B /* ParselySDK-Prefix.pch */,
-				AAE37F2916EA66B400358E79 /* InfoPlist.strings */,
 				AAE37F2C16EA66B400358E79 /* main.m */,
 				AABC76C616EF693800CEA20B /* Default-568h@2x.png */,
 				AABC76C716EF693800CEA20B /* Default.png */,
@@ -176,13 +172,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAE37F2B16EA66B400358E79 /* InfoPlist.strings in Resources */,
 				AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */,
 				AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */,
 				AABC76C916EF693800CEA20B /* Default-568h@2x.png in Resources */,
 				AABC76CA16EF693800CEA20B /* Default.png in Resources */,
 				AABC76CB16EF693800CEA20B /* Default@2x.png in Resources */,
-				AABC76CE16EF6A1F00CEA20B /* ParselySDK-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,18 +196,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		AAE37F2916EA66B400358E79 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AAE37F2A16EA66B400358E79 /* en */,
-			);
-			name = InfoPlist.strings;
-			path = ..;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AAE37F4116EA66B400358E79 /* Debug */ = {
@@ -278,8 +260,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PixelTester/ParselySDK-Prefix.pch";
-				INFOPLIST_FILE = "PixelTester/ParselySDK-Info.plist";
+				GCC_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
+				INFOPLIST_FILE = "PixelTester/Resources/ParselySDK-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
 				PRODUCT_NAME = ParselySDK;
 				WRAPPER_EXTENSION = app;
 			};
@@ -289,8 +272,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PixelTester/ParselySDK-Prefix.pch";
-				INFOPLIST_FILE = "PixelTester/ParselySDK-Info.plist";
+				GCC_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
+				INFOPLIST_FILE = "PixelTester/Resources/ParselySDK-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
 				PRODUCT_NAME = ParselySDK;
 				WRAPPER_EXTENSION = app;
 			};
