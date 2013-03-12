@@ -9,20 +9,27 @@
 #import <Foundation/Foundation.h>
 
 #define MOCKSERVER 1
+#define PLog( s, ... ) NSLog( @"<%@:(%d)> [Parsely] %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 
 @interface ParselyTracker : NSObject
 {
     NSString *_rootUrl, *_apikey;
-    NSNumber *_flushInterval;
+    NSInteger _flushInterval;
     NSTimer *_timer;
+    BOOL __debug_wifioff;
     NSMutableArray *eventQueue;
 }
 
 +(ParselyTracker *)sharedInstance;
--(NSString *)rootUrl;
++(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
+-(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
 
-// initial setup of invariant data
--(void)configure:(NSString *)apikey;
+-(NSString *)rootUrl;
+-(NSInteger)queueSize;
+-(NSInteger)flushInterval;
+-(void)__debugWifiOn;
+-(void)__debugWifiOff;
+-(BOOL)flushTimerIsActive;
 
 // add a pixel request to the queue
 -(void)track:(NSString *)url;

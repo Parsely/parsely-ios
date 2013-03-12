@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AAE37F1C16EA66B300358E79"
-               BuildableName = "PixelTester.app"
-               BlueprintName = "PixelTester"
-               ReferencedContainer = "container:PixelTester.xcodeproj">
+               BuildableName = "ParselySDK.app"
+               BlueprintName = "ParselySDK"
+               ReferencedContainer = "container:ParselySDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AAE37F1C16EA66B300358E79"
-            BuildableName = "PixelTester.app"
-            BlueprintName = "PixelTester"
-            ReferencedContainer = "container:PixelTester.xcodeproj">
+            BuildableName = "ParselySDK.app"
+            BlueprintName = "ParselySDK"
+            ReferencedContainer = "container:ParselySDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AAE37F1C16EA66B300358E79"
-            BuildableName = "PixelTester.app"
-            BlueprintName = "PixelTester"
-            ReferencedContainer = "container:PixelTester.xcodeproj">
+            BuildableName = "ParselySDK.app"
+            BlueprintName = "ParselySDK"
+            ReferencedContainer = "container:ParselySDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AAE37F1C16EA66B300358E79"
-            BuildableName = "PixelTester.app"
-            BlueprintName = "PixelTester"
-            ReferencedContainer = "container:PixelTester.xcodeproj">
+            BuildableName = "ParselySDK.app"
+            BlueprintName = "ParselySDK"
+            ReferencedContainer = "container:ParselySDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA0A86CE16EE61D3001ECCAE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0A86CD16EE61D3001ECCAE /* Reachability.m */; };
+		AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */; };
+		AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */; };
+		AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */; };
 		AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2016EA66B300358E79 /* UIKit.framework */; };
 		AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2216EA66B300358E79 /* Foundation.framework */; };
 		AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2416EA66B300358E79 /* CoreGraphics.framework */; };
@@ -17,20 +21,23 @@
 		AAE37F3516EA66B400358E79 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F3416EA66B400358E79 /* Default@2x.png */; };
 		AAE37F3716EA66B400358E79 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F3616EA66B400358E79 /* Default-568h@2x.png */; };
 		AAE37F3A16EA66B400358E79 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F3916EA66B400358E79 /* ViewController.m */; };
-		AAE37F3D16EA66B400358E79 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F3B16EA66B400358E79 /* ViewController_iPhone.xib */; };
-		AAE37F4016EA66B400358E79 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F3E16EA66B400358E79 /* ViewController_iPad.xib */; };
 		AAE37F4816EA804B00358E79 /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F4716EA804B00358E79 /* ParselyTracker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AAE37F1D16EA66B300358E79 /* PixelTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0A86CC16EE61D3001ECCAE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		AA0A86CD16EE61D3001ECCAE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_small.png; sourceTree = "<group>"; };
+		AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_retina.png; sourceTree = "<group>"; };
+		AAE37F1D16EA66B300358E79 /* ParselySDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParselySDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAE37F2416EA66B300358E79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		AAE37F2816EA66B300358E79 /* PixelTester-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PixelTester-Info.plist"; sourceTree = "<group>"; };
+		AAE37F2816EA66B300358E79 /* ParselySDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ParselySDK-Info.plist"; sourceTree = "<group>"; };
 		AAE37F2A16EA66B400358E79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AAE37F2C16EA66B400358E79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AAE37F2E16EA66B400358E79 /* PixelTester-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PixelTester-Prefix.pch"; sourceTree = "<group>"; };
+		AAE37F2E16EA66B400358E79 /* ParselySDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ParselySDK-Prefix.pch"; sourceTree = "<group>"; };
 		AAE37F2F16EA66B400358E79 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AAE37F3016EA66B400358E79 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AAE37F3216EA66B400358E79 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -38,8 +45,6 @@
 		AAE37F3616EA66B400358E79 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AAE37F3816EA66B400358E79 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AAE37F3916EA66B400358E79 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		AAE37F3C16EA66B400358E79 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		AAE37F3F16EA66B400358E79 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		AAE37F4616EA804B00358E79 /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
 		AAE37F4716EA804B00358E79 /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */,
 				AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */,
 				AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */,
 				AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */,
@@ -61,6 +67,8 @@
 		AAE37F1416EA66B300358E79 = {
 			isa = PBXGroup;
 			children = (
+				AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */,
+				AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */,
 				AAE37F2616EA66B300358E79 /* PixelTester */,
 				AAE37F1F16EA66B300358E79 /* Frameworks */,
 				AAE37F1E16EA66B300358E79 /* Products */,
@@ -70,7 +78,7 @@
 		AAE37F1E16EA66B300358E79 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AAE37F1D16EA66B300358E79 /* PixelTester.app */,
+				AAE37F1D16EA66B300358E79 /* ParselySDK.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +86,7 @@
 		AAE37F1F16EA66B300358E79 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */,
 				AAE37F2016EA66B300358E79 /* UIKit.framework */,
 				AAE37F2216EA66B300358E79 /* Foundation.framework */,
 				AAE37F2416EA66B300358E79 /* CoreGraphics.framework */,
@@ -94,8 +103,8 @@
 				AAE37F3916EA66B400358E79 /* ViewController.m */,
 				AAE37F4616EA804B00358E79 /* ParselyTracker.h */,
 				AAE37F4716EA804B00358E79 /* ParselyTracker.m */,
-				AAE37F3B16EA66B400358E79 /* ViewController_iPhone.xib */,
-				AAE37F3E16EA66B400358E79 /* ViewController_iPad.xib */,
+				AA0A86CC16EE61D3001ECCAE /* Reachability.h */,
+				AA0A86CD16EE61D3001ECCAE /* Reachability.m */,
 				AAE37F2716EA66B300358E79 /* Supporting Files */,
 			);
 			path = PixelTester;
@@ -104,10 +113,10 @@
 		AAE37F2716EA66B300358E79 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AAE37F2816EA66B300358E79 /* PixelTester-Info.plist */,
+				AAE37F2816EA66B300358E79 /* ParselySDK-Info.plist */,
 				AAE37F2916EA66B400358E79 /* InfoPlist.strings */,
 				AAE37F2C16EA66B400358E79 /* main.m */,
-				AAE37F2E16EA66B400358E79 /* PixelTester-Prefix.pch */,
+				AAE37F2E16EA66B400358E79 /* ParselySDK-Prefix.pch */,
 				AAE37F3216EA66B400358E79 /* Default.png */,
 				AAE37F3416EA66B400358E79 /* Default@2x.png */,
 				AAE37F3616EA66B400358E79 /* Default-568h@2x.png */,
@@ -118,9 +127,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AAE37F1C16EA66B300358E79 /* PixelTester */ = {
+		AAE37F1C16EA66B300358E79 /* ParselySDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "PixelTester" */;
+			buildConfigurationList = AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "ParselySDK" */;
 			buildPhases = (
 				AAE37F1916EA66B300358E79 /* Sources */,
 				AAE37F1A16EA66B300358E79 /* Frameworks */,
@@ -130,9 +139,9 @@
 			);
 			dependencies = (
 			);
-			name = PixelTester;
+			name = ParselySDK;
 			productName = PixelTester;
-			productReference = AAE37F1D16EA66B300358E79 /* PixelTester.app */;
+			productReference = AAE37F1D16EA66B300358E79 /* ParselySDK.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -144,7 +153,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Emmett Butler";
 			};
-			buildConfigurationList = AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "PixelTester" */;
+			buildConfigurationList = AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "ParselySDK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -156,7 +165,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AAE37F1C16EA66B300358E79 /* PixelTester */,
+				AAE37F1C16EA66B300358E79 /* ParselySDK */,
 			);
 		};
 /* End PBXProject section */
@@ -170,8 +179,8 @@
 				AAE37F3316EA66B400358E79 /* Default.png in Resources */,
 				AAE37F3516EA66B400358E79 /* Default@2x.png in Resources */,
 				AAE37F3716EA66B400358E79 /* Default-568h@2x.png in Resources */,
-				AAE37F3D16EA66B400358E79 /* ViewController_iPhone.xib in Resources */,
-				AAE37F4016EA66B400358E79 /* ViewController_iPad.xib in Resources */,
+				AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */,
+				AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +195,7 @@
 				AAE37F3116EA66B400358E79 /* AppDelegate.m in Sources */,
 				AAE37F3A16EA66B400358E79 /* ViewController.m in Sources */,
 				AAE37F4816EA804B00358E79 /* ParselyTracker.m in Sources */,
+				AA0A86CE16EE61D3001ECCAE /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,22 +208,6 @@
 				AAE37F2A16EA66B400358E79 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		AAE37F3B16EA66B400358E79 /* ViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AAE37F3C16EA66B400358E79 /* en */,
-			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		AAE37F3E16EA66B400358E79 /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AAE37F3F16EA66B400358E79 /* en */,
-			);
-			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -281,9 +275,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PixelTester/PixelTester-Prefix.pch";
-				INFOPLIST_FILE = "PixelTester/PixelTester-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "PixelTester/ParselySDK-Prefix.pch";
+				INFOPLIST_FILE = "PixelTester/ParselySDK-Info.plist";
+				PRODUCT_NAME = ParselySDK;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -292,9 +286,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PixelTester/PixelTester-Prefix.pch";
-				INFOPLIST_FILE = "PixelTester/PixelTester-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "PixelTester/ParselySDK-Prefix.pch";
+				INFOPLIST_FILE = "PixelTester/ParselySDK-Info.plist";
+				PRODUCT_NAME = ParselySDK;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -302,7 +296,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "PixelTester" */ = {
+		AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "ParselySDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAE37F4116EA66B400358E79 /* Debug */,
@@ -311,13 +305,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "PixelTester" */ = {
+		AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "ParselySDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAE37F4416EA66B400358E79 /* Debug */,
 				AAE37F4516EA66B400358E79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

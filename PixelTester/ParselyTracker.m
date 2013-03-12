@@ -7,6 +7,7 @@
 //
 
 #import "ParselyTracker.h"
+#import "Reachability.h"
 
 @implementation ParselyTracker
 
@@ -15,6 +16,7 @@ ParselyTracker *instance;
 -(void)track:(NSString *)url{
     // add an event to the queue
     
+    PLog(@"Track called for test url");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[NSString stringWithFormat:@"%lli", 1000000000000 + arc4random() % 9999999999999] forKey:@"rand"];
 	[params setObject:[self apikey] forKey:@"idsite"];
@@ -23,12 +25,30 @@ ParselyTracker *instance;
     [params setObject:@"" forKey:@"data"];
     
     [eventQueue addObject:params];
+    
+    if(_timer == nil){
+        [self setFlushTimer];
+        PLog(@"Flush timer set to %d", [self flushInterval]);
+    }
 }
 
 -(void)flush{
     // remove all events from the queue and send pixel requests
     
+    if([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] != ReachableViaWiFi || __debug_wifioff){
+        PLog(@"Wifi network unreachable. Not flushing.");
+        return;
+    }
+    
+    if([eventQueue count] == 0){
+        PLog(@"Event queue empty, flush timer cleared.");
+        [self stopFlushTimer];
+        return;
+    }
+    
+    PLog(@"Flushing queue...");
     for(NSMutableDictionary *event in eventQueue){
+        PLog(@"Flushing event %@", [event objectForKey:@"url"]);
         NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", [self rootUrl],
                                [event objectForKey:@"rand"],
                                [event objectForKey:@"idsite"],
@@ -39,7 +59,7 @@ ParselyTracker *instance;
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                            timeoutInterval:10];
-        [request setHTTPMethod: @"GET"];
+        [request setHTTPMethod:@"GET"];
         
         NSError *requestError;
         NSURLResponse *urlResponse = nil;
@@ -47,6 +67,7 @@ ParselyTracker *instance;
         [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
     }
     [eventQueue removeAllObjects];
+    PLog(@"Done");
 }
 
 -(void)persistQueue{
@@ -55,10 +76,6 @@ ParselyTracker *instance;
 
 -(void)persistSingleRequest{
     // save a single event from the queue to persistent storage
-}
-
--(void)configure:(NSString *)apikey{
-    [self setApikey:apikey];
 }
 
 -(void)setFlushTimer{
@@ -85,22 +102,28 @@ ParselyTracker *instance;
 
 +(ParselyTracker *)sharedInstance{
     if(instance == nil){
-        instance = [[self alloc] init];
+        PLog(@"Warning: sharedInstance called before sharedInstanceWithApiKey:");
     }
     return instance;
 }
 
--(id)init{
++(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey{
+    @synchronized(self) {
+        if (instance == nil) {
+            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:60 ];
+        }
+        return instance;
+    }
+}
+
+-(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint{
     @synchronized(self){
         if(self=[super init]){
+            _apikey = apikey;
             eventQueue = [NSMutableArray array];
-#ifdef MOCKSERVER
+            _flushInterval = flushint;
+            __debug_wifioff = NO;
             _rootUrl = @"http://localhost:8000/plogger/";
-#else
-            _rootUrl = @"http://the-actual-pixel-server";
-#endif
-            _flushInterval = [NSNumber numberWithInt:5];
-            [self setFlushTimer];
         }
         return self;
     }
@@ -134,8 +157,24 @@ ParselyTracker *instance;
     return _rootUrl;
 }
 
--(int)flushInterval{
-    return [_flushInterval intValue];
+-(NSInteger)flushInterval{
+    return _flushInterval;
+}
+
+-(NSInteger)queueSize{
+    return [eventQueue count];
+}
+
+-(void)__debugWifiOff{
+    __debug_wifioff = YES;
+}
+
+-(void)__debugWifiOn{
+    __debug_wifioff = NO;
+}
+
+-(BOOL)flushTimerIsActive{
+    return _timer != nil;
 }
 
 // helpers
