@@ -1,7 +1,10 @@
 #import <Foundation/Foundation.h>
 
-#define MOCKSERVER 1
+#ifdef DEBUG
 #define PLog( s, ... ) NSLog( @"<%@:(%d)> [Parsely] %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define PLog(s, ...)
+#endif
 
 @interface ParselyTracker : NSObject
 {
