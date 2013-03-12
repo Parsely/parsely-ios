@@ -37,12 +37,6 @@ ParselyTracker *instance;
         return;
     }
     
-    if(![self isReachable]){
-        PLog(@"Network unreachable. Not flushing.");
-        [self persistQueue];
-        return;
-    }
-    
     // prepare to flush by merging the memory queue with the stored queue
     NSArray *storedQueue = [self getStoredQueue];
     NSMutableSet *newQueue = [NSMutableSet setWithArray:eventQueue];
@@ -150,7 +144,7 @@ ParselyTracker *instance;
             _storageKey = @"parsely-events";
             _flushInterval = flushint;
             __debug_wifioff = NO;
-            _rootUrl = @"http://localhost:8000/plogger/";
+            _rootUrl = @"http://pixel.parsely.com/plogger/";
             
             if([self getStoredQueue]){
                 [self setFlushTimer];
