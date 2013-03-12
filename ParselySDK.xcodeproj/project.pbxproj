@@ -11,15 +11,16 @@
 		AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */; };
 		AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */; };
 		AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */; };
+		AABC76C916EF693800CEA20B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AABC76C616EF693800CEA20B /* Default-568h@2x.png */; };
+		AABC76CA16EF693800CEA20B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AABC76C716EF693800CEA20B /* Default.png */; };
+		AABC76CB16EF693800CEA20B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AABC76C816EF693800CEA20B /* Default@2x.png */; };
+		AABC76CE16EF6A1F00CEA20B /* ParselySDK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABC76CC16EF6A1F00CEA20B /* ParselySDK-Info.plist */; };
 		AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2016EA66B300358E79 /* UIKit.framework */; };
 		AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2216EA66B300358E79 /* Foundation.framework */; };
 		AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2416EA66B300358E79 /* CoreGraphics.framework */; };
 		AAE37F2B16EA66B400358E79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F2916EA66B400358E79 /* InfoPlist.strings */; };
 		AAE37F2D16EA66B400358E79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F2C16EA66B400358E79 /* main.m */; };
 		AAE37F3116EA66B400358E79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F3016EA66B400358E79 /* AppDelegate.m */; };
-		AAE37F3316EA66B400358E79 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F3216EA66B400358E79 /* Default.png */; };
-		AAE37F3516EA66B400358E79 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F3416EA66B400358E79 /* Default@2x.png */; };
-		AAE37F3716EA66B400358E79 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE37F3616EA66B400358E79 /* Default-568h@2x.png */; };
 		AAE37F3A16EA66B400358E79 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F3916EA66B400358E79 /* ViewController.m */; };
 		AAE37F4816EA804B00358E79 /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F4716EA804B00358E79 /* ParselyTracker.m */; };
 /* End PBXBuildFile section */
@@ -30,19 +31,19 @@
 		AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_small.png; sourceTree = "<group>"; };
 		AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_retina.png; sourceTree = "<group>"; };
+		AABC76C616EF693800CEA20B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AABC76C716EF693800CEA20B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		AABC76C816EF693800CEA20B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		AABC76CC16EF6A1F00CEA20B /* ParselySDK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ParselySDK-Info.plist"; sourceTree = "<group>"; };
+		AABC76CD16EF6A1F00CEA20B /* ParselySDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ParselySDK-Prefix.pch"; sourceTree = "<group>"; };
 		AAE37F1D16EA66B300358E79 /* ParselySDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParselySDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAE37F2416EA66B300358E79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		AAE37F2816EA66B300358E79 /* ParselySDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ParselySDK-Info.plist"; sourceTree = "<group>"; };
 		AAE37F2A16EA66B400358E79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AAE37F2C16EA66B400358E79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AAE37F2E16EA66B400358E79 /* ParselySDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ParselySDK-Prefix.pch"; sourceTree = "<group>"; };
+		AAE37F2C16EA66B400358E79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
 		AAE37F2F16EA66B400358E79 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AAE37F3016EA66B400358E79 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AAE37F3216EA66B400358E79 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		AAE37F3416EA66B400358E79 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		AAE37F3616EA66B400358E79 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AAE37F3816EA66B400358E79 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AAE37F3916EA66B400358E79 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AAE37F4616EA804B00358E79 /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
@@ -64,6 +65,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AABC76C516EF693800CEA20B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AABC76CC16EF6A1F00CEA20B /* ParselySDK-Info.plist */,
+				AABC76CD16EF6A1F00CEA20B /* ParselySDK-Prefix.pch */,
+				AAE37F2916EA66B400358E79 /* InfoPlist.strings */,
+				AAE37F2C16EA66B400358E79 /* main.m */,
+				AABC76C616EF693800CEA20B /* Default-568h@2x.png */,
+				AABC76C716EF693800CEA20B /* Default.png */,
+				AABC76C816EF693800CEA20B /* Default@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		AAE37F1416EA66B300358E79 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +112,7 @@
 		AAE37F2616EA66B300358E79 /* PixelTester */ = {
 			isa = PBXGroup;
 			children = (
+				AABC76C516EF693800CEA20B /* Resources */,
 				AAE37F2F16EA66B400358E79 /* AppDelegate.h */,
 				AAE37F3016EA66B400358E79 /* AppDelegate.m */,
 				AAE37F3816EA66B400358E79 /* ViewController.h */,
@@ -105,23 +121,8 @@
 				AAE37F4716EA804B00358E79 /* ParselyTracker.m */,
 				AA0A86CC16EE61D3001ECCAE /* Reachability.h */,
 				AA0A86CD16EE61D3001ECCAE /* Reachability.m */,
-				AAE37F2716EA66B300358E79 /* Supporting Files */,
 			);
 			path = PixelTester;
-			sourceTree = "<group>";
-		};
-		AAE37F2716EA66B300358E79 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AAE37F2816EA66B300358E79 /* ParselySDK-Info.plist */,
-				AAE37F2916EA66B400358E79 /* InfoPlist.strings */,
-				AAE37F2C16EA66B400358E79 /* main.m */,
-				AAE37F2E16EA66B400358E79 /* ParselySDK-Prefix.pch */,
-				AAE37F3216EA66B400358E79 /* Default.png */,
-				AAE37F3416EA66B400358E79 /* Default@2x.png */,
-				AAE37F3616EA66B400358E79 /* Default-568h@2x.png */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,11 +177,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAE37F2B16EA66B400358E79 /* InfoPlist.strings in Resources */,
-				AAE37F3316EA66B400358E79 /* Default.png in Resources */,
-				AAE37F3516EA66B400358E79 /* Default@2x.png in Resources */,
-				AAE37F3716EA66B400358E79 /* Default-568h@2x.png in Resources */,
 				AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */,
 				AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */,
+				AABC76C916EF693800CEA20B /* Default-568h@2x.png in Resources */,
+				AABC76CA16EF693800CEA20B /* Default.png in Resources */,
+				AABC76CB16EF693800CEA20B /* Default@2x.png in Resources */,
+				AABC76CE16EF6A1F00CEA20B /* ParselySDK-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +210,7 @@
 				AAE37F2A16EA66B400358E79 /* en */,
 			);
 			name = InfoPlist.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
