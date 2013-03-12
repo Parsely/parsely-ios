@@ -30,7 +30,7 @@ ParselyTracker *instance;
     // remove all events from the queue and send pixel requests
     
     PLog(@"%d events in queue, %d stored events", [eventQueue count], [[self getStoredQueue] count]);
-    if([eventQueue count] == 0){
+    if([eventQueue count] == 0 && [[self getStoredQueue] count] == 0){
         PLog(@"Event queue empty, flush timer cleared.");
         [self stopFlushTimer];
         return;
@@ -146,6 +146,10 @@ ParselyTracker *instance;
             _flushInterval = flushint;
             __debug_wifioff = NO;
             _rootUrl = @"http://localhost:8000/plogger/";
+            
+            if([self getStoredQueue]){
+                [self setFlushTimer];
+            }
         }
         return self;
     }
