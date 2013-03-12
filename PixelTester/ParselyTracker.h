@@ -8,11 +8,13 @@
 
 @interface ParselyTracker : NSObject
 {
-    NSString *_rootUrl, *_apikey;
+    NSString *_rootUrl, *_apikey, *_storageKey;
     NSInteger _flushInterval;
     NSTimer *_timer;
-    BOOL __debug_wifioff;
     NSMutableArray *eventQueue;
+#ifdef DEBUG
+    BOOL __debug_wifioff;
+#endif
 }
 
 +(ParselyTracker *)sharedInstance;
@@ -22,9 +24,11 @@
 -(NSString *)rootUrl;
 -(NSInteger)queueSize;
 -(NSInteger)flushInterval;
+-(BOOL)flushTimerIsActive;
+#ifdef DEBUG
 -(void)__debugWifiOn;
 -(void)__debugWifiOff;
--(BOOL)flushTimerIsActive;
+#endif
 
 // add a pixel request to the queue
 -(void)track:(NSString *)url;

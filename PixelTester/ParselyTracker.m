@@ -8,13 +8,15 @@ ParselyTracker *instance;
 -(void)track:(NSString *)url{
     // add an event to the queue
     
+    NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
+    
     PLog(@"Track called for test url");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[NSString stringWithFormat:@"%lli", 1000000000000 + arc4random() % 9999999999999] forKey:@"rand"];
 	[params setObject:[self apikey] forKey:@"idsite"];
     [params setObject:[self urlEncodeString:url] forKey:@"url"];
     [params setObject:@"mobile" forKey:@"urlref"];
-    [params setObject:@"" forKey:@"data"];
+    [params setObject:[self urlEncodeString:[NSString stringWithFormat:@"{\"ts\": %f}", timestamp]] forKey:@"data"];
     
     [eventQueue addObject:params];
     
@@ -27,20 +29,29 @@ ParselyTracker *instance;
 -(void)flush{
     // remove all events from the queue and send pixel requests
     
-    if([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] != ReachableViaWiFi || __debug_wifioff){
-        PLog(@"Wifi network unreachable. Not flushing.");
-        return;
-    }
-    
+    PLog(@"%d events in queue, %d stored events", [eventQueue count], [[self getStoredQueue] count]);
     if([eventQueue count] == 0){
         PLog(@"Event queue empty, flush timer cleared.");
         [self stopFlushTimer];
         return;
     }
     
+    if(![self isReachable]){
+        PLog(@"Wifi network unreachable. Not flushing.");
+        [self persistQueue];
+        return;
+    }
+    
+    // prepare to flush by merging the memory queue with the stored queue
+    NSArray *storedQueue = [self getStoredQueue];
+    NSMutableSet *newQueue = [NSMutableSet setWithArray:eventQueue];
+    if(storedQueue){
+        [newQueue addObjectsFromArray:storedQueue];
+    }
+    
     PLog(@"Flushing queue...");
-    for(NSMutableDictionary *event in eventQueue){
-        PLog(@"Flushing event %@", [event objectForKey:@"url"]);
+    for(NSMutableDictionary *event in newQueue){
+        PLog(@"Flushing event %@", event);
         NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", [self rootUrl],
                                [event objectForKey:@"rand"],
                                [event objectForKey:@"idsite"],
@@ -59,15 +70,29 @@ ParselyTracker *instance;
         [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
     }
     [eventQueue removeAllObjects];
+    [self purgeStoredQueue];
     PLog(@"Done");
 }
 
 -(void)persistQueue{
     // save the entire event queue to persistent storage
+    
+    PLog(@"Persisting event queue");
+    // get the previously stored queue, add current queue and re-store
+    NSMutableSet *storedQueue = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[self storageKey]]];
+    [storedQueue addObjectsFromArray:eventQueue];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[storedQueue allObjects] forKey:[self storageKey]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)persistSingleRequest{
-    // save a single event from the queue to persistent storage
+-(void)purgeStoredQueue{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:[self storageKey]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSArray *)getStoredQueue{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[self storageKey]];
 }
 
 -(void)setFlushTimer{
@@ -102,7 +127,11 @@ ParselyTracker *instance;
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey{
     @synchronized(self) {
         if (instance == nil) {
-            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:60 ];
+#ifdef DEBUG
+            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:5];
+#else
+            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:60];
+#endif
         }
         return instance;
     }
@@ -113,6 +142,7 @@ ParselyTracker *instance;
         if(self=[super init]){
             _apikey = apikey;
             eventQueue = [NSMutableArray array];
+            _storageKey = @"parsely-events";
             _flushInterval = flushint;
             __debug_wifioff = NO;
             _rootUrl = @"http://localhost:8000/plogger/";
@@ -145,6 +175,18 @@ ParselyTracker *instance;
     return _apikey;
 }
 
+-(BOOL)isReachable{
+    return [[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
+#ifdef DEBUG
+    && !__debug_wifioff
+#endif
+    ;
+}
+
+-(NSString *)storageKey{
+    return _storageKey;
+}
+
 -(NSString *)rootUrl{
     return _rootUrl;
 }
@@ -157,6 +199,7 @@ ParselyTracker *instance;
     return [eventQueue count];
 }
 
+#ifdef DEBUG
 -(void)__debugWifiOff{
     __debug_wifioff = YES;
 }
@@ -164,6 +207,7 @@ ParselyTracker *instance;
 -(void)__debugWifiOn{
     __debug_wifioff = NO;
 }
+#endif
 
 -(BOOL)flushTimerIsActive{
     return _timer != nil;
