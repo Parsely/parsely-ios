@@ -37,6 +37,11 @@ ParselyTracker *instance;
         return;
     }
     
+    if(![self isReachable]){
+        PLog(@"Server unreachable. Not flushing.");
+        return;
+    }
+    
     // prepare to flush by merging the memory queue with the stored queue
     NSArray *storedQueue = [self getStoredQueue];
     NSMutableSet *newQueue = [NSMutableSet setWithArray:eventQueue];
