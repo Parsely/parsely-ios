@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-#ifdef DEBUG
+#ifdef PARSELY_DEBUG
 #define PLog( s, ... ) NSLog( @"<%@:(%d)> [Parsely] %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 #else
 #define PLog(s, ...)
@@ -12,12 +12,13 @@
     NSInteger _flushInterval;
     NSTimer *_timer;
     NSMutableArray *eventQueue;
-#ifdef DEBUG
+#ifdef PARSELY_DEBUG
     BOOL __debug_wifioff;
 #endif
 }
 
 @property (nonatomic) NSString *uuidKey;
+@property (nonatomic) NSInteger queueSizeLimit;
 
 +(ParselyTracker *)sharedInstance;
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
@@ -28,7 +29,7 @@
 -(NSInteger)storedEventsCount;
 -(NSInteger)flushInterval;
 -(BOOL)flushTimerIsActive;
-#ifdef DEBUG
+#ifdef PARSELY_DEBUG
 -(void)__debugWifiOn;
 -(void)__debugWifiOff;
 #endif

@@ -261,6 +261,15 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"PARSELY_DEBUG=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "PixelTester/Resources/ParselySDK-Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
 				PRODUCT_NAME = ParselySDK;

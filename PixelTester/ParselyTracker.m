@@ -5,7 +5,7 @@
 
 @implementation ParselyTracker
 
-@synthesize uuidKey;
+@synthesize uuidKey, queueSizeLimit;
 
 ParselyTracker *instance;
 
@@ -20,10 +20,17 @@ ParselyTracker *instance;
 	[params setObject:[self apikey] forKey:@"idsite"];
     [params setObject:[self urlEncodeString:url] forKey:@"url"];
     [params setObject:@"mobile" forKey:@"urlref"];
-    [params setObject:[self urlEncodeString:[NSString stringWithFormat:@"{\"ts\": %f, \"parsely_uuid\": %@}", timestamp, [self getUuid]]] forKey:@"data"];
+    [params setObject:[self urlEncodeString:
+                       [NSString stringWithFormat:@"{\"ts\": %f, \"parsely_uuid\": %@}", timestamp, [self getUuid]]]
+               forKey:@"data"];
     
     [eventQueue addObject:params];
     [self persistQueue];
+    
+    if([self queueSize] >= [self queueSizeLimit] + 1){
+        PLog(@"Queue size exceeded, expelling event to persistent memory");
+        [eventQueue removeObjectAtIndex:0];
+    }
     
     if(_timer == nil){
         [self setFlushTimer];
@@ -108,6 +115,7 @@ ParselyTracker *instance;
     if(uuid == nil){
         uuid = [self generateUuid];
     }
+    PLog(@"UDID: %@", uuid);
     return uuid;
 }
 
@@ -131,6 +139,8 @@ ParselyTracker *instance;
     
     [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:[self uuidKey]];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    PLog(@"Generated UDID %@", _uuid);
     
     return _uuid;
 }
@@ -167,7 +177,7 @@ ParselyTracker *instance;
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey{
     @synchronized(self) {
         if (instance == nil) {
-#ifdef DEBUG
+#ifdef PARSELY_DEBUG
             instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:5];
 #else
             instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:60];
@@ -185,12 +195,17 @@ ParselyTracker *instance;
             _storageKey = @"parsely-events";
             [self setUuidKey:@"parsely-uuid"];
             _flushInterval = flushint;
-            __debug_wifioff = NO;
             _rootUrl = @"http://pixel.parsely.com/plogger/";
             
             if([self getStoredQueue]){
                 [self setFlushTimer];
             }
+#ifdef PARSELY_DEBUG
+            __debug_wifioff = NO;
+            [self setQueueSizeLimit:5];
+#else
+            [self setQueueSizeLimit:50];
+#endif
         }
         return self;
     }
@@ -223,7 +238,7 @@ ParselyTracker *instance;
 -(BOOL)isReachable{
     return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
     || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN)
-#ifdef DEBUG
+#ifdef PARSELY_DEBUG
     && !__debug_wifioff
 #endif
     ;
@@ -249,7 +264,11 @@ ParselyTracker *instance;
     return [[self getStoredQueue] count];
 }
 
-#ifdef DEBUG
+-(BOOL)flushTimerIsActive{
+    return _timer != nil;
+}
+
+#ifdef PARSELY_DEBUG
 -(void)__debugWifiOff{
     __debug_wifioff = YES;
 }
@@ -258,10 +277,6 @@ ParselyTracker *instance;
     __debug_wifioff = NO;
 }
 #endif
-
--(BOOL)flushTimerIsActive{
-    return _timer != nil;
-}
 
 // helpers
 
