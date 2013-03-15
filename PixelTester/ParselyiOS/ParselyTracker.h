@@ -1,3 +1,21 @@
+//
+// ParselyTracker.h
+// ParselyiOS
+//
+// Copyright 2013 Parse.ly
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #import <Foundation/Foundation.h>
 
 #ifdef PARSELY_DEBUG
@@ -8,7 +26,6 @@
 
 @interface ParselyTracker : NSObject
 {
-    NSInteger _flushInterval;
     NSTimer *_timer;
     NSMutableArray *eventQueue;
 #ifdef PARSELY_DEBUG
@@ -21,8 +38,8 @@
 @property (nonatomic) NSString *rootUrl;
 @property (nonatomic) NSString *storageKey;
 @property (nonatomic) NSInteger queueSizeLimit;
-@property (nonatomic) BOOL shouldFlushOnBackground;
 @property (nonatomic) NSInteger flushInterval;
+@property (nonatomic) BOOL shouldFlushOnBackground;
 
 // returns a reference to the singleton, must be called after sharedInstanceWithApiKey:
 +(ParselyTracker *)sharedInstance;
@@ -37,7 +54,6 @@
 
 -(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
 
--(NSString *)rootUrl;
 -(NSInteger)queueSize;
 -(NSInteger)storedEventsCount;
 -(BOOL)flushTimerIsActive;
