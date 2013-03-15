@@ -17,6 +17,8 @@
 #endif
 }
 
+@property (nonatomic) NSString *uuidKey;
+
 +(ParselyTracker *)sharedInstance;
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
 -(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;

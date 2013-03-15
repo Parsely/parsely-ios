@@ -1,7 +1,11 @@
 #import "ParselyTracker.h"
 #import "Reachability.h"
 
+#import <CommonCrypto/CommonDigest.h>
+
 @implementation ParselyTracker
+
+@synthesize uuidKey;
 
 ParselyTracker *instance;
 
@@ -16,7 +20,7 @@ ParselyTracker *instance;
 	[params setObject:[self apikey] forKey:@"idsite"];
     [params setObject:[self urlEncodeString:url] forKey:@"url"];
     [params setObject:@"mobile" forKey:@"urlref"];
-    [params setObject:[self urlEncodeString:[NSString stringWithFormat:@"{\"ts\": %f}", timestamp]] forKey:@"data"];
+    [params setObject:[self urlEncodeString:[NSString stringWithFormat:@"{\"ts\": %f, \"parsely_uuid\": %@}", timestamp, [self getUuid]]] forKey:@"data"];
     
     [eventQueue addObject:params];
     [self persistQueue];
@@ -99,6 +103,38 @@ ParselyTracker *instance;
     return [[NSUserDefaults standardUserDefaults] objectForKey:[self storageKey]];
 }
 
+-(NSString *)getUuid{
+    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:[self uuidKey]];
+    if(uuid == nil){
+        uuid = [self generateUuid];
+    }
+    return uuid;
+}
+
+-(NSString *)generateUuid{
+    // same method used by OpenUDID
+    NSString *_uuid = nil;
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    CFStringRef cfstring = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    const char *cStr = CFStringGetCStringPtr(cfstring,CFStringGetFastestEncoding(cfstring));
+    unsigned char result[16];
+    CC_MD5( cStr, strlen(cStr), result );
+    CFRelease(uuid);
+    
+    _uuid = [NSString stringWithFormat:
+                 @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%08x",
+                 result[0], result[1], result[2], result[3],
+                 result[4], result[5], result[6], result[7],
+                 result[8], result[9], result[10], result[11],
+                 result[12], result[13], result[14], result[15],
+                 (NSUInteger)(arc4random() % NSUIntegerMax)];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:[self uuidKey]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    return _uuid;
+}
+
 -(void)setFlushTimer{
     @synchronized(self){
         [self stopFlushTimer];
@@ -147,6 +183,7 @@ ParselyTracker *instance;
             _apikey = apikey;
             eventQueue = [NSMutableArray array];
             _storageKey = @"parsely-events";
+            [self setUuidKey:@"parsely-uuid"];
             _flushInterval = flushint;
             __debug_wifioff = NO;
             _rootUrl = @"http://pixel.parsely.com/plogger/";
