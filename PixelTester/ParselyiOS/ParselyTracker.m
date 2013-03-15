@@ -292,12 +292,14 @@ ParselyTracker *instance;
 // helpers
 
 -(NSString *)urlEncodeString:(NSString *)string{
-    NSString *retval = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                                             NULL,
-                                                                                             (__bridge CFStringRef) string,
-                                                                                             NULL,
-                                                                                             CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                                             kCFStringEncodingUTF8));
+    NSString *retval = (NSString *)CFBridgingRelease(
+                                   CFURLCreateStringByAddingPercentEscapes(
+                                        NULL,
+                                        (__bridge CFStringRef) string,
+                                        NULL,
+                                        CFSTR("!*'();:@&=+$,/?%#[]"),
+                                        kCFStringEncodingUTF8
+                                    ));
     return retval;
 }
 
@@ -305,16 +307,30 @@ ParselyTracker *instance;
 
 -(void)addApplicationObservers{
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
-    [notificationCenter addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
-    [notificationCenter addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationWillTerminate:)
+                               name:UIApplicationWillTerminateNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationWillResignActive:)
+                               name:UIApplicationWillResignActiveNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationDidBecomeActive:)
+                               name:UIApplicationDidBecomeActiveNotification
+                             object:nil];
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 40000
     if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)] && &UIBackgroundTaskInvalid) {
         if (&UIApplicationDidEnterBackgroundNotification) {
-            [notificationCenter addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+            [notificationCenter addObserver:self
+                                   selector:@selector(applicationDidEnterBackground:)
+                                       name:UIApplicationDidEnterBackgroundNotification
+                                     object:nil];
         }
         if (&UIApplicationWillEnterForegroundNotification) {
-            [notificationCenter addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+            [notificationCenter addObserver:self
+                                   selector:@selector(applicationWillEnterForeground:)
+                                       name:UIApplicationWillEnterForegroundNotification object:nil];
         }
     }
 #endif
