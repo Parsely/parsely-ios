@@ -8,7 +8,7 @@
 
 @interface ParselyTracker : NSObject
 {
-    NSString *_rootUrl, *_apikey, *_storageKey;
+    NSString *_rootUrl, *_apikey;
     NSInteger _flushInterval;
     NSTimer *_timer;
     NSMutableArray *eventQueue;
@@ -18,10 +18,19 @@
 }
 
 @property (nonatomic) NSString *uuidKey;
+@property (nonatomic) NSString *storageKey;
 @property (nonatomic) NSInteger queueSizeLimit;
+@property (nonatomic) BOOL shouldFlushOnBackground;
 
 +(ParselyTracker *)sharedInstance;
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
+// add a pixel request to the queue
+-(void)track:(NSString *)url;
+// stop sending events
+-(void)stop;
+// start sending events
+-(void)start;
+
 -(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
 
 -(NSString *)rootUrl;
@@ -33,14 +42,5 @@
 -(void)__debugWifiOn;
 -(void)__debugWifiOff;
 #endif
-
-// add a pixel request to the queue
--(void)track:(NSString *)url;
-
-// empty the queue and send pixel requests
--(void)flush;
-
-// make sure the whole queue is saved in persistent storage
--(void)persistQueue;
 
 @end

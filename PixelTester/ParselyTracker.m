@@ -5,7 +5,7 @@
 
 @implementation ParselyTracker
 
-@synthesize uuidKey, queueSizeLimit;
+@synthesize uuidKey, queueSizeLimit, storageKey, shouldFlushOnBackground;
 
 ParselyTracker *instance;
 
@@ -115,7 +115,6 @@ ParselyTracker *instance;
     if(uuid == nil){
         uuid = [self generateUuid];
     }
-    PLog(@"UDID: %@", uuid);
     return uuid;
 }
 
@@ -143,6 +142,14 @@ ParselyTracker *instance;
     PLog(@"Generated UDID %@", _uuid);
     
     return _uuid;
+}
+
+-(void)start{
+    [self setFlushTimer];
+}
+
+-(void)stop{
+    [self stopFlushTimer];
 }
 
 -(void)setFlushTimer{
@@ -192,8 +199,9 @@ ParselyTracker *instance;
         if(self=[super init]){
             _apikey = apikey;
             eventQueue = [NSMutableArray array];
-            _storageKey = @"parsely-events";
+            [self setStorageKey:@"parsely-events"];
             [self setUuidKey:@"parsely-uuid"];
+            [self setShouldFlushOnBackground:YES];
             _flushInterval = flushint;
             _rootUrl = @"http://pixel.parsely.com/plogger/";
             
@@ -206,6 +214,7 @@ ParselyTracker *instance;
 #else
             [self setQueueSizeLimit:50];
 #endif
+            [self addApplicationObservers];
         }
         return self;
     }
@@ -242,10 +251,6 @@ ParselyTracker *instance;
     && !__debug_wifioff
 #endif
     ;
-}
-
--(NSString *)storageKey{
-    return _storageKey;
 }
 
 -(NSString *)rootUrl{
@@ -288,6 +293,75 @@ ParselyTracker *instance;
                                                                                              CFSTR("!*'();:@&=+$,/?%#[]"),
                                                                                              kCFStringEncodingUTF8));
     return retval;
+}
+
+// notification observers
+
+-(void)addApplicationObservers{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 40000
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)] && &UIBackgroundTaskInvalid) {
+        if (&UIApplicationDidEnterBackgroundNotification) {
+            [notificationCenter addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        }
+        if (&UIApplicationWillEnterForegroundNotification) {
+            [notificationCenter addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+        }
+    }
+#endif
+}
+
+-(void)applicationWillTerminate:(NSNotification *)notification{
+    PLog(@"Application terminated");
+    [self persistQueue];
+}
+
+-(void)applicationWillResignActive:(NSNotification *)notification{
+    PLog(@"Application resigned active");
+    @synchronized(self){
+        [self stopFlushTimer];
+    }
+}
+
+-(void)applicationDidBecomeActive:(NSNotification *)notification{
+    PLog(@"Application became active");
+    @synchronized(self){
+        [self setFlushTimer];
+    }
+}
+
+-(void)applicationDidEnterBackground:(NSNotification *)notification{
+    PLog(@"Application entered background");
+    @synchronized(self){
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 40000
+        if ([self shouldFlushOnBackground] && [[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]) {
+            if ([[UIDevice currentDevice] isMultitaskingSupported]) {
+                UIApplication *application = [UIApplication sharedApplication];
+                __block UIBackgroundTaskIdentifier background_task;
+                background_task = [application beginBackgroundTaskWithExpirationHandler: ^{
+                    [application endBackgroundTask: background_task];
+                    background_task = UIBackgroundTaskInvalid;
+                }];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self flush];
+                    [self stopFlushTimer];
+                    [application endBackgroundTask: background_task];
+                    background_task = UIBackgroundTaskInvalid;
+                });
+            }
+        }
+#endif
+    }
+}
+
+-(void)applicationWillEnterForeground:(NSNotification *)notification{
+    PLog(@"Application entered foreground");
+    @synchronized(self){
+        [self setFlushTimer];
+    }
 }
 
 @end
