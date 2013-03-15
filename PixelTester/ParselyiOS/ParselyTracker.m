@@ -5,7 +5,7 @@
 
 @implementation ParselyTracker
 
-@synthesize uuidKey, queueSizeLimit, storageKey, shouldFlushOnBackground;
+@synthesize uuidKey, queueSizeLimit, storageKey, shouldFlushOnBackground, flushInterval;
 
 ParselyTracker *instance;
 
@@ -17,7 +17,7 @@ ParselyTracker *instance;
     PLog(@"Track called for test url");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[NSString stringWithFormat:@"%lli", 1000000000000 + arc4random() % 9999999999999] forKey:@"rand"];
-	[params setObject:[self apikey] forKey:@"idsite"];
+	[params setObject:self.apiKey forKey:@"idsite"];
     [params setObject:[self urlEncodeString:url] forKey:@"url"];
     [params setObject:@"mobile" forKey:@"urlref"];
     [params setObject:[self urlEncodeString:
@@ -71,7 +71,7 @@ ParselyTracker *instance;
 
 -(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
-    NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", [self rootUrl],
+    NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", self.rootUrl,
                      [event objectForKey:@"rand"],
                      [event objectForKey:@"idsite"],
                      [event objectForKey:@"url"],
@@ -94,24 +94,24 @@ ParselyTracker *instance;
     
     PLog(@"Persisting event queue");
     // get the previously stored queue, add current queue and re-store
-    NSMutableSet *storedQueue = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[self storageKey]]];
+    NSMutableSet *storedQueue = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey]];
     [storedQueue addObjectsFromArray:eventQueue];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[storedQueue allObjects] forKey:[self storageKey]];
+    [[NSUserDefaults standardUserDefaults] setObject:[storedQueue allObjects] forKey:self.storageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)purgeStoredQueue{
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:[self storageKey]];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:self.storageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(NSArray *)getStoredQueue{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[self storageKey]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
 }
 
 -(NSString *)getUuid{
-    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:[self uuidKey]];
+    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:self.uuidKey];
     if(uuid == nil){
         uuid = [self generateUuid];
     }
@@ -136,7 +136,7 @@ ParselyTracker *instance;
                  result[12], result[13], result[14], result[15],
                  (NSUInteger)(arc4random() % NSUIntegerMax)];
     
-    [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:[self uuidKey]];
+    [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:self.uuidKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     PLog(@"Generated UDID %@", _uuid);
@@ -155,11 +155,12 @@ ParselyTracker *instance;
 -(void)setFlushTimer{
     @synchronized(self){
         [self stopFlushTimer];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:[self flushInterval]
+        _timer = [NSTimer scheduledTimerWithTimeInterval:self.flushInterval
                                                   target:self
                                                 selector:@selector(flush)
                                                 userInfo:nil
                                                  repeats:YES];
+        PLog(@"Flush timer set");
     }
 }
 
@@ -169,6 +170,7 @@ ParselyTracker *instance;
             [_timer invalidate];
         }
         _timer = nil;
+        PLog(@"Flush timer cleared");
     }
 }
 
@@ -197,12 +199,12 @@ ParselyTracker *instance;
 -(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint{
     @synchronized(self){
         if(self=[super init]){
-            _apikey = apikey;
+            self.apiKey = apikey;
             eventQueue = [NSMutableArray array];
-            [self setStorageKey:@"parsely-events"];
-            [self setUuidKey:@"parsely-uuid"];
-            [self setShouldFlushOnBackground:YES];
-            _flushInterval = flushint;
+            self.storageKey = @"parsely-events";
+            self.uuidKey = @"parsely-uuid";
+            self.shouldFlushOnBackground = YES;
+            self.flushInterval = flushint;
             _rootUrl = @"http://pixel.parsely.com/plogger/";
             
             if([self getStoredQueue]){
@@ -210,9 +212,9 @@ ParselyTracker *instance;
             }
 #ifdef PARSELY_DEBUG
             __debug_wifioff = NO;
-            [self setQueueSizeLimit:5];
+            self.queueSizeLimit = 5;
 #else
-            [self setQueueSizeLimit:50];
+            self.queueSizeLimit = 50;
 #endif
             [self addApplicationObservers];
         }
@@ -236,14 +238,6 @@ ParselyTracker *instance;
 
 // accessors
 
--(void)setApikey:(NSString *)key{
-    _apikey = key;
-}
-
--(NSString *)apikey{
-    return _apikey;
-}
-
 -(BOOL)isReachable{
     return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
     || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN)
@@ -251,14 +245,6 @@ ParselyTracker *instance;
     && !__debug_wifioff
 #endif
     ;
-}
-
--(NSString *)rootUrl{
-    return _rootUrl;
-}
-
--(NSInteger)flushInterval{
-    return _flushInterval;
 }
 
 -(NSInteger)queueSize{

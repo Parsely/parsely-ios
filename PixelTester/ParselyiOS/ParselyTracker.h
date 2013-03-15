@@ -8,7 +8,6 @@
 
 @interface ParselyTracker : NSObject
 {
-    NSString *_rootUrl, *_apikey;
     NSInteger _flushInterval;
     NSTimer *_timer;
     NSMutableArray *eventQueue;
@@ -18,11 +17,16 @@
 }
 
 @property (nonatomic) NSString *uuidKey;
+@property (nonatomic) NSString *apiKey;
+@property (nonatomic) NSString *rootUrl;
 @property (nonatomic) NSString *storageKey;
 @property (nonatomic) NSInteger queueSizeLimit;
 @property (nonatomic) BOOL shouldFlushOnBackground;
+@property (nonatomic) NSInteger flushInterval;
 
+// returns a reference to the singleton, must be called after sharedInstanceWithApiKey:
 +(ParselyTracker *)sharedInstance;
+// instantiate the singleton Parsely SDK object
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
 // add a pixel request to the queue
 -(void)track:(NSString *)url;
@@ -36,7 +40,6 @@
 -(NSString *)rootUrl;
 -(NSInteger)queueSize;
 -(NSInteger)storedEventsCount;
--(NSInteger)flushInterval;
 -(BOOL)flushTimerIsActive;
 #ifdef PARSELY_DEBUG
 -(void)__debugWifiOn;

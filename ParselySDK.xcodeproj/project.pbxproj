@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA0A86CE16EE61D3001ECCAE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0A86CD16EE61D3001ECCAE /* Reachability.m */; };
 		AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */; };
 		AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */; };
 		AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */; };
@@ -20,12 +19,11 @@
 		AAE37F2D16EA66B400358E79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F2C16EA66B400358E79 /* main.m */; };
 		AAE37F3116EA66B400358E79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F3016EA66B400358E79 /* AppDelegate.m */; };
 		AAE37F3A16EA66B400358E79 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F3916EA66B400358E79 /* ViewController.m */; };
-		AAE37F4816EA804B00358E79 /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE37F4716EA804B00358E79 /* ParselyTracker.m */; };
+		AAF30E6916F3B132006B85A3 /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF30E6616F3B132006B85A3 /* ParselyTracker.m */; };
+		AAF30E6A16F3B132006B85A3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF30E6816F3B132006B85A3 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA0A86CC16EE61D3001ECCAE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		AA0A86CD16EE61D3001ECCAE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_small.png; sourceTree = "<group>"; };
 		AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_retina.png; sourceTree = "<group>"; };
@@ -43,8 +41,10 @@
 		AAE37F3016EA66B400358E79 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AAE37F3816EA66B400358E79 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AAE37F3916EA66B400358E79 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		AAE37F4616EA804B00358E79 /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
-		AAE37F4716EA804B00358E79 /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
+		AAF30E6516F3B132006B85A3 /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
+		AAF30E6616F3B132006B85A3 /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
+		AAF30E6716F3B132006B85A3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		AAF30E6816F3B132006B85A3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,12 +113,20 @@
 				AAE37F3016EA66B400358E79 /* AppDelegate.m */,
 				AAE37F3816EA66B400358E79 /* ViewController.h */,
 				AAE37F3916EA66B400358E79 /* ViewController.m */,
-				AAE37F4616EA804B00358E79 /* ParselyTracker.h */,
-				AAE37F4716EA804B00358E79 /* ParselyTracker.m */,
-				AA0A86CC16EE61D3001ECCAE /* Reachability.h */,
-				AA0A86CD16EE61D3001ECCAE /* Reachability.m */,
+				AAF30E6416F3B0F3006B85A3 /* ParselyiOS */,
 			);
 			path = PixelTester;
+			sourceTree = "<group>";
+		};
+		AAF30E6416F3B0F3006B85A3 /* ParselyiOS */ = {
+			isa = PBXGroup;
+			children = (
+				AAF30E6516F3B132006B85A3 /* ParselyTracker.h */,
+				AAF30E6616F3B132006B85A3 /* ParselyTracker.m */,
+				AAF30E6716F3B132006B85A3 /* Reachability.h */,
+				AAF30E6816F3B132006B85A3 /* Reachability.m */,
+			);
+			path = ParselyiOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,8 +198,8 @@
 				AAE37F2D16EA66B400358E79 /* main.m in Sources */,
 				AAE37F3116EA66B400358E79 /* AppDelegate.m in Sources */,
 				AAE37F3A16EA66B400358E79 /* ViewController.m in Sources */,
-				AAE37F4816EA804B00358E79 /* ParselyTracker.m in Sources */,
-				AA0A86CE16EE61D3001ECCAE /* Reachability.m in Sources */,
+				AAF30E6916F3B132006B85A3 /* ParselyTracker.m in Sources */,
+				AAF30E6A16F3B132006B85A3 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
