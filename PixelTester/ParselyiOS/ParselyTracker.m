@@ -34,7 +34,6 @@ ParselyTracker *instance;
     
     PLog(@"Track called for test url");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:[NSString stringWithFormat:@"%lli", 1000000000000 + arc4random() % 9999999999999] forKey:@"rand"];
 	[params setObject:self.apiKey forKey:@"idsite"];
     [params setObject:[self urlEncodeString:url] forKey:@"url"];
     [params setObject:@"mobile" forKey:@"urlref"];
@@ -90,7 +89,7 @@ ParselyTracker *instance;
 -(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
     NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", self.rootUrl,
-                     [event objectForKey:@"rand"],
+                     [NSString stringWithFormat:@"%lli", 1000000000 + arc4random() % 99999999999],
                      [event objectForKey:@"idsite"],
                      [event objectForKey:@"url"],
                      [event objectForKey:@"urlref"],
@@ -105,6 +104,8 @@ ParselyTracker *instance;
     NSURLResponse *urlResponse = nil;
     
     [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    PLog(@"Sent request to %@", url);
 }
 
 -(void)persistQueue{

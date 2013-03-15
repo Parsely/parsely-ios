@@ -75,13 +75,11 @@
 }
 
 -(void)trackPage{
-    [[ParselyTracker sharedInstance] track:@"http://arstechnica.com/some-old-thing"];
+    [[ParselyTracker sharedInstance] track:@"http://arstechnica.com/not-a-real-url.html"];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
