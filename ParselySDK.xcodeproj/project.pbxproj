@@ -139,6 +139,7 @@
 				AAE37F1916EA66B300358E79 /* Sources */,
 				AAE37F1A16EA66B300358E79 /* Frameworks */,
 				AAE37F1B16EA66B300358E79 /* Resources */,
+				AAF30E6C16F3C06B006B85A3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -190,6 +191,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AAF30E6C16F3C06B006B85A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = /Applications/Doxygen.app/Contents/Resources/doxygen;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AAE37F1916EA66B300358E79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -231,7 +248,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -256,7 +273,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -267,6 +284,7 @@
 		AAE37F4416EA66B400358E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DOXYGEN_PATH = "/Applications/Doxygen.app/Contents/Resources/doxygen ";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -288,6 +306,7 @@
 		AAE37F4516EA66B400358E79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DOXYGEN_PATH = "/Applications/Doxygen.app/Contents/Resources/doxygen ";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PixelTester/Resources/ParselySDK-Prefix.pch";
 				INFOPLIST_FILE = "PixelTester/Resources/ParselySDK-Info.plist";

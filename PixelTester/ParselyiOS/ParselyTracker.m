@@ -88,8 +88,9 @@ ParselyTracker *instance;
 
 -(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
-    NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%@&idsite=%@&url=%@&urlref=%@&data=%@", self.rootUrl,
-                     [NSString stringWithFormat:@"%lli", 1000000000 + arc4random() % 99999999999],
+    NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
+                     self.rootUrl,
+                     1000000000 + arc4random() % 99999999999,
                      [event objectForKey:@"idsite"],
                      [event objectForKey:@"url"],
                      [event objectForKey:@"urlref"],
@@ -99,12 +100,9 @@ ParselyTracker *instance;
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     [request setHTTPMethod:@"GET"];
-    
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
-    
     [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
     PLog(@"Sent request to %@", url);
 }
 
