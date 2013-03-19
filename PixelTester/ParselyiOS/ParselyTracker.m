@@ -29,17 +29,11 @@ ParselyTracker *instance;
 
 -(void)track:(NSString *)url{
     // add an event to the queue
-    
-    NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
-    
     PLog(@"Track called for test url");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	[params setObject:self.apiKey forKey:@"idsite"];
     [params setObject:[self urlEncodeString:url] forKey:@"url"];
-    [params setObject:@"mobile" forKey:@"urlref"];
-    [params setObject:[self urlEncodeString:
-                       [NSString stringWithFormat:@"{\"ts\": %f, \"parsely_uuid\": %@}", timestamp, [self getUuid]]]
-               forKey:@"data"];
+    [params setObject:[self urlEncodeString:[self buildJsonDataObject]] forKey:@"data"];
     
     [eventQueue addObject:params];
     
@@ -88,22 +82,20 @@ ParselyTracker *instance;
 
 -(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
-    NSString *url = [NSString stringWithFormat:@"%@%%3Frand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
+    NSString *url = [NSString stringWithFormat:@"%@?rand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
                      self.rootUrl,
                      1000000000 + arc4random() % 99999999999,
                      [event objectForKey:@"idsite"],
                      [event objectForKey:@"url"],
-                     [event objectForKey:@"urlref"],
+                     @"",  // urlref
                      [event objectForKey:@"data"]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     [request setHTTPMethod:@"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    PLog(@"Sent request to %@", url);
+    NSURLConnection *eventsConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    PLog(@"Requested %@", url);
 }
 
 -(void)persistQueue{
@@ -125,6 +117,17 @@ ParselyTracker *instance;
 
 -(NSArray *)getStoredQueue{
     return [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
+}
+
+-(NSString *)buildJsonDataObject{
+    NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *dictionary = @{@"ts": [NSNumber numberWithDouble:timestamp]};
+    NSMutableDictionary *info = [self deviceInfo];
+    [info addEntriesFromDictionary:dictionary];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:info
+                                                       options:0
+                                                         error:nil];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 -(NSString *)getUuid{
@@ -193,6 +196,16 @@ ParselyTracker *instance;
     }
 }
 
+-(NSMutableDictionary *)collectDeviceInfo{
+    NSMutableDictionary *deviceInfo = [NSMutableDictionary dictionary];
+    
+    [deviceInfo setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] forKey:@"appname"];
+    [deviceInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
+    [deviceInfo setObject:@"mobileapp" forKey:@"type"];
+    
+    return deviceInfo;
+}
+
 // singleton boilerplate
 
 +(ParselyTracker *)sharedInstance{
@@ -224,15 +237,18 @@ ParselyTracker *instance;
             self.uuidKey = @"parsely-uuid";
             self.shouldFlushOnBackground = YES;
             self.flushInterval = flushint;
-            _rootUrl = @"http://pixel.parsely.com/plogger/";
+            
+            [self setDeviceInfo:[self collectDeviceInfo]];
             
             if([self getStoredQueue]){
                 [self setFlushTimer];
             }
 #ifdef PARSELY_DEBUG
             __debug_wifioff = NO;
+            _rootUrl = @"http://localhost:1337/";
             self.queueSizeLimit = 5;
 #else
+            _rootUrl = @"http://pixel.parsely.com/plogger/";
             self.queueSizeLimit = 50;
 #endif
             [self addApplicationObservers];
@@ -302,6 +318,17 @@ ParselyTracker *instance;
     return retval;
 }
 
+// connection delegate methods
+
+// TODO - these don't get called when flush is called as a background job
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    PLog(@"Pixel request successful");
+}
+
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    PLog(@"Pixel request error: %@", error);
+}
+
 // notification observers
 
 -(void)addApplicationObservers{
@@ -367,8 +394,8 @@ ParselyTracker *instance;
                     background_task = UIBackgroundTaskInvalid;
                 }];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    PLog(@"Running background task to flush queue");
                     [self flush];
-                    [self stopFlushTimer];
                     [application endBackgroundTask: background_task];
                     background_task = UIBackgroundTaskInvalid;
                 });

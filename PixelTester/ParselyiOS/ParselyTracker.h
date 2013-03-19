@@ -29,7 +29,7 @@
  *  Accessed as a singleton. Maintains a queue of pageview events in memory and periodically
  *  flushes the queue to the Parsely pixel server.
  */ 
-@interface ParselyTracker : NSObject
+@interface ParselyTracker : NSObject <NSURLConnectionDelegate>
 {
     NSTimer *_timer;  /*!< Periodically generates a callback to flush the event queue */
     NSMutableArray *eventQueue;  /*!< Buffer of events, periodically emptied and used to generate pixel requests */
@@ -45,6 +45,7 @@
 @property (nonatomic) NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
 @property (nonatomic) NSInteger flushInterval;  /*!< The time between event queue flushes expressed in seconds */
 @property (nonatomic) BOOL shouldFlushOnBackground;  /*!< If YES, the event queue is automatically flushed when the app enters the background */
+@property (nonatomic) NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
 
 /*! \brief Singleton instance accessor
  *
