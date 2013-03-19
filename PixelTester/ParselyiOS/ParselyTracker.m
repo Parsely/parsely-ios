@@ -29,11 +29,13 @@ ParselyTracker *instance;
 
 -(void)track:(NSString *)url{
     // add an event to the queue
+    NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
+    
     PLog(@"Track called for test url");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	[params setObject:self.apiKey forKey:@"idsite"];
-    [params setObject:[self urlEncodeString:url] forKey:@"url"];
-    [params setObject:[self urlEncodeString:[self buildJsonDataObject]] forKey:@"data"];
+    [params setObject:url forKey:@"url"];
+    [params setObject:[NSNumber numberWithDouble:timestamp] forKey:@"ts"];
+    [params setObject:self.deviceInfo forKey:@"data"];
     
     [eventQueue addObject:params];
     
@@ -72,8 +74,12 @@ ParselyTracker *instance;
     }
     
     PLog(@"Flushing queue...");
-    for(NSMutableDictionary *event in newQueue){
-        [self flushEvent:event];
+    if(self.shouldBatchRequests){
+        [self sendBatchRequest:newQueue];
+    } else {
+        for(NSMutableDictionary *event in newQueue){
+            [self flushEvent:event];
+        }
     }
     [eventQueue removeAllObjects];
     [self purgeStoredQueue];
@@ -82,14 +88,44 @@ ParselyTracker *instance;
 
 -(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
+    // add the timestamp to the data object for non-batched requests, since they are sent directly to the pixel server
+    NSMutableDictionary *data = [event objectForKey:@"data"];
+    [data addEntriesFromDictionary:@{@"ts": [event objectForKey:@"ts"]}];
+    
     NSString *url = [NSString stringWithFormat:@"%@?rand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
                      self.rootUrl,
                      1000000000 + arc4random() % 99999999999,
-                     [event objectForKey:@"idsite"],
-                     [event objectForKey:@"url"],
+                     self.apiKey,
+                     [self urlEncodeString:[event objectForKey:@"url"]],
                      @"",  // urlref
-                     [event objectForKey:@"data"]];
+                     [self urlEncodeString:[self JSONWithDictionary:data]]];
     
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    [request setHTTPMethod:@"GET"];
+    NSURLConnection *eventsConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    PLog(@"Requested %@", url);
+}
+
+-(void)sendBatchRequest:(NSSet *)queue{
+    NSMutableDictionary *batchDict = [NSMutableDictionary dictionary];
+    NSArray *queueArray = [queue allObjects];
+    [batchDict setObject:[[queueArray objectAtIndex:0] objectForKey:@"data"] forKey:@"data"];
+    NSMutableArray *events = [NSMutableArray array];
+    for(NSDictionary *event in queueArray){
+        [events addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
+                                                   [event objectForKey:@"url"],  @"url",
+                                                   [event objectForKey:@"ts"], @"ts",
+                                                   nil]];
+    }
+    [batchDict setObject:events forKey:@"events"];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:batchDict
+                                                       options:0
+                                                         error:nil];
+    NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *url = [NSString stringWithFormat:@"%@?rqs=%@", self.rootUrl, [self urlEncodeString:json]];
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
@@ -119,11 +155,7 @@ ParselyTracker *instance;
     return [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
 }
 
--(NSString *)buildJsonDataObject{
-    NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *dictionary = @{@"ts": [NSNumber numberWithDouble:timestamp]};
-    NSMutableDictionary *info = [self deviceInfo];
-    [info addEntriesFromDictionary:dictionary];
+-(NSString *)JSONWithDictionary:(NSDictionary *)info{
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:info
                                                        options:0
                                                          error:nil];
@@ -201,11 +233,12 @@ ParselyTracker *instance;
     
     [deviceInfo setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] forKey:@"appname"];
     [deviceInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
+    [deviceInfo setObject:self.apiKey forKey:@"idsite"];
     [deviceInfo setObject:@"mobileapp" forKey:@"type"];
     
-    [deviceInfo setObject:@"Apple" forKey:@"$manufacturer"];
-    [deviceInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"$os"];
-    [deviceInfo setObject:[[UIDevice currentDevice] systemVersion] forKey:@"$os_version"];
+    [deviceInfo setObject:@"Apple" forKey:@"manufacturer"];
+    [deviceInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
+    [deviceInfo setObject:[[UIDevice currentDevice] systemVersion] forKey:@"os_version"];
     
     return deviceInfo;
 }
@@ -240,9 +273,9 @@ ParselyTracker *instance;
             self.storageKey = @"parsely-events";
             self.uuidKey = @"parsely-uuid";
             self.shouldFlushOnBackground = YES;
+            self.shouldBatchRequests = YES;
             self.flushInterval = flushint;
-            
-            [self setDeviceInfo:[self collectDeviceInfo]];
+            self.deviceInfo = [self collectDeviceInfo];
             
             if([self getStoredQueue]){
                 [self setFlushTimer];

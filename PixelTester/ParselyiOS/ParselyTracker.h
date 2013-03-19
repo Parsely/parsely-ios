@@ -44,6 +44,7 @@
 @property (nonatomic) NSString *rootUrl;  /*!< Root of Parsely's pixel server URL (eg "http://pixel.parsely.com") */
 @property (nonatomic) NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
 @property (nonatomic) NSInteger flushInterval;  /*!< The time between event queue flushes expressed in seconds */
+@property (nonatomic) BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
 @property (nonatomic) BOOL shouldFlushOnBackground;  /*!< If YES, the event queue is automatically flushed when the app enters the background */
 @property (nonatomic) NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
 
