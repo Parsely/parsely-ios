@@ -203,6 +203,10 @@ ParselyTracker *instance;
     [deviceInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
     [deviceInfo setObject:@"mobileapp" forKey:@"type"];
     
+    [deviceInfo setObject:@"Apple" forKey:@"$manufacturer"];
+    [deviceInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"$os"];
+    [deviceInfo setObject:[[UIDevice currentDevice] systemVersion] forKey:@"$os_version"];
+    
     return deviceInfo;
 }
 
