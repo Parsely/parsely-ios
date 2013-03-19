@@ -28,6 +28,7 @@
     button.frame = CGRectMake(80.0, 110.0, 160.0, 40.0);
     [self.view addSubview:button];
     
+#ifdef PARSELY_DEBUG
     connectionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [connectionButton addTarget:self
                action:@selector(toggleSimulatedConnection)
@@ -35,6 +36,7 @@
     [connectionButton setTitle:@"Lose connection" forState:UIControlStateNormal];
     connectionButton.frame = CGRectMake(80.0, 160.0, 160.0, 40.0);
     [self.view addSubview:connectionButton];
+#endif
     
     queueStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, bounds.size.height-120, bounds.size.width, 90)];
     [queueStatusLabel setNumberOfLines:0];
