@@ -42,7 +42,6 @@ ParselyTracker *instance;
                forKey:@"data"];
     
     [eventQueue addObject:params];
-    [self persistQueue];
     
     if([self queueSize] >= [self queueSizeLimit] + 1){
         PLog(@"Queue size exceeded, expelling event to persistent memory");
@@ -102,7 +101,10 @@ ParselyTracker *instance;
     [request setHTTPMethod:@"GET"];
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
+#ifdef PARSELY_DEBUG
+#else
     [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+#endif
     PLog(@"Sent request to %@", url);
 }
 
