@@ -73,6 +73,14 @@
  */
 -(void)track:(NSString *)url;
 
+/*!  \brief Generate pixel requests from the queue
+ *
+ *  Empties the entire queue and sends the appropriate pixel requests.
+ *  If `shouldBatchRequests` is YES, the queue is sent as a minimum number of requests.
+ *  Called automatically after a number of seconds determined by `flushInterval`.
+ */
+-(void)flush;
+
 /*! \brief Disallow the SDK from sending pageview events
  *
  *  Invalidates the callback timer responsible for flushing the events queue.
