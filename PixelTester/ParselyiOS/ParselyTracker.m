@@ -23,24 +23,22 @@
 
 @implementation ParselyTracker
 
-@synthesize uuidKey, queueSizeLimit, storageKey, shouldFlushOnBackground, flushInterval;
-
-ParselyTracker *instance;
+ParselyTracker *instance;  /*!< Singleton instance */
 
 -(void)track:(NSString *)url{
-    // add an event to the queue
+    PLog(@"Track called for %@", url);
+    
     NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
     
-    PLog(@"Track called for test url");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:url forKey:@"url"];
     [params setObject:[NSNumber numberWithDouble:timestamp] forKey:@"ts"];
+    // TODO - this assumes that idsite will never change for a given run of an app. bad idea?
     [params setObject:self.deviceInfo forKey:@"data"];
-    
     [eventQueue addObject:params];
     
     if([self queueSize] >= [self queueSizeLimit] + 1){
-        PLog(@"Queue size exceeded, expelling event to persistent memory");
+        PLog(@"Queue size exceeded, expelling oldest event to persistent memory");
         [self persistQueue];
         [eventQueue removeObjectAtIndex:0];
     }
@@ -52,9 +50,8 @@ ParselyTracker *instance;
 }
 
 -(void)flush{
-    // remove all events from the queue and send pixel requests
-    
     PLog(@"%d events in queue, %d stored events", [eventQueue count], [[self getStoredQueue] count]);
+    
     if([eventQueue count] == 0 && [[self getStoredQueue] count] == 0){
         PLog(@"Event queue empty, flush timer cleared.");
         [self stopFlushTimer];
@@ -62,14 +59,15 @@ ParselyTracker *instance;
     }
     
     if(![self isReachable]){
-        PLog(@"Server unreachable. Not flushing.");
+        PLog(@"Network unreachable. Not flushing.");
         return;
     }
     
     // prepare to flush by merging the memory queue with the stored queue
+    // NOTE: typically this merge will be fully redundant, except in the case where the app terminated with items still in the queue
     NSArray *storedQueue = [self getStoredQueue];
     NSMutableSet *newQueue = [NSMutableSet setWithArray:eventQueue];
-    if(storedQueue){
+    if(storedQueue != nil){
         [newQueue addObjectsFromArray:storedQueue];
     }
     
@@ -81,13 +79,16 @@ ParselyTracker *instance;
             [self flushEvent:event];
         }
     }
+    PLog(@"done");
+
+    // now that we've sent the requests, vaporize them
     [eventQueue removeAllObjects];
     [self purgeStoredQueue];
-    PLog(@"Done");
 }
 
 -(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
+    
     // add the timestamp to the data object for non-batched requests, since they are sent directly to the pixel server
     NSMutableDictionary *data = [event objectForKey:@"data"];
     [data addEntriesFromDictionary:@{@"ts": [event objectForKey:@"ts"]}];
@@ -99,20 +100,21 @@ ParselyTracker *instance;
                      [self urlEncodeString:[event objectForKey:@"url"]],
                      @"",  // urlref
                      [self urlEncodeString:[self JSONWithDictionary:data]]];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    [request setHTTPMethod:@"GET"];
-    NSURLConnection *eventsConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+
+    [self apiConnectionWithURL:url];
     PLog(@"Requested %@", url);
 }
 
 -(void)sendBatchRequest:(NSSet *)queue{
+    // create an efficiently packed object for the GET parameters
     NSMutableDictionary *batchDict = [NSMutableDictionary dictionary];
     NSArray *queueArray = [queue allObjects];
+    
+    // the object contains only one copy of the queue's invariant data
     [batchDict setObject:[[queueArray objectAtIndex:0] objectForKey:@"data"] forKey:@"data"];
     NSMutableArray *events = [NSMutableArray array];
+    
+    // and a list of url/timestamp dictionaries
     for(NSDictionary *event in queueArray){
         [events addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
                                                    [event objectForKey:@"url"],  @"url",
@@ -120,25 +122,16 @@ ParselyTracker *instance;
                                                    nil]];
     }
     [batchDict setObject:events forKey:@"events"];
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:batchDict
-                                                       options:0
-                                                         error:nil];
-    NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSString *url = [NSString stringWithFormat:@"%@?rqs=%@", self.rootUrl, [self urlEncodeString:json]];
 
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    [request setHTTPMethod:@"GET"];
-    NSURLConnection *eventsConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSString *url = [NSString stringWithFormat:@"%@?rqs=%@", self.rootUrl, [self urlEncodeString:[self JSONWithDictionary:batchDict]]];
+    [self apiConnectionWithURL:url];
     PLog(@"Requested %@", url);
 }
 
 -(void)persistQueue{
-    // save the entire event queue to persistent storage
-    
     PLog(@"Persisting event queue");
-    // get the previously stored queue, add current queue and re-store
+
+    // get the previously stored queue, merge current queue and re-store
     NSMutableSet *storedQueue = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey]];
     [storedQueue addObjectsFromArray:eventQueue];
     
@@ -155,45 +148,12 @@ ParselyTracker *instance;
     return [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
 }
 
--(NSString *)JSONWithDictionary:(NSDictionary *)info{
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:info
-                                                       options:0
-                                                         error:nil];
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-}
-
 -(NSString *)getUuid{
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:self.uuidKey];
     if(uuid == nil){
         uuid = [self generateUuid];
     }
     return uuid;
-}
-
--(NSString *)generateUuid{
-    // same method used by OpenUDID
-    NSString *_uuid = nil;
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    CFStringRef cfstring = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    const char *cStr = CFStringGetCStringPtr(cfstring,CFStringGetFastestEncoding(cfstring));
-    unsigned char result[16];
-    CC_MD5( cStr, strlen(cStr), result );
-    CFRelease(uuid);
-    
-    _uuid = [NSString stringWithFormat:
-                 @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%08x",
-                 result[0], result[1], result[2], result[3],
-                 result[4], result[5], result[6], result[7],
-                 result[8], result[9], result[10], result[11],
-                 result[12], result[13], result[14], result[15],
-                 (NSUInteger)(arc4random() % NSUIntegerMax)];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:self.uuidKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    PLog(@"Generated UDID %@", _uuid);
-    
-    return _uuid;
 }
 
 -(void)start{
@@ -214,7 +174,6 @@ ParselyTracker *instance;
                                                 selector:@selector(flush)
                                                 userInfo:nil
                                                  repeats:YES];
-        PLog(@"Flush timer set");
     }
 }
 
@@ -224,7 +183,6 @@ ParselyTracker *instance;
             [_timer invalidate];
         }
         _timer = nil;
-        PLog(@"Flush timer cleared");
     }
 }
 
@@ -243,13 +201,14 @@ ParselyTracker *instance;
     return deviceInfo;
 }
 
-// singleton boilerplate
-
 +(ParselyTracker *)sharedInstance{
-    if(instance == nil){
-        PLog(@"Warning: sharedInstance called before sharedInstanceWithApiKey:");
+    @synchronized(self){
+        if(instance == nil){
+            PLog(@"Warning: sharedInstance called before sharedInstanceWithApiKey:");
+            return nil;
+        }
+        return instance;
     }
-    return instance;
 }
 
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey{
@@ -294,6 +253,8 @@ ParselyTracker *instance;
     }
 }
 
+// singleton boilerplate
+
 +(id)allocWithZone:(NSZone *)zone{
     @synchronized(self){
         if (instance == nil){
@@ -310,15 +271,6 @@ ParselyTracker *instance;
 
 // accessors
 
--(BOOL)isReachable{
-    return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
-    || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN)
-#ifdef PARSELY_DEBUG
-    && !__debug_wifioff
-#endif
-    ;
-}
-
 -(NSInteger)queueSize{
     return [eventQueue count];
 }
@@ -328,7 +280,7 @@ ParselyTracker *instance;
 }
 
 -(BOOL)flushTimerIsActive{
-    return _timer != nil;
+    return _timer != nil && [_timer isValid];
 }
 
 #ifdef PARSELY_DEBUG
@@ -353,6 +305,56 @@ ParselyTracker *instance;
                                         kCFStringEncodingUTF8
                                     ));
     return retval;
+}
+
+-(NSString *)JSONWithDictionary:(NSDictionary *)info{
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:info
+                                                       options:0
+                                                         error:nil];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+-(NSURLConnection *)apiConnectionWithURL:(NSString *)endpoint{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    [request setHTTPMethod:@"GET"];
+    return [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+-(NSString *)generateUuid{
+    // same method used by OpenUDID
+    NSString *_uuid = nil;
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    CFStringRef cfstring = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    const char *cStr = CFStringGetCStringPtr(cfstring,CFStringGetFastestEncoding(cfstring));
+    unsigned char result[16];
+    CC_MD5( cStr, strlen(cStr), result );
+    CFRelease(uuid);
+    
+    _uuid = [NSString stringWithFormat:
+             @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%08x",
+             result[0], result[1], result[2], result[3],
+             result[4], result[5], result[6], result[7],
+             result[8], result[9], result[10], result[11],
+             result[12], result[13], result[14], result[15],
+             (NSUInteger)(arc4random() % NSUIntegerMax)];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:self.uuidKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    PLog(@"Generated UUID %@", _uuid);
+    
+    return _uuid;
+}
+
+-(BOOL)isReachable{
+    return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
+            || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN)
+#ifdef PARSELY_DEBUG
+    && !__debug_wifioff
+#endif
+    ;
 }
 
 // connection delegate methods

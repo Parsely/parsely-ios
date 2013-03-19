@@ -98,6 +98,24 @@
  */
 -(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
 
+/*!  \brief Send a single pixel request
+ *
+ *  Sends a single request directly to Parsely's pixel server, bypassing the proxy.
+ *  Prefer `sendBatchRequest:` to this method, as `sendBatchRequest:` causes less battery usage
+ *
+ *  @param event A dictionary containing data for a single pageview event
+ */
+-(void)flushEvent:(NSDictionary *)event;
+
+/*!  \brief Send the entire queue as a single request
+ *
+ *   Creates a large GET request containing the JSON encoding of the entire queue.
+ *   Sends this request to the proxy server, which forwards requests to the pixel server.
+ *
+ *   @param queue The list of event dictionaries to serialize
+ */
+-(void)sendBatchRequest:(NSSet *)queue;
+
 /*! \brief Get the size of the queue
  *  
  *  @return The current cardinality of the in-memory event queue
