@@ -24,39 +24,97 @@
 #define PLog(s, ...)
 #endif
 
+/*! \brief Manages pageview events and analytics data for Parsely on iOS
+ *
+ *  Accessed as a singleton. Maintains a queue of pageview events in memory and periodically
+ *  flushes the queue to the Parsely pixel server.
+ */ 
 @interface ParselyTracker : NSObject
 {
-    NSTimer *_timer;
-    NSMutableArray *eventQueue;
+    NSTimer *_timer;  /*!< Periodically generates a callback to flush the event queue */
+    NSMutableArray *eventQueue;  /*!< Buffer of events, periodically emptied and used to generate pixel requests */
 #ifdef PARSELY_DEBUG
     BOOL __debug_wifioff;
 #endif
 }
 
-@property (nonatomic) NSString *uuidKey;
-@property (nonatomic) NSString *apiKey;
-@property (nonatomic) NSString *rootUrl;
-@property (nonatomic) NSString *storageKey;
-@property (nonatomic) NSInteger queueSizeLimit;
-@property (nonatomic) NSInteger flushInterval;
-@property (nonatomic) BOOL shouldFlushOnBackground;
+@property (nonatomic) NSString *uuidKey;  /*!< Key mapped to the generated uuid in the defaults store */
+@property (nonatomic) NSString *apiKey;  /*!< Parsely public API key (eg "dailycaller.com") */
+@property (nonatomic) NSString *storageKey;  /*!< Key mapped to the saved event queue in the defaults store */
+@property (nonatomic) NSString *rootUrl;  /*!< Root of Parsely's pixel server URL (eg "http://pixel.parsely.com") */
+@property (nonatomic) NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
+@property (nonatomic) NSInteger flushInterval;  /*!< The time between event queue flushes expressed in seconds */
+@property (nonatomic) BOOL shouldFlushOnBackground;  /*!< If YES, the event queue is automatically flushed when the app enters the background */
 
-// returns a reference to the singleton, must be called after sharedInstanceWithApiKey:
+/*! \brief Singleton instance accessor
+ *
+ *  **Note**: This must be called after `sharedInstanceWithApiKey:`
+ *
+ *  @return The singleton instance
+ */
 +(ParselyTracker *)sharedInstance;
-// instantiate the singleton Parsely SDK object
+
+/*! \brief Singleton instance factory
+ *
+ *  **Note**: This must be called before `sharedInstance`
+ *
+ *  @param apikey The Parsely public API key (eg "dailycaller.com")
+ *  @return The singleton instance
+ */
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
-// add a pixel request to the queue
+
+/*! \brief Register a pageview event
+ *
+ *  Places a data structure representing the event into the in-memory queue for later use
+ *
+ *  @param url The canonical URL of the article being tracked (eg: "http://dailycaller.com/some-old/article.html")
+ */
 -(void)track:(NSString *)url;
-// stop sending events
+
+/*! \brief Disallow the SDK from sending pageview events
+ *
+ *  Invalidates the callback timer responsible for flushing the events queue.
+ *  Can be called before or after `start`, but has no effect if used before instantiating the singleton
+ */
 -(void)stop;
-// start sending events
+
+/*! \brief Allow the SDK to send pageview events
+ *
+ *  Instantiates the callback timer responsible for flushing the events queue.
+ *  Can be called before of after `stop`, but has no effect is used before instantiating the singleton
+ */
 -(void)start;
 
+/*! \brief Singleton constructor
+ *
+ *  Creates an instance of the class and returns the reference.
+ *  Prefer `sharedInstanceWithApiKey:` to this method.
+ *
+ *  @param apikey Parsely public API key (eg "dailycaller.com")
+ *  @param flushint Interval between queue flushes, expressed in seconds
+ *  @return The singleton instance
+ */
 -(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
 
+/*! \brief Get the size of the queue
+ *  
+ *  @return The current cardinality of the in-memory event queue
+ *
+ */
 -(NSInteger)queueSize;
+
+/*! \brief Get the size of the persistent store
+ *
+ *  @return The current number of events stored in persistent memory (the defaults store)
+ */
 -(NSInteger)storedEventsCount;
+
+/*! \brief Is the callback timer running 
+ *
+ *  @return `YES` if the callback timer is currently running, `NO` otherwise
+ */
 -(BOOL)flushTimerIsActive;
+
 #ifdef PARSELY_DEBUG
 -(void)__debugWifiOn;
 -(void)__debugWifiOff;
