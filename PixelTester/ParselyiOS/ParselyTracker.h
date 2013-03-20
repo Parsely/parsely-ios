@@ -70,6 +70,8 @@
  *
  *  Places a data structure representing the event into the in-memory queue for later use
  *
+ *  **Note**: Events placed into this queue will be discarded if the size of the persistent queue store exceeds `storageSizeLimit`.
+ *
  *  @param url The canonical URL of the article being tracked (eg: "http://dailycaller.com/some-old/article.html")
  */
 -(void)track:(NSString *)url;
