@@ -55,5 +55,14 @@ Variable        | Container | Description                                       
 A real request to the proxy server might look like this one, which contains two separate pageview events in the URL-encoded JSON document:
 
     GET http://hack.parsely.com/mobileproxy/?rqs=%7B%22data%22%3A%7B%22appname%22%3A%22MyCoolApp%22%2C%22type%22%3A%22mobileapp%22%2C%22manufacturer%22%3A%22Apple%22%2C%22idsite%22%3A%22dailycaller.com%22%2C%22os%22%3A%22iPhone%20OS%22%2C%22os_version%22%3A%226.1%22%2C%22parsely_uuid%22%3A%2276e4c7f0afeb4e7643f5089235779937d9637b55%22%7D%2C%22events%22%3A%5B%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fdailycaller.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.753075%7D%2C%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fdailycaller.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.870318%7D%5D%7D
+    
+Generating a UUID
+-----------------
+
+On desktop browsers, you can avoid generating a UUID by <a href="http://parsely.com/api/tracking_pixel.html#using-the-parse-ly-network-uuid">using the Parsely network UUID</a>.
+
+Mobile apps that use the Parsely SDK don't have to create their own UUIDs, as the SDK handles that. However, if you'd like to create your own, it must be guaranteed to be unique per device.
+The easiest way to guarantee uniqueness is to generate a UUID using the device MAC address. On iOS, see the `CFUUIDCreate()` function for a description of how to do this.
+Once you create the UUID, you should save it in persistent storage (for example, iOS' `NSUserDefaults` key-value store).
 
 */
