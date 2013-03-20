@@ -241,10 +241,10 @@ ParselyTracker *instance;  /*!< Singleton instance */
             }
 #ifdef PARSELY_DEBUG
             __debug_wifioff = NO;
-            _rootUrl = @"http://localhost:1337/";
+            _rootUrl = @"http://hack.parsely.com/mobileproxy/";
             self.queueSizeLimit = 5;
 #else
-            _rootUrl = @"http://pixel.parsely.com/plogger/";
+            _rootUrl = @"http://hack.parsely.com/mobileproxy/";
             self.queueSizeLimit = 50;
 #endif
             [self addApplicationObservers];
