@@ -123,6 +123,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
     }
     [batchDict setObject:events forKey:@"events"];
 
+    PLog(@"%@", [self JSONWithDictionary:batchDict]);
+    
     NSString *url = [NSString stringWithFormat:@"%@?rqs=%@", self.rootUrl, [self urlEncodeString:[self JSONWithDictionary:batchDict]]];
     [self apiConnectionWithURL:url];
     PLog(@"Requested %@", url);
