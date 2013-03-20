@@ -43,6 +43,10 @@ ParselyTracker *instance;  /*!< Singleton instance */
         [eventQueue removeObjectAtIndex:0];
     }
     
+    if([self storedEventsCount] > self.storageSizeLimit){
+        [self expelStoredEvent];
+    }
+    
     if(_timer == nil){
         [self setFlushTimer];
         PLog(@"Flush timer set to %d", self.flushInterval);
@@ -146,6 +150,14 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+-(void)expelStoredEvent{
+    NSArray *storedQueue = [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
+    NSMutableArray *mutableCopy = [NSMutableArray arrayWithArray:storedQueue];
+    [mutableCopy removeObjectAtIndex:0];
+    [[NSUserDefaults standardUserDefaults] setObject:(NSArray *)mutableCopy forKey:self.storageKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 -(NSArray *)getStoredQueue{
     return [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
 }
@@ -243,11 +255,13 @@ ParselyTracker *instance;  /*!< Singleton instance */
             }
 #ifdef PARSELY_DEBUG
             __debug_wifioff = NO;
-            _rootUrl = @"http://hack.parsely.com/mobileproxy/";
+            _rootUrl = @"http://localhost:5001/";
             self.queueSizeLimit = 5;
+            self.storageSizeLimit = 20;
 #else
             _rootUrl = @"http://hack.parsely.com/mobileproxy/";
             self.queueSizeLimit = 50;
+            self.storageSizeLimit = 100;
 #endif
             [self addApplicationObservers];
         }
