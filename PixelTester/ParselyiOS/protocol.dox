@@ -1,4 +1,4 @@
-/*! \page page1 Proxy Server Wire Protocol
+/*! \page protocol Proxy Server Wire Protocol
 
 The Parsely pixel server accepts GET requests containing the information for single pageviews. For mobile devices, sending one request per pageview wastes battery.
 The Parsely SDK sends batches of events to a proxy server, which then splits the batches into individual requests for consumption by the pixel server.

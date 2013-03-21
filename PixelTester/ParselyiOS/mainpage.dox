@@ -18,6 +18,15 @@ Adding Parsely to your iOS app is easy!
 
 *  SystemConfiguration.framework
 
+Including the SDK
+-----------------
+
+In any file that uses the Parsely SDK, be sure to add the line
+
+    #import "ParselyTracker.h"
+    
+at the top of the file.
+
 Parsely Initialization
 ----------------------
 
