@@ -2,6 +2,13 @@ If you want to track activity on your iPhone app, first clone this repository wi
 
     git clone http://github.com/Parsely/parsely-ios.git
 
+This repository contains three main directories:
+
+`ParselyiOS` is the Parsely iOS SDK source code
+`HiParsely` is an XCode project demonstrating how to integrate the SDK into an app
+`Documentation` is the target directory for the Doxygen document generator
+
+
 Integrating with XCode
 ----------------------
 
@@ -21,7 +28,7 @@ Including the SDK
 In any file that uses the Parsely SDK, be sure to add the line
 
     #import "ParselyTracker.h"
-    
+
 at the top of the file.
 
 Parsely Initialization
@@ -36,7 +43,7 @@ Before using the SDK, you must initialize the Parsely object with your public ap
         self.window.rootViewController = self.viewController;
 
         [ParselyTracker sharedInstanceWithApiKey:@"dailycaller.com"];  // initialize the Parsely tracker
-    
+
         [self.window makeKeyAndVisible];
         return YES;
     }
@@ -47,5 +54,5 @@ Pageview Tracking
 To register a pageview event with Parsely, simply use the `track:` call.
 
     [[ParselyTracker sharedInstance] track:@"http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
-    
+
 This call requires the canonical URL of the page corresponding to the post currently being viewed.
