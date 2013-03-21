@@ -43,7 +43,6 @@
 		AA157DCA16FB9046000DB72C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AA157DCB16FB9046000DB72C /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
 		AA157DCC16FB9046000DB72C /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
-		AA157DCD16FB9046000DB72C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		AA157DD316FB909D000DB72C /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiParsely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,7 +96,6 @@
 				AA157DC816FB9046000DB72C /* libs */,
 				AA157DCB16FB9046000DB72C /* ParselyTracker.h */,
 				AA157DCC16FB9046000DB72C /* ParselyTracker.m */,
-				AA157DCD16FB9046000DB72C /* README.md */,
 			);
 			name = ParselyiOS;
 			path = ../ParselyiOS;
