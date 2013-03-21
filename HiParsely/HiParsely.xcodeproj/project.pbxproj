@@ -18,6 +18,7 @@
 		AA157DC116FB8DD0000DB72C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DBA16FB8DD0000DB72C /* ViewController.m */; };
 		AA157DD016FB9046000DB72C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCA16FB9046000DB72C /* Reachability.m */; };
 		AA157DD116FB9046000DB72C /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCC16FB9046000DB72C /* ParselyTracker.m */; };
+		AAA9A85D16FBA41E00923565 /* parsely_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */; };
 		AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2016EA66B300358E79 /* UIKit.framework */; };
 		AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2216EA66B300358E79 /* Foundation.framework */; };
 		AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2416EA66B300358E79 /* CoreGraphics.framework */; };
@@ -43,7 +44,8 @@
 		AA157DCA16FB9046000DB72C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AA157DCB16FB9046000DB72C /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
 		AA157DCC16FB9046000DB72C /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
-		AA157DD316FB909D000DB72C /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiParsely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_logo_horizontal.png; sourceTree = "<group>"; };
+		AAA9A85E16FBA68200923565 /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiParsely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAE37F2416EA66B300358E79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -80,6 +82,7 @@
 		AA157DB316FB8DD0000DB72C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */,
 				AA157DB416FB8DD0000DB72C /* Default-568h@2x.png */,
 				AA157DB516FB8DD0000DB72C /* Default.png */,
 				AA157DB616FB8DD0000DB72C /* Default@2x.png */,
@@ -127,7 +130,7 @@
 				AA157DC416FB9046000DB72C /* ParselyiOS */,
 				AA157DAF16FB8DD0000DB72C /* HiParsely */,
 				AAE37F1F16EA66B300358E79 /* Frameworks */,
-				AA157DD316FB909D000DB72C /* HiParsely.app */,
+				AAA9A85E16FBA68200923565 /* HiParsely.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,7 +163,7 @@
 			);
 			name = HiParsely;
 			productName = PixelTester;
-			productReference = AA157DD316FB909D000DB72C /* HiParsely.app */;
+			productReference = AAA9A85E16FBA68200923565 /* HiParsely.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -199,6 +202,7 @@
 				AA157DBD16FB8DD0000DB72C /* Default-568h@2x.png in Resources */,
 				AA157DBE16FB8DD0000DB72C /* Default.png in Resources */,
 				AA157DBF16FB8DD0000DB72C /* Default@2x.png in Resources */,
+				AAA9A85D16FBA41E00923565 /* parsely_logo_horizontal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

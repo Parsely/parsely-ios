@@ -12,13 +12,11 @@
     hasConnection = YES;
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, bounds.size.width, 40)];
-    [title setFont:[UIFont fontWithName:@"Arial" size:26]];
-    [title setTextColor:[UIColor whiteColor]];
-    [title setBackgroundColor:[UIColor blackColor]];
-    [title setTextAlignment:NSTextAlignmentCenter];
-    [title setText:@"Parsely SDK Test App"];
-    [self.view addSubview:title];
+    [self.view setBackgroundColor:[UIColor grayColor]];
+    
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parsely_logo_horizontal"]];
+    [logoView setFrame:CGRectMake(48, 40, 200, 57)];
+    [self.view addSubview:logoView];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button addTarget:self
