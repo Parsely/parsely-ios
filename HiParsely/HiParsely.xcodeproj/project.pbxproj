@@ -1,0 +1,358 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */; };
+		AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */; };
+		AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */; };
+		AA157DBB16FB8DD0000DB72C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DB116FB8DD0000DB72C /* AppDelegate.m */; };
+		AA157DBC16FB8DD0000DB72C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DB216FB8DD0000DB72C /* main.m */; };
+		AA157DBD16FB8DD0000DB72C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA157DB416FB8DD0000DB72C /* Default-568h@2x.png */; };
+		AA157DBE16FB8DD0000DB72C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AA157DB516FB8DD0000DB72C /* Default.png */; };
+		AA157DBF16FB8DD0000DB72C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA157DB616FB8DD0000DB72C /* Default@2x.png */; };
+		AA157DC116FB8DD0000DB72C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DBA16FB8DD0000DB72C /* ViewController.m */; };
+		AA157DD016FB9046000DB72C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCA16FB9046000DB72C /* Reachability.m */; };
+		AA157DD116FB9046000DB72C /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCC16FB9046000DB72C /* ParselyTracker.m */; };
+		AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2016EA66B300358E79 /* UIKit.framework */; };
+		AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2216EA66B300358E79 /* Foundation.framework */; };
+		AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2416EA66B300358E79 /* CoreGraphics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_small.png; sourceTree = "<group>"; };
+		AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_retina.png; sourceTree = "<group>"; };
+		AA157DB016FB8DD0000DB72C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AA157DB116FB8DD0000DB72C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AA157DB216FB8DD0000DB72C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA157DB416FB8DD0000DB72C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AA157DB516FB8DD0000DB72C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		AA157DB616FB8DD0000DB72C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		AA157DB716FB8DD0000DB72C /* HiParsely-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HiParsely-Info.plist"; sourceTree = "<group>"; };
+		AA157DB816FB8DD0000DB72C /* HiParsely-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HiParsely-Prefix.pch"; sourceTree = "<group>"; };
+		AA157DB916FB8DD0000DB72C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AA157DBA16FB8DD0000DB72C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AA157DC616FB9046000DB72C /* mainpage.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainpage.dox; sourceTree = "<group>"; };
+		AA157DC716FB9046000DB72C /* protocol.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = protocol.dox; sourceTree = "<group>"; };
+		AA157DC916FB9046000DB72C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		AA157DCA16FB9046000DB72C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		AA157DCB16FB9046000DB72C /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
+		AA157DCC16FB9046000DB72C /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
+		AA157DCD16FB9046000DB72C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		AA157DD316FB909D000DB72C /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiParsely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AAE37F2416EA66B300358E79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAE37F1A16EA66B300358E79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */,
+				AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */,
+				AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */,
+				AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA157DAF16FB8DD0000DB72C /* HiParsely */ = {
+			isa = PBXGroup;
+			children = (
+				AA157DB016FB8DD0000DB72C /* AppDelegate.h */,
+				AA157DB116FB8DD0000DB72C /* AppDelegate.m */,
+				AA157DB216FB8DD0000DB72C /* main.m */,
+				AA157DB916FB8DD0000DB72C /* ViewController.h */,
+				AA157DBA16FB8DD0000DB72C /* ViewController.m */,
+				AA157DB316FB8DD0000DB72C /* Resources */,
+			);
+			path = HiParsely;
+			sourceTree = "<group>";
+		};
+		AA157DB316FB8DD0000DB72C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA157DB416FB8DD0000DB72C /* Default-568h@2x.png */,
+				AA157DB516FB8DD0000DB72C /* Default.png */,
+				AA157DB616FB8DD0000DB72C /* Default@2x.png */,
+				AA157DB716FB8DD0000DB72C /* HiParsely-Info.plist */,
+				AA157DB816FB8DD0000DB72C /* HiParsely-Prefix.pch */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA157DC416FB9046000DB72C /* ParselyiOS */ = {
+			isa = PBXGroup;
+			children = (
+				AA157DC516FB9046000DB72C /* docs */,
+				AA157DC816FB9046000DB72C /* libs */,
+				AA157DCB16FB9046000DB72C /* ParselyTracker.h */,
+				AA157DCC16FB9046000DB72C /* ParselyTracker.m */,
+				AA157DCD16FB9046000DB72C /* README.md */,
+			);
+			name = ParselyiOS;
+			path = ../ParselyiOS;
+			sourceTree = "<group>";
+		};
+		AA157DC516FB9046000DB72C /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				AA157DC616FB9046000DB72C /* mainpage.dox */,
+				AA157DC716FB9046000DB72C /* protocol.dox */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		AA157DC816FB9046000DB72C /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				AA157DC916FB9046000DB72C /* Reachability.h */,
+				AA157DCA16FB9046000DB72C /* Reachability.m */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		AAE37F1416EA66B300358E79 = {
+			isa = PBXGroup;
+			children = (
+				AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */,
+				AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */,
+				AA157DC416FB9046000DB72C /* ParselyiOS */,
+				AA157DAF16FB8DD0000DB72C /* HiParsely */,
+				AAE37F1F16EA66B300358E79 /* Frameworks */,
+				AA157DD316FB909D000DB72C /* HiParsely.app */,
+			);
+			sourceTree = "<group>";
+		};
+		AAE37F1F16EA66B300358E79 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */,
+				AAE37F2016EA66B300358E79 /* UIKit.framework */,
+				AAE37F2216EA66B300358E79 /* Foundation.framework */,
+				AAE37F2416EA66B300358E79 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAE37F1C16EA66B300358E79 /* HiParsely */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "HiParsely" */;
+			buildPhases = (
+				AAE37F1916EA66B300358E79 /* Sources */,
+				AAE37F1A16EA66B300358E79 /* Frameworks */,
+				AAE37F1B16EA66B300358E79 /* Resources */,
+				AAF30E6C16F3C06B006B85A3 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HiParsely;
+			productName = PixelTester;
+			productReference = AA157DD316FB909D000DB72C /* HiParsely.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAE37F1516EA66B300358E79 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Emmett Butler";
+			};
+			buildConfigurationList = AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "HiParsely" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AAE37F1416EA66B300358E79;
+			productRefGroup = AAE37F1416EA66B300358E79;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAE37F1C16EA66B300358E79 /* HiParsely */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AAE37F1B16EA66B300358E79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */,
+				AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */,
+				AA157DBD16FB8DD0000DB72C /* Default-568h@2x.png in Resources */,
+				AA157DBE16FB8DD0000DB72C /* Default.png in Resources */,
+				AA157DBF16FB8DD0000DB72C /* Default@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AAF30E6C16F3C06B006B85A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ../docs\n/Applications/Doxygen.app/Contents/Resources/doxygen";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAE37F1916EA66B300358E79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA157DBB16FB8DD0000DB72C /* AppDelegate.m in Sources */,
+				AA157DBC16FB8DD0000DB72C /* main.m in Sources */,
+				AA157DC116FB8DD0000DB72C /* ViewController.m in Sources */,
+				AA157DD016FB9046000DB72C /* Reachability.m in Sources */,
+				AA157DD116FB9046000DB72C /* ParselyTracker.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AAE37F4116EA66B400358E79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AAE37F4216EA66B400358E79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AAE37F4416EA66B400358E79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DOXYGEN_PATH = "/Applications/Doxygen.app/Contents/Resources/doxygen ";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"PARSELY_DEBUG=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HiParsely/Resources/HiParsely-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
+				PRODUCT_NAME = HiParsely;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AAE37F4516EA66B400358E79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DOXYGEN_PATH = "/Applications/Doxygen.app/Contents/Resources/doxygen ";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
+				INFOPLIST_FILE = "HiParsely/Resources/HiParsely-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
+				PRODUCT_NAME = HiParsely;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "HiParsely" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAE37F4116EA66B400358E79 /* Debug */,
+				AAE37F4216EA66B400358E79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "HiParsely" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAE37F4416EA66B400358E79 /* Debug */,
+				AAE37F4516EA66B400358E79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAE37F1516EA66B300358E79 /* Project object */;
+}
