@@ -10,6 +10,7 @@
 		AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */; };
 		AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */; };
 		AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */; };
+		AA157DA116FB864A000DB72C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA157DA016FB864A000DB72C /* README.md */; };
 		AA168CE516FA16F7001BE072 /* protocol.dox in Resources */ = {isa = PBXBuildFile; fileRef = AA168CE416FA16F7001BE072 /* protocol.dox */; };
 		AAA9F67016F8FFAD00B224AA /* mainpage.dox in Resources */ = {isa = PBXBuildFile; fileRef = AAA9F66F16F8FFAD00B224AA /* mainpage.dox */; };
 		AABC76C916EF693800CEA20B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AABC76C616EF693800CEA20B /* Default-568h@2x.png */; };
@@ -29,6 +30,7 @@
 		AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_small.png; sourceTree = "<group>"; };
 		AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_retina.png; sourceTree = "<group>"; };
+		AA157DA016FB864A000DB72C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		AA168CE416FA16F7001BE072 /* protocol.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = protocol.dox; sourceTree = "<group>"; };
 		AAA9F66F16F8FFAD00B224AA /* mainpage.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainpage.dox; sourceTree = "<group>"; };
 		AABC76C616EF693800CEA20B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				AAF30E6816F3B132006B85A3 /* Reachability.m */,
 				AAA9F66F16F8FFAD00B224AA /* mainpage.dox */,
 				AA168CE416FA16F7001BE072 /* protocol.dox */,
+				AA157DA016FB864A000DB72C /* README.md */,
 			);
 			path = ParselyiOS;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				AABC76CB16EF693800CEA20B /* Default@2x.png in Resources */,
 				AAA9F67016F8FFAD00B224AA /* mainpage.dox in Resources */,
 				AA168CE516FA16F7001BE072 /* protocol.dox in Resources */,
+				AA157DA116FB864A000DB72C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
