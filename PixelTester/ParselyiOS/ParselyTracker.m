@@ -102,7 +102,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
                      1000000000 + arc4random() % 99999999999,
                      self.apiKey,
                      [self urlEncodeString:[event objectForKey:@"url"]],
-                     @"",  // urlref
+                     @"mobile",  // urlref
                      [self urlEncodeString:[self JSONWithDictionary:data]]];
 
     [self apiConnectionWithURL:url];
@@ -207,6 +207,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [deviceInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
     [deviceInfo setObject:self.apiKey forKey:@"idsite"];
     [deviceInfo setObject:@"mobileapp" forKey:@"type"];
+    [deviceInfo setObject:@"mobile" forKey:@"urlref"];
     
     [deviceInfo setObject:@"Apple" forKey:@"manufacturer"];
     [deviceInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
@@ -255,11 +256,11 @@ ParselyTracker *instance;  /*!< Singleton instance */
             }
 #ifdef PARSELY_DEBUG
             __debug_wifioff = NO;
-            _rootUrl = @"http://localhost:5001/";
+            _rootUrl = @"http://hack.parsely.com/mobileproxy";
             self.queueSizeLimit = 5;
             self.storageSizeLimit = 20;
 #else
-            _rootUrl = @"http://hack.parsely.com/mobileproxy/";
+            _rootUrl = @"http://hack.parsely.com/mobileproxy";
             self.queueSizeLimit = 50;
             self.storageSizeLimit = 100;
 #endif
