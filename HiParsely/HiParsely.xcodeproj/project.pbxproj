@@ -218,7 +218,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../docs\n/Applications/Doxygen.app/Contents/Resources/doxygen";
+			shellScript = "cd ../Documentation\n/Applications/Doxygen.app/Contents/Resources/doxygen";
 		};
 /* End PBXShellScriptBuildPhase section */
 
