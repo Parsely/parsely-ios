@@ -207,7 +207,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [deviceInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
     [deviceInfo setObject:self.apiKey forKey:@"idsite"];
     [deviceInfo setObject:@"mobileapp" forKey:@"type"];
-    [deviceInfo setObject:@"mobile" forKey:@"urlref"];
     
     [deviceInfo setObject:@"Apple" forKey:@"manufacturer"];
     [deviceInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
