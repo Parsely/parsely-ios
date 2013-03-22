@@ -50,6 +50,12 @@ Pageview Tracking
 
 To register a pageview event with Parsely, simply use the `track:` call.
 
-    [[ParselyTracker sharedInstance] track:@"http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
+    [[ParselyTracker sharedInstance] trackURL:@"http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
 
 This call requires the canonical URL of the page corresponding to the post currently being viewed.
+
+You can also use
+
+    [[ParselyTracker sharedInstance] trackPostID:@"12353-349867-1823756"];
+
+which requires a string uniquely identifying the post to Parsely's systems.

@@ -226,7 +226,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [dInfo setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] forKey:@"appname"];
     [dInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
     [dInfo setObject:self.apiKey forKey:@"idsite"];
-    [dInfo setObject:@"mobileapp" forKey:@"type"];
     
     [dInfo setObject:@"Apple" forKey:@"manufacturer"];
     [dInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
@@ -269,8 +268,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
             shouldBatchRequests = YES;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
-            rootUrl = @"http://hack.parsely.com/mobileproxy";
-            //rootUrl = @"http://localhost:5001/mobileproxy";
+            //rootUrl = @"http://hack.parsely.com/mobileproxy";
+            rootUrl = @"http://localhost:5001/mobileproxy";
             
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
             

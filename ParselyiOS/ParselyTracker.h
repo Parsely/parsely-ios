@@ -27,7 +27,7 @@
 /*! \brief Manages pageview events and analytics data for Parsely on iOS
  *
  *  Accessed as a singleton. Maintains a queue of pageview events in memory and periodically
- *  flushes the queue to the Parsely pixel server.
+ *  flushes the queue to the Parsely pixel proxy server.
  */ 
 @interface ParselyTracker : NSObject <NSURLConnectionDelegate>
 {
@@ -131,7 +131,7 @@ typedef enum _kIdType {
 
 /*!  \brief Send the entire queue as a single request
  *
- *   Creates a large GET request containing the JSON encoding of the entire queue.
+ *   Creates a large POST request containing the JSON encoding of the entire queue.
  *   Sends this request to the proxy server, which forwards requests to the pixel server.
  *
  *   @param queue The list of event dictionaries to serialize

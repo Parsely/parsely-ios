@@ -83,12 +83,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><p>The Parsely pixel server accepts GET requests containing the information for single pageviews. For mobile devices, sending one request per pageview wastes battery. The Parsely SDK sends batches of events to a proxy server, which then splits the batches into individual requests for consumption by the pixel server. The Parsely SDK creates this batched request for you, but there are some cases where you might want to construct this batched request yourself.</p>
 <h2>Elements of the Proxy Request</h2>
-<p>All requests sent to <code><a href="http://hack.parsely.com/mobileproxy/">http://hack.parsely.com/mobileproxy/</a></code> must have a single querystring argument <code>rqs</code>. All other querystring aruments are ignored. The value of the <code>rqs</code> (requests) parameter is a <b>URL-encoded</b> JSON document that must have the following structure: </p>
+<p>All POST requests sent to <code><a href="http://hack.parsely.com/mobileproxy/">http://hack.parsely.com/mobileproxy/</a></code> must have a single argument <code>rqs</code>. All other aruments are ignored. The value of the <code>rqs</code> (requests) parameter is a <b>URL-encoded</b> JSON document that must have the following structure: </p>
 <pre class="fragment">{
     "data":{
         "idsite":"samplesite.com",
         "parsely_uuid":"76e4c7f0afeb4e7643f5089235779937d9637b55"
-        "type":"mobileapp",
         "appname":"ParselySDK",
         "manufacturer":"Apple",
         "os":"iPhone OS",
@@ -100,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
             "ts":1363796913.105937
         },
         {
-            "url":"http://samplesite.com/2013/03/20/obamas-limo-breaks-down-in-israel-filled-with-diesel-photos/",
+            "postid":"91782365-12378561-457896",
             "ts":1363596915.229876
         },
         ...
@@ -110,7 +109,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
         }
     ]
 }
-</pre><p>The <code>data</code> variable is a document containing invariant data about the pixel requests - that is, data that is constant for all of the events being transmitted. The <code>events</code> variable is a list of documents containing data that differs per request.</p>
+</pre><p>The <code>data</code> variable is a document containing invariant data about the pixel requests - that is, data that is constant for all of the events being transmitted. The <code>events</code> variable is a list of documents containing data that differs per request. Note that it is permissible to mix <code>url</code>s and <code>postid</code>s in the same <code>events</code> array.</p>
 <table class="doxtable">
 <tr>
 <th>Variable </th><th>Container </th><th>Description </th><th>Required </th><th>Example</th></tr>
@@ -118,8 +117,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <td><code>idsite</code> </td><td><code>data</code> </td><td>The site ID where data should be stored </td><td>yes </td><td><code>"idsite":"samplesite.com"</code> </td></tr>
 <tr>
 <td><code>parsely_uuid</code> </td><td><code>data</code> </td><td>The UUID for the current user or device </td><td>yes </td><td><code>"parsely_uuid":"76e4c8f0afeb4e7643f5089235779937d9637b55"</code> </td></tr>
-<tr>
-<td><code>type</code> </td><td><code>data</code> </td><td>One of "mobileapp","mobileweb","desktop" </td><td>yes </td><td><code>"type":"mobileapp"</code> </td></tr>
 <tr>
 <td><code>appname</code> </td><td><code>data</code> </td><td>The name of the current app (for mobile devices) </td><td>no </td><td><code>"appname":"MyCoolApp"</code> </td></tr>
 <tr>
@@ -129,19 +126,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr>
 <td><code>os_version</code> </td><td><code>data</code> </td><td>Operating system major and minor version </td><td>no </td><td><code>"os_version":"6.1"</code> </td></tr>
 <tr>
-<td><code>url</code> </td><td><code>events</code> </td><td>The canonical URL of the tracked post </td><td>yes </td><td><code>"url":"http://samplesite.com/2013/03/20/obama-reid-dragged-into-evolving-menendez-donor-scandal/"</code> </td></tr>
+<td><code>url</code> </td><td><code>events</code> </td><td>The canonical URL of the tracked post </td><td>yes, or <code>postid</code> </td><td><code>"url":"http://samplesite.com/2013/03/20/obama-reid-dragged-into-evolving-menendez-donor-scandal/"</code> </td></tr>
+<tr>
+<td><code>postid</code> </td><td><code>events</code> </td><td>The Parsely-unique string identifier for the post </td><td>yes, or <code>url</code> </td><td><code>"postid":"147136-1892374-1297856"</code> </td></tr>
 <tr>
 <td><code>ts</code> </td><td><code>events</code> </td><td>The UNIX timestamp of the event (seconds since epoch) </td><td>yes </td><td><code>"ts":1363796913.220884</code> </td></tr>
 </table>
 <p>A real request to the proxy server might look like this one, which contains two separate pageview events in the URL-encoded JSON document: </p>
-<pre class="fragment">GET http://hack.parsely.com/mobileproxy/?rqs=%7B%22data%22%3A%7B%22appname%22%3A%22MyCoolApp%22%2C%22type%22%3A%22mobileapp%22%2C%22manufacturer%22%3A%22Apple%22%2C%22idsite%22%3A%22samplesite.com%22%2C%22os%22%3A%22iPhone%20OS%22%2C%22os_version%22%3A%226.1%22%2C%22parsely_uuid%22%3A%2276e4c7f0afeb4e7643f5089235779937d9637b55%22%7D%2C%22events%22%3A%5B%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fsamplesite.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.753075%7D%2C%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fsamplesite.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.870318%7D%5D%7D
+<pre class="fragment">POST /mobileproxy HTTP/1.1
+Host: hack.parsely.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 213
+
+rqs=%7B%22data%22%3A%7B%22os_version%22%3A%226.1%22%2C%22appname%22%3A%22HiParsely%22%2C%22parsely_uuid%22%3A%22ad926df27f7f39fe1417f41bac9ec8e40232680a%22%2C%22idsite%22%3A%22somesite.com%22%2C%22manufacturer%22%3A%22Apple%22%2C%22os%22%3A%22iPhone%20OS%22%7D%2C%22events%22%3A%5B%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fsomesite.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363977322.65788%7D%2C%7B%22ts%22%3A1363977323.012882%2C%22postid%22%3A%2212353-983124-876153%22%7D%5D%7D
 </pre><h2>Generating a UUID</h2>
 <p>On desktop browsers, you can avoid generating a UUID by <a href="http://parsely.com/api/tracking_pixel.html#using-the-parse-ly-network-uuid">using the Parsely network UUID</a>.</p>
 <p>Mobile apps that use the Parsely SDK don't have to create their own UUIDs, as the SDK handles that. However, if you'd like to create your own, it must be guaranteed to be unique per device. The easiest way to guarantee uniqueness is to generate a UUID using the device MAC address. On iOS, see the <code>CFUUIDCreate()</code> function for a description of how to do this. Once you create the UUID, you should save it in persistent storage (for example, iOS' <code>NSUserDefaults</code> key-value store). </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 22 2013 14:14:45 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 22 2013 14:42:53 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
