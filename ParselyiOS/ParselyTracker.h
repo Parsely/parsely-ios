@@ -129,15 +129,6 @@ typedef enum _kIdType {
  */
 -(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
 
-/*!  \brief Send a single pixel request
- *
- *  Sends a single request directly to Parsely's pixel server, bypassing the proxy.
- *  Prefer `sendBatchRequest:` to this method, as `sendBatchRequest:` causes less battery usage
- *
- *  @param event A dictionary containing data for a single pageview event
- */
--(void)flushEvent:(NSDictionary *)event;
-
 /*!  \brief Send the entire queue as a single request
  *
  *   Creates a large GET request containing the JSON encoding of the entire queue.

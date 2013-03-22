@@ -11,7 +11,7 @@
     self.viewController = [[ViewController alloc] init];
     self.window.rootViewController = self.viewController;
     
-    [ParselyTracker sharedInstanceWithApiKey:@"arstechnica.com"];
+    [ParselyTracker sharedInstanceWithApiKey:@"somesite.com"];
     
     [self.window makeKeyAndVisible];
     return YES;

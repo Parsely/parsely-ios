@@ -22,9 +22,17 @@
     [button addTarget:self
                action:@selector(trackPage)
      forControlEvents:UIControlEventTouchDown];
-    [button setTitle:@"Track page" forState:UIControlStateNormal];
+    [button setTitle:@"Track URL" forState:UIControlStateNormal];
     button.frame = CGRectMake(80.0, 110.0, 160.0, 40.0);
     [self.view addSubview:button];
+    
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button2 addTarget:self
+               action:@selector(trackPostID)
+     forControlEvents:UIControlEventTouchDown];
+    [button2 setTitle:@"Track Post ID" forState:UIControlStateNormal];
+    button2.frame = CGRectMake(80.0, 160.0, 160.0, 40.0);
+    [self.view addSubview:button2];
     
 #ifdef PARSELY_DEBUG
     connectionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -32,7 +40,7 @@
                action:@selector(toggleSimulatedConnection)
      forControlEvents:UIControlEventTouchDown];
     [connectionButton setTitle:@"Lose connection" forState:UIControlStateNormal];
-    connectionButton.frame = CGRectMake(80.0, 160.0, 160.0, 40.0);
+    connectionButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
     [self.view addSubview:connectionButton];
 #endif
     
@@ -75,7 +83,10 @@
 }
 
 -(void)trackPage{
-    [[ParselyTracker sharedInstance] trackURL:@"http://arstechnica.com/not-a-real-url.html"];
+    [[ParselyTracker sharedInstance] trackURL:@"http://somesite.com/not-a-real-url.html"];
+}
+
+-(void)trackPostID{
     [[ParselyTracker sharedInstance] trackPostID:@"12353-983124-876153"];
 }
 

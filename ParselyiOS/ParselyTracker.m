@@ -45,6 +45,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [params setObject:deviceInfo forKey:@"data"];
     [eventQueue addObject:params];
     
+    PLog(@"%@", params);
+    
     if([self queueSize] >= queueSizeLimit + 1){
         PLog(@"Queue size exceeded, expelling oldest event to persistent memory");
         [self persistQueue];
@@ -102,6 +104,13 @@ ParselyTracker *instance;  /*!< Singleton instance */
     }
 }
 
+/*! \brief Send a single pixel request
+ *
+ *  Sends a single request directly to Parsely's pixel server, bypassing the proxy.
+ *  Prefer `sendBatchRequest:` to this method, as `sendBatchRequest:` causes less battery usage
+ *
+ *  @param event A dictionary containing data for a single pageview event
+ */
 -(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
     
@@ -132,8 +141,16 @@ ParselyTracker *instance;  /*!< Singleton instance */
     
     // and a list of url/timestamp dictionaries
     for(NSDictionary *event in queueArray){
+        NSString *field, *value;
+        if([event objectForKey:@"url"] != nil){
+            field = @"url";
+            value = [event objectForKey:@"url"];
+        } else if([event objectForKey:@"postid"] != nil){
+            field = @"postid";
+            value = [event objectForKey:@"postid"];
+        }
         [events addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
-                                                   [event objectForKey:@"url"],  @"url",
+                                                   value, field,
                                                    [event objectForKey:@"ts"], @"ts",
                                                    nil]];
     }
@@ -141,9 +158,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
     PLog(@"%@", [self JSONWithDictionary:batchDict]);
     
-    NSString *url = [NSString stringWithFormat:@"%@?rqs=%@", rootUrl, [self urlEncodeString:[self JSONWithDictionary:batchDict]]];
-    [self apiConnectionWithURL:url];
-    PLog(@"Requested %@", url);
+    [self apiConnectionWithURL:rootUrl andData:[self JSONWithDictionary:batchDict]];
+    PLog(@"Requested %@", rootUrl);
 }
 
 -(void)persistQueue{
@@ -254,6 +270,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
             rootUrl = @"http://hack.parsely.com/mobileproxy";
+            //rootUrl = @"http://localhost:5001/mobileproxy";
             
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
             
@@ -340,6 +357,22 @@ ParselyTracker *instance;  /*!< Singleton instance */
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     [request setHTTPMethod:@"GET"];
+    return [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+-(NSURLConnection *)apiConnectionWithURL:(NSString *)endpoint andData:(NSString *)data{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    NSString *requestString = [NSString stringWithFormat:@"rqs=%@", [self urlEncodeString:data]];
+    NSMutableData *postData = [NSMutableData data];
+    [postData appendData:[requestString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
     return [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
