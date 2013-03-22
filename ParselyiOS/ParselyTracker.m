@@ -25,13 +25,21 @@
 
 ParselyTracker *instance;  /*!< Singleton instance */
 
--(void)track:(NSString *)url{
-    PLog(@"Track called for %@", url);
+-(void)trackURL:(NSString *)url{
+    [self track:url withIDType:kUrl];
+}
+
+-(void)trackPostID:(NSString *)postid{
+    [self track:postid withIDType:kPostId];
+}
+
+-(void)track:(NSString *)identifier withIDType:(kIdType)idtype{
+    PLog(@"Track called for %@", identifier);
     
     NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:url forKey:@"url"];
+    [params setObject:identifier forKey:[idNameMap objectForKey:[NSNumber numberWithInt:idtype]]];
     [params setObject:[NSNumber numberWithDouble:timestamp] forKey:@"ts"];
     // TODO - this assumes that idsite will never change for a given run of an app. bad idea?
     [params setObject:deviceInfo forKey:@"data"];
@@ -254,6 +262,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
             rootUrl = @"http://hack.parsely.com/mobileproxy";
+            
+            idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
             
             if([self getStoredQueue]){
                 [self setFlushTimer];

@@ -40,11 +40,20 @@
         NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
         NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
         NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
+        NSDictionary *idNameMap;
         BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
 #ifdef PARSELY_DEBUG
         BOOL __debug_wifioff;
 #endif
 }
+
+/*! \brief types of post identifiers
+ *
+ *  Representation of the allowed post identifier types
+ */
+typedef enum _kIdType {
+    kUrl, kPostId
+} kIdType;
 
 @property (nonatomic) NSString *apiKey;  /*!< Parsely public API key (eg "dailycaller.com") */
 @property (nonatomic) NSInteger flushInterval;  /*!< The time between event queue flushes expressed in seconds */
@@ -67,15 +76,25 @@
  */
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
 
-/*! \brief Register a pageview event
+/*! \brief Register a pageview event using a canonical URL
+ *
+ *  @param url The canonical URL of the article being tracked (eg: "http://dailycaller.com/some-old/article.html")
+ */
+-(void)trackURL:(NSString *)url;
+
+/*! \brief Register a pageview event using a CMS post identifier
+ *
+ *  @param postid A string uniquely identifying this post. This **must** be unique within Parsely's database.
+ */
+-(void)trackPostID:(NSString *)postid;
+
+/*! \brief Registers a pageview event
  *
  *  Places a data structure representing the event into the in-memory queue for later use
  *
  *  **Note**: Events placed into this queue will be discarded if the size of the persistent queue store exceeds `storageSizeLimit`.
- *
- *  @param url The canonical URL of the article being tracked (eg: "http://dailycaller.com/some-old/article.html")
  */
--(void)track:(NSString *)url;
+-(void)track:(NSString *)identifier withIDType:(kIdType)idtype;
 
 /*!  \brief Generate pixel requests from the queue
  *

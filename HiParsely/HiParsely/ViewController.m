@@ -75,7 +75,8 @@
 }
 
 -(void)trackPage{
-    [[ParselyTracker sharedInstance] track:@"http://arstechnica.com/not-a-real-url.html"];
+    [[ParselyTracker sharedInstance] trackURL:@"http://arstechnica.com/not-a-real-url.html"];
+    [[ParselyTracker sharedInstance] trackPostID:@"12353-983124-876153"];
 }
 
 - (void)didReceiveMemoryWarning{
