@@ -86,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>All requests sent to <code><a href="http://hack.parsely.com/mobileproxy/">http://hack.parsely.com/mobileproxy/</a></code> must have a single querystring argument <code>rqs</code>. All other querystring aruments are ignored. The value of the <code>rqs</code> (requests) parameter is a <b>URL-encoded</b> JSON document that must have the following structure: </p>
 <pre class="fragment">{
     "data":{
-        "idsite":"dailycaller.com",
+        "idsite":"samplesite.com",
         "parsely_uuid":"76e4c7f0afeb4e7643f5089235779937d9637b55"
         "type":"mobileapp",
         "appname":"ParselySDK",
@@ -96,16 +96,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     },
     "events":[
         {
-            "url":"http://dailycaller.com/2013/03/20/obama-delinquent-with-budgets-always-on-time-with-ncaa-brackets-say-republicans/",
+            "url":"http://samplesite.com/2013/03/20/obama-delinquent-with-budgets-always-on-time-with-ncaa-brackets-say-republicans/",
             "ts":1363796913.105937
         },
         {
-            "url":"http://dailycaller.com/2013/03/20/obamas-limo-breaks-down-in-israel-filled-with-diesel-photos/",
+            "url":"http://samplesite.com/2013/03/20/obamas-limo-breaks-down-in-israel-filled-with-diesel-photos/",
             "ts":1363596915.229876
         },
         ...
         {
-            "url":"http://dailycaller.com/2013/03/18/the-spin-does-not-stop-here/",
+            "url":"http://samplesite.com/2013/03/18/the-spin-does-not-stop-here/",
             "ts":1363296917.195734
         }
     ]
@@ -115,7 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr>
 <th>Variable </th><th>Container </th><th>Description </th><th>Required </th><th>Example</th></tr>
 <tr>
-<td><code>idsite</code> </td><td><code>data</code> </td><td>The site ID where data should be stored </td><td>yes </td><td><code>"idsite":"dailycaller.com"</code> </td></tr>
+<td><code>idsite</code> </td><td><code>data</code> </td><td>The site ID where data should be stored </td><td>yes </td><td><code>"idsite":"samplesite.com"</code> </td></tr>
 <tr>
 <td><code>parsely_uuid</code> </td><td><code>data</code> </td><td>The UUID for the current user or device </td><td>yes </td><td><code>"parsely_uuid":"76e4c8f0afeb4e7643f5089235779937d9637b55"</code> </td></tr>
 <tr>
@@ -129,19 +129,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr>
 <td><code>os_version</code> </td><td><code>data</code> </td><td>Operating system major and minor version </td><td>no </td><td><code>"os_version":"6.1"</code> </td></tr>
 <tr>
-<td><code>url</code> </td><td><code>events</code> </td><td>The canonical URL of the tracked post </td><td>yes </td><td><code>"url":"http://dailycaller.com/2013/03/20/obama-reid-dragged-into-evolving-menendez-donor-scandal/"</code> </td></tr>
+<td><code>url</code> </td><td><code>events</code> </td><td>The canonical URL of the tracked post </td><td>yes </td><td><code>"url":"http://samplesite.com/2013/03/20/obama-reid-dragged-into-evolving-menendez-donor-scandal/"</code> </td></tr>
 <tr>
 <td><code>ts</code> </td><td><code>events</code> </td><td>The UNIX timestamp of the event (seconds since epoch) </td><td>yes </td><td><code>"ts":1363796913.220884</code> </td></tr>
 </table>
 <p>A real request to the proxy server might look like this one, which contains two separate pageview events in the URL-encoded JSON document: </p>
-<pre class="fragment">GET http://hack.parsely.com/mobileproxy/?rqs=%7B%22data%22%3A%7B%22appname%22%3A%22MyCoolApp%22%2C%22type%22%3A%22mobileapp%22%2C%22manufacturer%22%3A%22Apple%22%2C%22idsite%22%3A%22dailycaller.com%22%2C%22os%22%3A%22iPhone%20OS%22%2C%22os_version%22%3A%226.1%22%2C%22parsely_uuid%22%3A%2276e4c7f0afeb4e7643f5089235779937d9637b55%22%7D%2C%22events%22%3A%5B%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fdailycaller.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.753075%7D%2C%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fdailycaller.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.870318%7D%5D%7D
+<pre class="fragment">GET http://hack.parsely.com/mobileproxy/?rqs=%7B%22data%22%3A%7B%22appname%22%3A%22MyCoolApp%22%2C%22type%22%3A%22mobileapp%22%2C%22manufacturer%22%3A%22Apple%22%2C%22idsite%22%3A%22samplesite.com%22%2C%22os%22%3A%22iPhone%20OS%22%2C%22os_version%22%3A%226.1%22%2C%22parsely_uuid%22%3A%2276e4c7f0afeb4e7643f5089235779937d9637b55%22%7D%2C%22events%22%3A%5B%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fsamplesite.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.753075%7D%2C%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fsamplesite.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363799126.870318%7D%5D%7D
 </pre><h2>Generating a UUID</h2>
 <p>On desktop browsers, you can avoid generating a UUID by <a href="http://parsely.com/api/tracking_pixel.html#using-the-parse-ly-network-uuid">using the Parsely network UUID</a>.</p>
 <p>Mobile apps that use the Parsely SDK don't have to create their own UUIDs, as the SDK handles that. However, if you'd like to create your own, it must be guaranteed to be unique per device. The easiest way to guarantee uniqueness is to generate a UUID using the device MAC address. On iOS, see the <code>CFUUIDCreate()</code> function for a description of how to do this. Once you create the UUID, you should save it in persistent storage (for example, iOS' <code>NSUserDefaults</code> key-value store). </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 22 2013 13:09:06 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 22 2013 13:11:17 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

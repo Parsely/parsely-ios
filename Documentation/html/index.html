@@ -101,19 +101,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <pre class="fragment">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    [ParselyTracker sharedInstanceWithApiKey:@"dailycaller.com"];  // initialize the Parsely tracker
+    [ParselyTracker sharedInstanceWithApiKey:@"samplesite.com"];  // initialize the Parsely tracker
 
     [self.window makeKeyAndVisible];
     return YES;
 }
 </pre><h2>Pageview Tracking</h2>
 <p>To register a pageview event with Parsely, simply use the <code>track:</code> call.:: </p>
-<pre class="fragment">[[ParselyTracker sharedInstance] track:@"http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
+<pre class="fragment">[[ParselyTracker sharedInstance] track:@"http://samplesite.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
 </pre><p>This call requires the canonical URL of the page corresponding to the post currently being viewed. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 22 2013 13:09:06 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 22 2013 13:11:17 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
