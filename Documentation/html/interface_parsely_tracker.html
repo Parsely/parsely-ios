@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,7 +88,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Instance Methods</a> &#124;
 <a href="#pub-static-methods">Class Methods</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="class_parsely_tracker-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -151,35 +150,14 @@ Class Methods</h2></td></tr>
 <tr class="memdesc:a05b5cbcf2cdf6ef3f29b130176045bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton instance factory.  <a href="#a05b5cbcf2cdf6ef3f29b130176045bd3">More...</a><br/></td></tr>
 <tr class="separator:a05b5cbcf2cdf6ef3f29b130176045bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a9b8655792584175bbf8a903b9bcbe9a4"><td class="memItemLeft" align="right" valign="top">NSTimer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a9b8655792584175bbf8a903b9bcbe9a4">_timer</a></td></tr>
-<tr class="separator:a9b8655792584175bbf8a903b9bcbe9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6e1e04d0f93aa48ffe92c3bfb752632"><td class="memItemLeft" align="right" valign="top">NSMutableArray *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#ad6e1e04d0f93aa48ffe92c3bfb752632">eventQueue</a></td></tr>
-<tr class="separator:ad6e1e04d0f93aa48ffe92c3bfb752632"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a36bc5d673135f17e8ccfc0993bc7c9e7"><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a36bc5d673135f17e8ccfc0993bc7c9e7">uuidKey</a></td></tr>
-<tr class="separator:a36bc5d673135f17e8ccfc0993bc7c9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9322084d53edf267ae9ff6483d70201"><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#ae9322084d53edf267ae9ff6483d70201">apiKey</a></td></tr>
 <tr class="separator:ae9322084d53edf267ae9ff6483d70201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad57ffb9a8b0c378e032e8f660e77f007"><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#ad57ffb9a8b0c378e032e8f660e77f007">storageKey</a></td></tr>
-<tr class="separator:ad57ffb9a8b0c378e032e8f660e77f007"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbf5a64e4810b30e6a483d8696563b3d"><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#abbf5a64e4810b30e6a483d8696563b3d">rootUrl</a></td></tr>
-<tr class="separator:abbf5a64e4810b30e6a483d8696563b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b836ffeab9b33a0d08edc311e74f110"><td class="memItemLeft" align="right" valign="top">NSInteger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a7b836ffeab9b33a0d08edc311e74f110">queueSizeLimit</a></td></tr>
-<tr class="separator:a7b836ffeab9b33a0d08edc311e74f110"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aaf77c9e756f8a65f1ccbcf67639aaf"><td class="memItemLeft" align="right" valign="top">NSInteger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a7aaf77c9e756f8a65f1ccbcf67639aaf">storageSizeLimit</a></td></tr>
-<tr class="separator:a7aaf77c9e756f8a65f1ccbcf67639aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45ec9e90b5bbfe0fafb0bd4d2938ef55"><td class="memItemLeft" align="right" valign="top">NSInteger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a45ec9e90b5bbfe0fafb0bd4d2938ef55">flushInterval</a></td></tr>
 <tr class="separator:a45ec9e90b5bbfe0fafb0bd4d2938ef55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3c2a00bbdaeaaf3ec143ec2ccee30c2"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#ae3c2a00bbdaeaaf3ec143ec2ccee30c2">shouldBatchRequests</a></td></tr>
-<tr class="separator:ae3c2a00bbdaeaaf3ec143ec2ccee30c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ca7d8ee30b8c05c774f380529980e88"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a8ca7d8ee30b8c05c774f380529980e88">shouldFlushOnBackground</a></td></tr>
 <tr class="separator:a8ca7d8ee30b8c05c774f380529980e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ec3cf37dc7808fec182362d7daba967"><td class="memItemLeft" align="right" valign="top">NSMutableDictionary *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a8ec3cf37dc7808fec182362d7daba967">deviceInfo</a></td></tr>
-<tr class="separator:a8ec3cf37dc7808fec182362d7daba967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages pageview events and analytics data for Parsely on iOS. </p>
@@ -451,49 +429,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a9b8655792584175bbf8a903b9bcbe9a4"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSTimer*) _timer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Periodically generates a callback to flush the event queue </p>
-
-</div>
-</div>
-<a class="anchor" id="ad6e1e04d0f93aa48ffe92c3bfb752632"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSMutableArray*) eventQueue</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Buffer of events, periodically emptied and used to generate pixel requests </p>
-
-</div>
-</div>
 <h2 class="groupheader">Property Documentation</h2>
 <a class="anchor" id="ae9322084d53edf267ae9ff6483d70201"></a>
 <div class="memitem">
@@ -513,27 +448,6 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Parsely public API key (eg "dailycaller.com") </p>
-
-</div>
-</div>
-<a class="anchor" id="a8ec3cf37dc7808fec182362d7daba967"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSMutableDictionary*) deviceInfo</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span><span class="mlabel">nonatomic</span><span class="mlabel">assign</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Contains static information about the current app and device </p>
 
 </div>
 </div>
@@ -558,69 +472,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7b836ffeab9b33a0d08edc311e74f110"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSInteger) queueSizeLimit</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span><span class="mlabel">nonatomic</span><span class="mlabel">assign</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Maximum number of events held in the in-memory event queue </p>
-
-</div>
-</div>
-<a class="anchor" id="abbf5a64e4810b30e6a483d8696563b3d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) rootUrl</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span><span class="mlabel">nonatomic</span><span class="mlabel">assign</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Root of Parsely's pixel server URL (eg "http://pixel.parsely.com") </p>
-
-</div>
-</div>
-<a class="anchor" id="ae3c2a00bbdaeaaf3ec143ec2ccee30c2"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (BOOL) shouldBatchRequests</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span><span class="mlabel">nonatomic</span><span class="mlabel">assign</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>If YES, the event queue is sent as a single request to a proxy server </p>
-
-</div>
-</div>
 <a class="anchor" id="a8ca7d8ee30b8c05c774f380529980e88"></a>
 <div class="memitem">
 <div class="memproto">
@@ -642,69 +493,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad57ffb9a8b0c378e032e8f660e77f007"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) storageKey</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span><span class="mlabel">nonatomic</span><span class="mlabel">assign</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Key mapped to the saved event queue in the defaults store </p>
-
-</div>
-</div>
-<a class="anchor" id="a7aaf77c9e756f8a65f1ccbcf67639aaf"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSInteger) storageSizeLimit</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span><span class="mlabel">nonatomic</span><span class="mlabel">assign</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Maximum number of events held in persistent storage </p>
-
-</div>
-</div>
-<a class="anchor" id="a36bc5d673135f17e8ccfc0993bc7c9e7"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) uuidKey</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span><span class="mlabel">nonatomic</span><span class="mlabel">assign</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Key mapped to the generated uuid in the defaults store </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/emmettbutler/git/CT/Parsely-iOS/ParselyiOS/<a class="el" href="_parsely_tracker_8h_source.html">ParselyTracker.h</a></li>
 <li>/Users/emmettbutler/git/CT/Parsely-iOS/ParselyiOS/ParselyTracker.m</li>
@@ -712,7 +500,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 16:35:23 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 22 2013 10:29:14 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

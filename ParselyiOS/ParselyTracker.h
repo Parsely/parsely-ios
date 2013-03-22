@@ -31,23 +31,24 @@
  */ 
 @interface ParselyTracker : NSObject <NSURLConnectionDelegate>
 {
-    NSTimer *_timer;  /*!< Periodically generates a callback to flush the event queue */
-    NSMutableArray *eventQueue;  /*!< Buffer of events, periodically emptied and used to generate pixel requests */
+    @private
+        NSTimer *_timer;  /*!< Periodically generates a callback to flush the event queue */
+        NSMutableArray *eventQueue;  /*!< Buffer of events, periodically emptied and used to generate pixel requests */
+        NSString *uuidKey;  /*!< Key mapped to the generated uuid in the defaults store */
+        NSString *storageKey;  /*!< Key mapped to the saved event queue in the defaults store */
+        NSString *rootUrl;  /*!< Root of Parsely's pixel server URL (eg "http://pixel.parsely.com") */
+        NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
+        NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
+        NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
+        BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
 #ifdef PARSELY_DEBUG
-    BOOL __debug_wifioff;
+        BOOL __debug_wifioff;
 #endif
 }
 
-@property (nonatomic) NSString *uuidKey;  /*!< Key mapped to the generated uuid in the defaults store */
 @property (nonatomic) NSString *apiKey;  /*!< Parsely public API key (eg "dailycaller.com") */
-@property (nonatomic) NSString *storageKey;  /*!< Key mapped to the saved event queue in the defaults store */
-@property (nonatomic) NSString *rootUrl;  /*!< Root of Parsely's pixel server URL (eg "http://pixel.parsely.com") */
-@property (nonatomic) NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
-@property (nonatomic) NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
 @property (nonatomic) NSInteger flushInterval;  /*!< The time between event queue flushes expressed in seconds */
-@property (nonatomic) BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
 @property (nonatomic) BOOL shouldFlushOnBackground;  /*!< If YES, the event queue is automatically flushed when the app enters the background */
-@property (nonatomic) NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
 
 /*! \brief Singleton instance accessor
  *

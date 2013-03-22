@@ -34,16 +34,16 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [params setObject:url forKey:@"url"];
     [params setObject:[NSNumber numberWithDouble:timestamp] forKey:@"ts"];
     // TODO - this assumes that idsite will never change for a given run of an app. bad idea?
-    [params setObject:self.deviceInfo forKey:@"data"];
+    [params setObject:deviceInfo forKey:@"data"];
     [eventQueue addObject:params];
     
-    if([self queueSize] >= [self queueSizeLimit] + 1){
+    if([self queueSize] >= queueSizeLimit + 1){
         PLog(@"Queue size exceeded, expelling oldest event to persistent memory");
         [self persistQueue];
         [eventQueue removeObjectAtIndex:0];
     }
     
-    if([self storedEventsCount] > self.storageSizeLimit){
+    if([self storedEventsCount] > storageSizeLimit){
         [self expelStoredEvent];
     }
     
@@ -57,7 +57,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
     PLog(@"%d events in queue, %d stored events", [eventQueue count], [[self getStoredQueue] count]);
     
     if([eventQueue count] == 0 && [[self getStoredQueue] count] == 0){
-        PLog(@"Event queue empty, flush timer cleared.");
         [self stopFlushTimer];
         return;
     }
@@ -76,7 +75,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     }
     
     PLog(@"Flushing queue...");
-    if(self.shouldBatchRequests){
+    if(shouldBatchRequests){
         [self sendBatchRequest:newQueue];
     } else {
         for(NSMutableDictionary *event in newQueue){
@@ -88,6 +87,11 @@ ParselyTracker *instance;  /*!< Singleton instance */
     // now that we've sent the requests, vaporize them
     [eventQueue removeAllObjects];
     [self purgeStoredQueue];
+    
+    if([eventQueue count] == 0 && [[self getStoredQueue] count] == 0){
+        PLog(@"Event queue empty, flush timer cleared.");
+        [self stopFlushTimer];
+    }
 }
 
 -(void)flushEvent:(NSDictionary *)event{
@@ -98,7 +102,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [data addEntriesFromDictionary:@{@"ts": [event objectForKey:@"ts"]}];
     
     NSString *url = [NSString stringWithFormat:@"%@?rand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
-                     self.rootUrl,
+                     rootUrl,
                      1000000000 + arc4random() % 99999999999,
                      self.apiKey,
                      [self urlEncodeString:[event objectForKey:@"url"]],
@@ -129,7 +133,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
     PLog(@"%@", [self JSONWithDictionary:batchDict]);
     
-    NSString *url = [NSString stringWithFormat:@"%@?rqs=%@", self.rootUrl, [self urlEncodeString:[self JSONWithDictionary:batchDict]]];
+    NSString *url = [NSString stringWithFormat:@"%@?rqs=%@", rootUrl, [self urlEncodeString:[self JSONWithDictionary:batchDict]]];
     [self apiConnectionWithURL:url];
     PLog(@"Requested %@", url);
 }
@@ -138,32 +142,32 @@ ParselyTracker *instance;  /*!< Singleton instance */
     PLog(@"Persisting event queue");
 
     // get the previously stored queue, merge current queue and re-store
-    NSMutableSet *storedQueue = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey]];
+    NSMutableSet *storedQueue = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:storageKey]];
     [storedQueue addObjectsFromArray:eventQueue];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[storedQueue allObjects] forKey:self.storageKey];
+    [[NSUserDefaults standardUserDefaults] setObject:[storedQueue allObjects] forKey:storageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)purgeStoredQueue{
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:self.storageKey];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:storageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)expelStoredEvent{
-    NSArray *storedQueue = [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
+    NSArray *storedQueue = [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
     NSMutableArray *mutableCopy = [NSMutableArray arrayWithArray:storedQueue];
     [mutableCopy removeObjectAtIndex:0];
-    [[NSUserDefaults standardUserDefaults] setObject:(NSArray *)mutableCopy forKey:self.storageKey];
+    [[NSUserDefaults standardUserDefaults] setObject:(NSArray *)mutableCopy forKey:storageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(NSArray *)getStoredQueue{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:self.storageKey];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
 }
 
 -(NSString *)getUuid{
-    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:self.uuidKey];
+    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:uuidKey];
     if(uuid == nil){
         uuid = [self generateUuid];
     }
@@ -201,18 +205,18 @@ ParselyTracker *instance;  /*!< Singleton instance */
 }
 
 -(NSMutableDictionary *)collectDeviceInfo{
-    NSMutableDictionary *deviceInfo = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dInfo = [NSMutableDictionary dictionary];
     
-    [deviceInfo setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] forKey:@"appname"];
-    [deviceInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
-    [deviceInfo setObject:self.apiKey forKey:@"idsite"];
-    [deviceInfo setObject:@"mobileapp" forKey:@"type"];
+    [dInfo setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] forKey:@"appname"];
+    [dInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
+    [dInfo setObject:self.apiKey forKey:@"idsite"];
+    [dInfo setObject:@"mobileapp" forKey:@"type"];
     
-    [deviceInfo setObject:@"Apple" forKey:@"manufacturer"];
-    [deviceInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
-    [deviceInfo setObject:[[UIDevice currentDevice] systemVersion] forKey:@"os_version"];
+    [dInfo setObject:@"Apple" forKey:@"manufacturer"];
+    [dInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
+    [dInfo setObject:[[UIDevice currentDevice] systemVersion] forKey:@"os_version"];
     
-    return deviceInfo;
+    return dInfo;
 }
 
 +(ParselyTracker *)sharedInstance{
@@ -243,25 +247,24 @@ ParselyTracker *instance;  /*!< Singleton instance */
         if(self=[super init]){
             self.apiKey = apikey;
             eventQueue = [NSMutableArray array];
-            self.storageKey = @"parsely-events";
-            self.uuidKey = @"parsely-uuid";
+            storageKey = @"parsely-events";
+            uuidKey = @"parsely-uuid";
             self.shouldFlushOnBackground = YES;
-            self.shouldBatchRequests = YES;
+            shouldBatchRequests = YES;
             self.flushInterval = flushint;
-            self.deviceInfo = [self collectDeviceInfo];
+            deviceInfo = [self collectDeviceInfo];
+            rootUrl = @"http://hack.parsely.com/mobileproxy";
             
             if([self getStoredQueue]){
                 [self setFlushTimer];
             }
 #ifdef PARSELY_DEBUG
             __debug_wifioff = NO;
-            _rootUrl = @"http://hack.parsely.com/mobileproxy";
-            self.queueSizeLimit = 5;
-            self.storageSizeLimit = 20;
+            queueSizeLimit = 5;
+            storageSizeLimit = 20;
 #else
-            _rootUrl = @"http://hack.parsely.com/mobileproxy";
-            self.queueSizeLimit = 50;
-            self.storageSizeLimit = 100;
+            queueSizeLimit = 50;
+            storageSizeLimit = 100;
 #endif
             [self addApplicationObservers];
         }
@@ -356,7 +359,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
              result[12], result[13], result[14], result[15],
              (NSUInteger)(arc4random() % NSUIntegerMax)];
     
-    [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:self.uuidKey];
+    [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:uuidKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     PLog(@"Generated UUID %@", _uuid);
