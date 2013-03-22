@@ -104,14 +104,14 @@ typedef enum _kIdType {
  */
 -(void)flush;
 
-/*! \brief Disallow the SDK from sending pageview events
+/*! \brief Disallow Parsely from sending pageview events
  *
  *  Invalidates the callback timer responsible for flushing the events queue.
  *  Can be called before or after `start`, but has no effect if used before instantiating the singleton
  */
 -(void)stopFlushTimer;
 
-/*! \brief Allow the SDK to send pageview events
+/*! \brief Allow Parsely to send pageview events
  *
  *  Instantiates the callback timer responsible for flushing the events queue.
  *  Can be called before of after `stop`, but has no effect is used before instantiating the singleton

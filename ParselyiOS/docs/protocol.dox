@@ -66,7 +66,7 @@ Generating a UUID
 
 On desktop browsers, you can avoid generating a UUID by <a href="http://parsely.com/api/tracking_pixel.html#using-the-parse-ly-network-uuid">using the Parsely network UUID</a>.
 
-Mobile apps that use the Parsely SDK don't have to create their own UUIDs, as the SDK handles that. However, if you'd like to create your own, it must be guaranteed to be unique per device.
+Mobile apps that use the Parsely toolkit don't have to create their own UUIDs, as the SDK handles that. However, if you'd like to create your own, it must be guaranteed to be unique per device.
 The easiest way to guarantee uniqueness is to generate a UUID using the device MAC address. On iOS, see the `CFUUIDCreate()` function for a description of how to do this.
 Once you create the UUID, you should save it in persistent storage (for example, iOS' `NSUserDefaults` key-value store).
 
