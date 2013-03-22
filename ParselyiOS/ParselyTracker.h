@@ -55,7 +55,7 @@ typedef enum _kIdType {
     kUrl, kPostId
 } kIdType;
 
-@property (nonatomic) NSString *apiKey;  /*!< Parsely public API key (eg "dailycaller.com") */
+@property (nonatomic) NSString *apiKey;  /*!< Parsely public API key (eg "samplesite.com") */
 @property (nonatomic) NSInteger flushInterval;  /*!< The time between event queue flushes expressed in seconds */
 @property (nonatomic) BOOL shouldFlushOnBackground;  /*!< If YES, the event queue is automatically flushed when the app enters the background */
 
@@ -71,14 +71,14 @@ typedef enum _kIdType {
  *
  *  **Note**: This must be called before `sharedInstance`
  *
- *  @param apikey The Parsely public API key (eg "dailycaller.com")
+ *  @param apikey The Parsely public API key (eg "samplesite.com")
  *  @return The singleton instance
  */
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey;
 
 /*! \brief Register a pageview event using a canonical URL
  *
- *  @param url The canonical URL of the article being tracked (eg: "http://dailycaller.com/some-old/article.html")
+ *  @param url The canonical URL of the article being tracked (eg: "http://samplesite.com/some-old/article.html")
  */
 -(void)trackURL:(NSString *)url;
 
@@ -123,7 +123,7 @@ typedef enum _kIdType {
  *  Creates an instance of the class and returns the reference.
  *  Prefer `sharedInstanceWithApiKey:` to this method.
  *
- *  @param apikey Parsely public API key (eg "dailycaller.com")
+ *  @param apikey Parsely public API key (eg "samplesite.com")
  *  @param flushint Interval between queue flushes, expressed in seconds
  *  @return The singleton instance
  */
