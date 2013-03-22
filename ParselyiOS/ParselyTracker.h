@@ -40,7 +40,7 @@
         NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
         NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
         NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
-        NSDictionary *idNameMap;
+        NSDictionary *idNameMap; /*!< Maps kIdTypes to request parameter strings */
         BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
 #ifdef PARSELY_DEBUG
         BOOL __debug_wifioff;
@@ -109,14 +109,14 @@ typedef enum _kIdType {
  *  Invalidates the callback timer responsible for flushing the events queue.
  *  Can be called before or after `start`, but has no effect if used before instantiating the singleton
  */
--(void)stop;
+-(void)stopFlushTimer;
 
 /*! \brief Allow the SDK to send pageview events
  *
  *  Instantiates the callback timer responsible for flushing the events queue.
  *  Can be called before of after `stop`, but has no effect is used before instantiating the singleton
  */
--(void)start;
+-(void)setFlushTimer;
 
 /*! \brief Singleton constructor
  *

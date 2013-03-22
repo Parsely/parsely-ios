@@ -182,14 +182,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
     return uuid;
 }
 
--(void)start{
-    [self setFlushTimer];
-}
-
--(void)stop{
-    [self stopFlushTimer];
-}
-
 -(void)setFlushTimer{
     @synchronized(self){
         if([self flushTimerIsActive]){
