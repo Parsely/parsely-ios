@@ -39,7 +39,7 @@ Before using the SDK, you must initialize the Parsely object with your public ap
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-        [ParselyTracker sharedInstanceWithApiKey:@"dailycaller.com"];  // initialize the Parsely tracker
+        [ParselyTracker sharedInstanceWithApiKey:@"somesite.com"];  // initialize the Parsely tracker
 
         [self.window makeKeyAndVisible];
         return YES;
