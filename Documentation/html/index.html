@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>ParselyiOS: iOS SDK Documentation</title>
+<title>ParselyiOS: Parsely for iPhone Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
    <div id="projectname">ParselyiOS
    &#160;<span id="projectnumber">1.0</span>
    </div>
-   <div id="projectbrief">The Parsely iOS SDK</div>
+   <div id="projectbrief">The Parsely iOS Toolkit</div>
   </td>
  </tr>
  </tbody>
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">iOS SDK Documentation </div>  </div>
+<div class="title">Parsely for iPhone Documentation </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1>Quickstart Guide</h1>
@@ -92,23 +92,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p class="startli">SystemConfiguration.framework</p>
 </li>
 </ol>
-<h2>Including the SDK</h2>
-<p>In any file that uses the Parsely SDK, be sure to add the line </p>
+<h2>Including the Library</h2>
+<p>In any file that uses Parsely, be sure to add the line </p>
 <pre class="fragment">#import "ParselyTracker.h"
 </pre><p>at the top of the file.</p>
 <h2>Parsely Initialization</h2>
-<p>Before using the SDK, you must initialize the Parsely object with your public api key. This is usually best to do in the <code>applicationDidFinishLaunchingWithOptions:</code> method of the <code>AppDelegate</code>. </p>
+<p>Before using the Parsely library, you must initialize the Parsely object with your public api key. This is usually best to do in the <code>applicationDidFinishLaunchingWithOptions:</code> method of the <code>AppDelegate</code>. </p>
 <pre class="fragment">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    [ParselyTracker sharedInstanceWithApiKey:@"dailycaller.com"];  // initialize the Parsely tracker
+    [ParselyTracker sharedInstanceWithApiKey:@"somesite.com"];  // initialize the Parsely tracker
 
     [self.window makeKeyAndVisible];
     return YES;
 }
 </pre><h2>Pageview Tracking</h2>
 <p>To register a pageview event with Parsely, simply use the <code>track:</code> call. </p>
-<pre class="fragment">[[ParselyTracker sharedInstance] trackURL:@"http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
+<pre class="fragment">[[ParselyTracker sharedInstance] trackURL:@"http://somesite.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
 </pre><p>This call requires the canonical URL of the page corresponding to the post currently being viewed.</p>
 <p>You can also use </p>
 <pre class="fragment">[[ParselyTracker sharedInstance] trackPostID:@"12353-349867-1823756"];
@@ -116,7 +116,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 22 2013 14:42:53 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 12 2013 09:43:18 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

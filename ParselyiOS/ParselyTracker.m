@@ -166,7 +166,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     PLog(@"Persisting event queue");
 
     // get the previously stored queue, merge current queue and re-store
-    NSMutableSet *storedQueue = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:storageKey]];
+    NSMutableSet *storedQueue = [NSMutableSet setWithArray:[self getStoredQueue]];
     [storedQueue addObjectsFromArray:eventQueue];
     
     [[NSUserDefaults standardUserDefaults] setObject:[storedQueue allObjects] forKey:storageKey];
@@ -179,7 +179,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
 }
 
 -(void)expelStoredEvent{
-    NSArray *storedQueue = [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
+    NSArray *storedQueue = [self getStoredQueue];
     NSMutableArray *mutableCopy = [NSMutableArray arrayWithArray:storedQueue];
     [mutableCopy removeObjectAtIndex:0];
     [[NSUserDefaults standardUserDefaults] setObject:(NSArray *)mutableCopy forKey:storageKey];
@@ -269,7 +269,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
             //rootUrl = @"http://hack.parsely.com/mobileproxy";
-            rootUrl = @"http://localhost:5001/mobileproxy";
+            rootUrl = @"http://216.30.191.81/mobileproxy";
             
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
             
