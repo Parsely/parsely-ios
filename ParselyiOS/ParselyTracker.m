@@ -190,10 +190,10 @@ ParselyTracker *instance;  /*!< Singleton instance */
     return [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
 }
 
--(NSString *)getUuid{
+-(NSString *)getSiteUuid{
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:uuidKey];
     if(uuid == nil){
-        uuid = [self generateUuid];
+        uuid = [self generateSiteUuid];
     }
     return uuid;
 }
@@ -224,7 +224,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     NSMutableDictionary *dInfo = [NSMutableDictionary dictionary];
     
     [dInfo setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] forKey:@"appname"];
-    [dInfo setObject:[self getUuid] forKey:@"parsely_uuid"];
+    [dInfo setObject:[self getSiteUuid] forKey:@"parsely_site_uuid"];
     [dInfo setObject:self.apiKey forKey:@"idsite"];
     
     [dInfo setObject:@"Apple" forKey:@"manufacturer"];
@@ -263,7 +263,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
             self.apiKey = apikey;
             eventQueue = [NSMutableArray array];
             storageKey = @"parsely-events";
-            uuidKey = @"parsely-uuid";
+            uuidKey = @"parsely-site-uuid";
             self.shouldFlushOnBackground = YES;
             shouldBatchRequests = YES;
             self.flushInterval = flushint;
@@ -375,7 +375,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     return [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
--(NSString *)generateUuid{
+-(NSString *)generateSiteUuid{
     // same method used by OpenUDID
     NSString *_uuid = nil;
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
@@ -482,13 +482,13 @@ ParselyTracker *instance;  /*!< Singleton instance */
                 UIApplication *application = [UIApplication sharedApplication];
                 __block UIBackgroundTaskIdentifier background_task;
                 background_task = [application beginBackgroundTaskWithExpirationHandler: ^{
-                    [application endBackgroundTask: background_task];
+                    [application endBackgroundTask:background_task];
                     background_task = UIBackgroundTaskInvalid;
                 }];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     PLog(@"Running background task to flush queue");
                     [self flush];
-                    [application endBackgroundTask: background_task];
+                    [application endBackgroundTask:background_task];
                     background_task = UIBackgroundTaskInvalid;
                 });
             }
