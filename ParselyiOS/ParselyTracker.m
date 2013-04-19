@@ -268,8 +268,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
             shouldBatchRequests = YES;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
-            //rootUrl = @"http://hack.parsely.com/mobileproxy";
-            rootUrl = @"http://216.30.191.81/mobileproxy";
+            //rootUrl = @"http://localhost:5001/mobileproxy";
+            rootUrl = @"http://174.143.139.157/mobileproxy";
             
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
             
