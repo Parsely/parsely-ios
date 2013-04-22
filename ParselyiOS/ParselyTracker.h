@@ -135,8 +135,9 @@ typedef enum _kIdType {
  *   Sends this request to the proxy server, which forwards requests to the pixel server.
  *
  *   @param queue The list of event dictionaries to serialize
+ *   @return The HTTP request error encountered during the send, if any
  */
--(void)sendBatchRequest:(NSSet *)queue;
+-(NSError *)sendBatchRequest:(NSSet *)queue;
 
 /*! \brief Get the size of the queue
  *  

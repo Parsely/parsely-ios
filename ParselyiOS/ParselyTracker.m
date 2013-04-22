@@ -85,8 +85,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
     }
     
     PLog(@"Flushing queue...");
+    NSError *err = nil;
     if(shouldBatchRequests){
-        [self sendBatchRequest:newQueue];
+        err = [self sendBatchRequest:newQueue];
     } else {
         for(NSMutableDictionary *event in newQueue){
             [self flushEvent:event];
@@ -94,9 +95,11 @@ ParselyTracker *instance;  /*!< Singleton instance */
     }
     PLog(@"done");
 
-    // now that we've sent the requests, vaporize them
-    [eventQueue removeAllObjects];
-    [self purgeStoredQueue];
+    if(err == nil){
+        // now that we've sent the requests, vaporize them
+        [eventQueue removeAllObjects];
+        [self purgeStoredQueue];
+    }
     
     if([eventQueue count] == 0 && [[self getStoredQueue] count] == 0){
         PLog(@"Event queue empty, flush timer cleared.");
@@ -130,7 +133,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     PLog(@"Requested %@", url);
 }
 
--(void)sendBatchRequest:(NSSet *)queue{
+-(NSError *)sendBatchRequest:(NSSet *)queue{
     // create an efficiently packed object for the GET parameters
     NSMutableDictionary *batchDict = [NSMutableDictionary dictionary];
     NSArray *queueArray = [queue allObjects];
@@ -158,8 +161,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
     PLog(@"%@", [self JSONWithDictionary:batchDict]);
     
-    [self apiConnectionWithURL:rootUrl andData:[self JSONWithDictionary:batchDict]];
+    NSError *err = [self apiConnectionWithURL:rootUrl andData:[self JSONWithDictionary:batchDict]];
     PLog(@"Requested %@", rootUrl);
+    return err;
 }
 
 -(void)persistQueue{
@@ -359,7 +363,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     return [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
--(NSURLConnection *)apiConnectionWithURL:(NSString *)endpoint andData:(NSString *)data{
+-(NSError *)apiConnectionWithURL:(NSString *)endpoint andData:(NSString *)data{
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
@@ -372,7 +376,13 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
-    return [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    __block NSError *err = nil;
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:
+     ^(NSURLResponse *response, NSData *data, NSError *error){
+         err = error;
+     }
+    ];
+    return err;
 }
 
 -(NSString *)generateSiteUuid{
