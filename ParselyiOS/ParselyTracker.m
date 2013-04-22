@@ -90,7 +90,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
         err = [self sendBatchRequest:newQueue];
     } else {
         for(NSMutableDictionary *event in newQueue){
-            [self flushEvent:event];
+            err = [self flushEvent:event];
         }
     }
     PLog(@"done");
@@ -113,8 +113,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
  *  Prefer `sendBatchRequest:` to this method, as `sendBatchRequest:` causes less battery usage
  *
  *  @param event A dictionary containing data for a single pageview event
+ *  @return The HTTP request error encountered during the send, if any
  */
--(void)flushEvent:(NSDictionary *)event{
+-(NSError *)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
     
     // add the timestamp to the data object for non-batched requests, since they are sent directly to the pixel server
@@ -129,8 +130,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
                      @"mobile",  // urlref
                      [self urlEncodeString:[self JSONWithDictionary:data]]];
 
-    [self apiConnectionWithURL:url];
+    NSError *err = [self apiConnectionWithURL:url];
     PLog(@"Requested %@", url);
+    return err;
 }
 
 -(NSError *)sendBatchRequest:(NSSet *)queue{
@@ -355,12 +357,19 @@ ParselyTracker *instance;  /*!< Singleton instance */
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
--(NSURLConnection *)apiConnectionWithURL:(NSString *)endpoint{
+-(NSError *)apiConnectionWithURL:(NSString *)endpoint{
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     [request setHTTPMethod:@"GET"];
-    return [[NSURLConnection alloc] initWithRequest:request delegate:self];
+
+    __block NSError *err = nil;
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:
+     ^(NSURLResponse *response, NSData *data, NSError *error){
+         err = error;
+     }
+     ];
+    return err;
 }
 
 -(NSError *)apiConnectionWithURL:(NSString *)endpoint andData:(NSString *)data{
