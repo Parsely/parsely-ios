@@ -123,7 +123,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [data addEntriesFromDictionary:@{@"ts": [event objectForKey:@"ts"]}];
     
     NSString *url = [NSString stringWithFormat:@"%@?rand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
-                     rootUrl,
+                     [NSString stringWithFormat:@"%@plogger", rootUrl],
                      1000000000 + arc4random() % 99999999999,
                      self.apiKey,
                      [self urlEncodeString:[event objectForKey:@"url"]],
@@ -163,8 +163,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
     PLog(@"%@", [self JSONWithDictionary:batchDict]);
     
-    NSError *err = [self apiConnectionWithURL:rootUrl andData:[self JSONWithDictionary:batchDict]];
-    PLog(@"Requested %@", rootUrl);
+    NSError *err = [self apiConnectionWithURL:[NSString stringWithFormat:@"%@mobileproxy", rootUrl] andData:[self JSONWithDictionary:batchDict]];
+    PLog(@"Requested %@mobileproxy", rootUrl);
     return err;
 }
 
@@ -274,8 +274,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
             shouldBatchRequests = YES;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
-            //rootUrl = @"http://localhost:5001/mobileproxy";
-            rootUrl = @"http://174.143.139.157/mobileproxy";
+            //rootUrl = @"http://localhost:5001/";
+            rootUrl = @"http://174.143.139.157/";
             
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
             
