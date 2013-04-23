@@ -301,6 +301,8 @@
 		AAE37F4416EA66B400358E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
 				DOXYGEN_PATH = "/Applications/Doxygen.app/Contents/Resources/doxygen ";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
@@ -316,6 +318,8 @@
 				INFOPLIST_FILE = "HiParsely/Resources/HiParsely-Info.plist";
 				INFOPLIST_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
 				PRODUCT_NAME = HiParsely;
+				PROVISIONING_PROFILE = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -323,12 +327,16 @@
 		AAE37F4516EA66B400358E79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
 				DOXYGEN_PATH = "/Applications/Doxygen.app/Contents/Resources/doxygen ";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
 				INFOPLIST_FILE = "HiParsely/Resources/HiParsely-Info.plist";
 				INFOPLIST_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
 				PRODUCT_NAME = HiParsely;
+				PROVISIONING_PROFILE = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
