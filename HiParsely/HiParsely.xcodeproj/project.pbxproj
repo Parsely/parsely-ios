@@ -19,10 +19,26 @@
 		AA157DD016FB9046000DB72C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCA16FB9046000DB72C /* Reachability.m */; };
 		AA157DD116FB9046000DB72C /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCC16FB9046000DB72C /* ParselyTracker.m */; };
 		AAA9A85D16FBA41E00923565 /* parsely_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */; };
+		AAAF5135172ABD29003CE442 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAF5134172ABD29003CE442 /* SenTestingKit.framework */; };
+		AAAF5136172ABD29003CE442 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2016EA66B300358E79 /* UIKit.framework */; };
+		AAAF5137172ABD29003CE442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2216EA66B300358E79 /* Foundation.framework */; };
+		AAAF513D172ABD29003CE442 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAAF513B172ABD29003CE442 /* InfoPlist.strings */; };
+		AAAF5140172ABD29003CE442 /* SDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAF513F172ABD29003CE442 /* SDKTests.m */; };
+		AAAF5147172AC020003CE442 /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCC16FB9046000DB72C /* ParselyTracker.m */; };
 		AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2016EA66B300358E79 /* UIKit.framework */; };
 		AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2216EA66B300358E79 /* Foundation.framework */; };
 		AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE37F2416EA66B300358E79 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AAAF5145172ABF1B003CE442 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAE37F1516EA66B300358E79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AAE37F1C16EA66B300358E79;
+			remoteInfo = HiParsely;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -46,12 +62,29 @@
 		AA157DCC16FB9046000DB72C /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
 		AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_logo_horizontal.png; sourceTree = "<group>"; };
 		AAA9A85E16FBA68200923565 /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiParsely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAAF5133172ABD29003CE442 /* SDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAAF5134172ABD29003CE442 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		AAAF513A172ABD29003CE442 /* SDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SDKTests-Info.plist"; sourceTree = "<group>"; };
+		AAAF513C172ABD29003CE442 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AAAF513E172ABD29003CE442 /* SDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDKTests.h; sourceTree = "<group>"; };
+		AAAF513F172ABD29003CE442 /* SDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDKTests.m; sourceTree = "<group>"; };
+		AAAF5141172ABD29003CE442 /* SDKTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDKTests-Prefix.pch"; sourceTree = "<group>"; };
 		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAE37F2416EA66B300358E79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AAAF512F172ABD29003CE442 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAAF5135172ABD29003CE442 /* SenTestingKit.framework in Frameworks */,
+				AAAF5136172ABD29003CE442 /* UIKit.framework in Frameworks */,
+				AAAF5137172ABD29003CE442 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAE37F1A16EA66B300358E79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,6 +155,26 @@
 			path = libs;
 			sourceTree = "<group>";
 		};
+		AAAF5138172ABD29003CE442 /* SDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				AAAF513E172ABD29003CE442 /* SDKTests.h */,
+				AAAF513F172ABD29003CE442 /* SDKTests.m */,
+				AAAF5139172ABD29003CE442 /* Supporting Files */,
+			);
+			path = SDKTests;
+			sourceTree = "<group>";
+		};
+		AAAF5139172ABD29003CE442 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AAAF513A172ABD29003CE442 /* SDKTests-Info.plist */,
+				AAAF513B172ABD29003CE442 /* InfoPlist.strings */,
+				AAAF5141172ABD29003CE442 /* SDKTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		AAE37F1416EA66B300358E79 = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +182,10 @@
 				AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */,
 				AA157DC416FB9046000DB72C /* ParselyiOS */,
 				AA157DAF16FB8DD0000DB72C /* HiParsely */,
+				AAAF5138172ABD29003CE442 /* SDKTests */,
 				AAE37F1F16EA66B300358E79 /* Frameworks */,
 				AAA9A85E16FBA68200923565 /* HiParsely.app */,
+				AAAF5133172ABD29003CE442 /* SDKTests.octest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,6 +196,7 @@
 				AAE37F2016EA66B300358E79 /* UIKit.framework */,
 				AAE37F2216EA66B300358E79 /* Foundation.framework */,
 				AAE37F2416EA66B300358E79 /* CoreGraphics.framework */,
+				AAAF5134172ABD29003CE442 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,6 +204,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AAAF5132172ABD29003CE442 /* SDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAAF5144172ABD29003CE442 /* Build configuration list for PBXNativeTarget "SDKTests" */;
+			buildPhases = (
+				AAAF512E172ABD29003CE442 /* Sources */,
+				AAAF512F172ABD29003CE442 /* Frameworks */,
+				AAAF5130172ABD29003CE442 /* Resources */,
+				AAAF5131172ABD29003CE442 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AAAF5146172ABF1B003CE442 /* PBXTargetDependency */,
+			);
+			name = SDKTests;
+			productName = SDKTests;
+			productReference = AAAF5133172ABD29003CE442 /* SDKTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		AAE37F1C16EA66B300358E79 /* HiParsely */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "HiParsely" */;
@@ -188,11 +263,20 @@
 			projectRoot = "";
 			targets = (
 				AAE37F1C16EA66B300358E79 /* HiParsely */,
+				AAAF5132172ABD29003CE442 /* SDKTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AAAF5130172ABD29003CE442 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAAF513D172ABD29003CE442 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAE37F1B16EA66B300358E79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +293,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		AAAF5131172ABD29003CE442 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		AAF30E6C16F3C06B006B85A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,6 +322,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AAAF512E172ABD29003CE442 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAAF5140172ABD29003CE442 /* SDKTests.m in Sources */,
+				AAAF5147172AC020003CE442 /* ParselyTracker.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAE37F1916EA66B300358E79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,7 +345,62 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AAAF5146172ABF1B003CE442 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AAE37F1C16EA66B300358E79 /* HiParsely */;
+			targetProxy = AAAF5145172ABF1B003CE442 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AAAF513B172ABD29003CE442 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAAF513C172ABD29003CE442 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		AAAF5142172ABD29003CE442 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HiParsely.app/HiParsely";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SDKTests/SDKTests-Prefix.pch";
+				INFOPLIST_FILE = "SDKTests/SDKTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		AAAF5143172ABD29003CE442 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HiParsely.app/HiParsely";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SDKTests/SDKTests-Prefix.pch";
+				INFOPLIST_FILE = "SDKTests/SDKTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		AAE37F4116EA66B400358E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -344,6 +505,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AAAF5144172ABD29003CE442 /* Build configuration list for PBXNativeTarget "SDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAAF5142172ABD29003CE442 /* Debug */,
+				AAAF5143172ABD29003CE442 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "HiParsely" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -73,6 +73,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
+      <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_prop.html"><span>Properties</span></a></li>
     </ul>
   </div>
@@ -82,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -93,6 +96,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="contents">
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div><ul>
+<li>_kIdType
+: <a class="el" href="interface_parsely_tracker.html#a74a2d4b3125c963ba30959e09bff2ea0">ParselyTracker</a>
+</li>
 <li>apiKey
 : <a class="el" href="interface_parsely_tracker.html#ae9322084d53edf267ae9ff6483d70201">ParselyTracker</a>
 </li>
@@ -108,8 +114,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>initWithApiKey:andFlushInterval:
 : <a class="el" href="interface_parsely_tracker.html#a903cc71a2077ae06f43bbd2e62e9744c">ParselyTracker</a>
 </li>
+<li>kIdType
+: <a class="el" href="interface_parsely_tracker.html#a14d282c0690cf2df2a4db9b540473524">ParselyTracker</a>
+</li>
 <li>queueSize
 : <a class="el" href="interface_parsely_tracker.html#a3535629b25dbb4614a1b92554834bd70">ParselyTracker</a>
+</li>
+<li>queueSizeLimit
+: <a class="el" href="interface_parsely_tracker.html#a7b836ffeab9b33a0d08edc311e74f110">ParselyTracker</a>
 </li>
 <li>sendBatchRequest:
 : <a class="el" href="interface_parsely_tracker.html#ac92a7e5ce014ecf1bafbb6d694f5ac07">ParselyTracker</a>
@@ -129,6 +141,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>stopFlushTimer
 : <a class="el" href="interface_parsely_tracker.html#a85cbb9a10717f53c609697d9528ac482">ParselyTracker</a>
 </li>
+<li>storageSizeLimit
+: <a class="el" href="interface_parsely_tracker.html#a7aaf77c9e756f8a65f1ccbcf67639aaf">ParselyTracker</a>
+</li>
 <li>storedEventsCount
 : <a class="el" href="interface_parsely_tracker.html#a90110859528d8c6da8678a793faadb72">ParselyTracker</a>
 </li>
@@ -145,7 +160,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 23 2013 11:48:34 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 26 2013 12:06:44 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

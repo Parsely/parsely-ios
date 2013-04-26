@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -86,8 +86,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Instance Methods</a> &#124;
 <a href="#pub-static-methods">Class Methods</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="class_parsely_tracker-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -108,6 +110,18 @@ Inheritance diagram for ParselyTracker:</div>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a74a2d4b3125c963ba30959e09bff2ea0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a74a2d4b3125c963ba30959e09bff2ea0">_kIdType</a> { <b>kUrl</b>, 
+<b>kPostId</b>
+ }</td></tr>
+<tr class="memdesc:a74a2d4b3125c963ba30959e09bff2ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">types of post identifiers  <a href="interface_parsely_tracker.html#a74a2d4b3125c963ba30959e09bff2ea0">More...</a><br/></td></tr>
+<tr class="separator:a74a2d4b3125c963ba30959e09bff2ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14d282c0690cf2df2a4db9b540473524"><td class="memItemLeft" align="right" valign="top">typedef enum <br class="typebreak"/>
+<a class="el" href="interface_parsely_tracker.html#a74a2d4b3125c963ba30959e09bff2ea0">ParselyTracker::_kIdType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a14d282c0690cf2df2a4db9b540473524">kIdType</a></td></tr>
+<tr class="memdesc:a14d282c0690cf2df2a4db9b540473524"><td class="mdescLeft">&#160;</td><td class="mdescRight">types of post identifiers  <a href="#a14d282c0690cf2df2a4db9b540473524">More...</a><br/></td></tr>
+<tr class="separator:a14d282c0690cf2df2a4db9b540473524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Instance Methods</h2></td></tr>
 <tr class="memitem:a0a563f75d061eb2edb4ca6d4b01b471a"><td class="memItemLeft" align="right" valign="top">(void)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_parsely_tracker.html#a0a563f75d061eb2edb4ca6d4b01b471a">trackURL:</a></td></tr>
@@ -153,6 +167,13 @@ Class Methods</h2></td></tr>
 <tr class="memdesc:a05b5cbcf2cdf6ef3f29b130176045bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton instance factory.  <a href="#a05b5cbcf2cdf6ef3f29b130176045bd3">More...</a><br/></td></tr>
 <tr class="separator:a05b5cbcf2cdf6ef3f29b130176045bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a7aaf77c9e756f8a65f1ccbcf67639aaf"><td class="memItemLeft" align="right" valign="top">NSInteger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a7aaf77c9e756f8a65f1ccbcf67639aaf">storageSizeLimit</a></td></tr>
+<tr class="separator:a7aaf77c9e756f8a65f1ccbcf67639aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b836ffeab9b33a0d08edc311e74f110"><td class="memItemLeft" align="right" valign="top">NSInteger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#a7b836ffeab9b33a0d08edc311e74f110">queueSizeLimit</a></td></tr>
+<tr class="separator:a7b836ffeab9b33a0d08edc311e74f110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ae9322084d53edf267ae9ff6483d70201"><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_parsely_tracker.html#ae9322084d53edf267ae9ff6483d70201">apiKey</a></td></tr>
@@ -165,7 +186,39 @@ Properties</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages pageview events and analytics data for Parsely on iOS. </p>
 <p>Accessed as a singleton. Maintains a queue of pageview events in memory and periodically flushes the queue to the Parsely pixel proxy server. </p>
-</div><h2 class="groupheader">Method Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a class="anchor" id="a14d282c0690cf2df2a4db9b540473524"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (typedef enum <a class="el" href="interface_parsely_tracker.html#a74a2d4b3125c963ba30959e09bff2ea0">_kIdType</a>)  ParselyTracker:</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>types of post identifiers </p>
+<p>Representation of the allowed post identifier types </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="a74a2d4b3125c963ba30959e09bff2ea0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (enum) <a class="el" href="interface_parsely_tracker.html#a74a2d4b3125c963ba30959e09bff2ea0">_kIdType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>types of post identifiers </p>
+<p>Representation of the allowed post identifier types </p>
+
+</div>
+</div>
+<h2 class="groupheader">Method Documentation</h2>
 <a class="anchor" id="a847fbaacd9b6d2f3251ed8f03ac4447c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +448,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="paramkey">withIDType:</td>
           <td></td>
-          <td class="paramtype">(kIdType)&#160;</td>
+          <td class="paramtype">(<a class="el" href="interface_parsely_tracker.html#a14d282c0690cf2df2a4db9b540473524">kIdType</a>)&#160;</td>
           <td class="paramname"><em>idtype</em>&#160;</td>
         </tr>
         <tr>
@@ -457,6 +510,33 @@ Properties</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a7b836ffeab9b33a0d08edc311e74f110"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (NSInteger) queueSizeLimit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Maximum number of events held in the in-memory event queue </p>
+
+</div>
+</div>
+<a class="anchor" id="a7aaf77c9e756f8a65f1ccbcf67639aaf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (NSInteger) storageSizeLimit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Maximum number of events held in persistent storage </p>
 
 </div>
 </div>
@@ -531,7 +611,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 23 2013 11:48:34 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 26 2013 12:06:44 for ParselyiOS by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
