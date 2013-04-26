@@ -37,14 +37,15 @@
         NSString *uuidKey;  /*!< Key mapped to the generated uuid in the defaults store */
         NSString *storageKey;  /*!< Key mapped to the saved event queue in the defaults store */
         NSString *rootUrl;  /*!< Root of Parsely's pixel server URL (eg "http://pixel.parsely.com") */
-        NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
-        NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
         NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
         NSDictionary *idNameMap; /*!< Maps kIdTypes to request parameter strings */
         BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
 #ifdef PARSELY_DEBUG
         BOOL __debug_wifioff;
 #endif
+    @public
+        NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
+        NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
 }
 
 /*! \brief types of post identifiers
