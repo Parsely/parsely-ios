@@ -18,9 +18,9 @@ Adding Parsely to your iOS app is easy!
 2. Check the box labeled "Copy items into destination Group's folder"
 3. Ensure that the following frameworks are included in the "Link Binary with Libraries" build phase
 
-*  Foundation.framework
+*  `Foundation.framework`
 
-*  SystemConfiguration.framework
+*  `SystemConfiguration.framework`
 
 Including the SDK
 -----------------
@@ -34,7 +34,7 @@ at the top of the file.
 Parsely Initialization
 ----------------------
 
-Before using the SDK, you must initialize the Parsely object with your public api key. This is usually best to do in the `applicationDidFinishLaunchingWithOptions:` method of the `AppDelegate`.
+Before using the SDK, you must initialize the Parsely object with your public api key. This is usually best to do in the setup phase of your app, for example in the `applicationDidFinishLaunchingWithOptions:` method of the `AppDelegate`.
 
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -48,14 +48,8 @@ Before using the SDK, you must initialize the Parsely object with your public ap
 Pageview Tracking
 -----------------
 
-To register a pageview event with Parsely, simply use the `track:` call.
+To register a pageview event with Parsely, simply use the `trackURL:` call.
 
     [[ParselyTracker sharedInstance] trackURL:@"http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
 
 This call requires the canonical URL of the page corresponding to the post currently being viewed.
-
-You can also use
-
-    [[ParselyTracker sharedInstance] trackPostID:@"12353-349867-1823756"];
-
-which requires a string uniquely identifying the post to Parsely's systems.
