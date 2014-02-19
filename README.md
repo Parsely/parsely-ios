@@ -1,3 +1,20 @@
+Parsely iOS SDK
+===============
+
+This library provides an interface to Parsely's pageview tracking system. It
+provides similar functionality to the [Parsely Javascript tracker](http://www.parsely.com/docs/integration/tracking/basic.html)
+for iOS apps.
+
+Documentation
+-------------
+
+Full class-level documentation of this library can be found at the
+[Parsely website](http://www.parsely.com/sdk/ios/index.html). This documentation
+is generated from the code itself using [Doxygen](http://www.stack.nl/~dimitri/doxygen/).
+
+Usage
+-----
+
 If you want to track activity on your iPhone app, first clone this repository with
 
     git clone http://github.com/Parsely/parsely-ios.git

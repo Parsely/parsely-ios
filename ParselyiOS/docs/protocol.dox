@@ -13,7 +13,7 @@ The value of the `rqs` (requests) parameter is a **URL-encoded** JSON document t
     {
         "data":{
             "idsite":"samplesite.com",
-            "parsely_uuid":"76e4c7f0afeb4e7643f5089235779937d9637b55"
+            "parsely_site_uuid":"76e4c7f0afeb4e7643f5089235779937d9637b55"
             "appname":"ParselySDK",
             "manufacturer":"Apple",
             "os":"iPhone OS",
@@ -25,7 +25,7 @@ The value of the `rqs` (requests) parameter is a **URL-encoded** JSON document t
                 "ts":1363796913.105937
             },
             {
-                "postid":"91782365-12378561-457896",
+                "url":"http://samplesite.com/2014/02/13/test-post.html",
                 "ts":1363596915.229876
             },
             ...
@@ -38,7 +38,6 @@ The value of the `rqs` (requests) parameter is a **URL-encoded** JSON document t
 
 The `data` variable is a document containing invariant data about the pixel requests - that is, data that is constant for all of the events being transmitted.
 The `events` variable is a list of documents containing data that differs per request.
-Note that it is permissible to mix `url`s and `postid`s in the same `events` array.
 
 Variable            | Container | Description                                           | Required         |          Example
 ------------------- | --------- | ----------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------
@@ -48,8 +47,7 @@ Variable            | Container | Description                                   
 `manufacturer`      | `data`    | The device manufacturer (for mobile devices)          | no               | `"manufacturer":"Apple"`
 `os`                | `data`    | The name of the operating system (mobile only)        | no               | `"os":"iPhone OS"`
 `os_version`        | `data`    | Operating system major and minor version              | no               | `"os_version":"6.1"`
-`url`               | `events`  | The canonical URL of the tracked post                 | yes, or `postid` | `"url":"http://samplesite.com/2013/03/20/obama-reid-dragged-into-evolving-menendez-donor-scandal/"`
-`postid`            | `events`  | The Parsely-unique string identifier for the post     | yes, or `url`    | `"postid":"147136-1892374-1297856"`
+`url`               | `events`  | The canonical URL of the tracked post                 | yes              | `"url":"http://samplesite.com/2013/03/20/obama-reid-dragged-into-evolving-menendez-donor-scandal/"`
 `ts`                | `events`  | The UNIX timestamp of the event (seconds since epoch) | yes              | `"ts":1363796913.220884`
 
 A real request to the proxy server might look like this one, which contains two separate pageview events in the URL-encoded JSON document:
@@ -59,7 +57,7 @@ A real request to the proxy server might look like this one, which contains two 
     Content-Type: application/x-www-form-urlencoded
     Content-Length: 213
 
-    rqs=%7B%22data%22%3A%7B%22os_version%22%3A%226.1%22%2C%22appname%22%3A%22HiParsely%22%2C%22parsely_uuid%22%3A%22ad926df27f7f39fe1417f41bac9ec8e40232680a%22%2C%22idsite%22%3A%22somesite.com%22%2C%22manufacturer%22%3A%22Apple%22%2C%22os%22%3A%22iPhone%20OS%22%7D%2C%22events%22%3A%5B%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fsomesite.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363977322.65788%7D%2C%7B%22ts%22%3A1363977323.012882%2C%22postid%22%3A%2212353-983124-876153%22%7D%5D%7D
+    rqs=%7B%22data%22%3A%7B%22os_version%22%3A%226.1%22%2C%22appname%22%3A%22HiParsely%22%2C%22parsely_site_uuid%22%3A%22ad926df27f7f39fe1417f41bac9ec8e40232680a%22%2C%22idsite%22%3A%22somesite.com%22%2C%22manufacturer%22%3A%22Apple%22%2C%22os%22%3A%22iPhone%20OS%22%7D%2C%22events%22%3A%5B%7B%22url%22%3A%22http%3A%5C%2F%5C%2Fsomesite.com%5C%2Fnot-a-real-url.html%22%2C%22ts%22%3A1363977322.65788%7D%2C%7B%22ts%22%3A1363977323.012882%2C%22url%22%3A%22http%3A%5C%2F%5C%2Fsamplesite.com%5C%2Fthis%5C%2Fis%5C%2Fa%5C%2Freal%5C%2Fpost.html%22%7D%5D%7D
 
 Generating a UUID
 -----------------
