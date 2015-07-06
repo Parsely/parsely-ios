@@ -230,7 +230,12 @@ ParselyTracker *instance;  /*!< Singleton instance */
 -(NSMutableDictionary *)collectDeviceInfo{
     NSMutableDictionary *dInfo = [NSMutableDictionary dictionary];
     
-    [dInfo setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] forKey:@"appname"];
+    NSString *bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    if (bundleName == nil) {
+        bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    }
+    [dInfo setObject:(bundleName ? bundleName : @"") forKey:@"appname"];
+
     [dInfo setObject:[self getSiteUuid] forKey:@"parsely_site_uuid"];
     [dInfo setObject:self.apiKey forKey:@"idsite"];
     
