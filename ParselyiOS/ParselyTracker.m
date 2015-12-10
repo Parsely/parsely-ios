@@ -36,28 +36,28 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
 -(void)track:(NSString *)identifier withIDType:(kIdType)idtype{
     PLog(@"Track called for %@", identifier);
-    
+
     NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:identifier forKey:[idNameMap objectForKey:[NSNumber numberWithInt:idtype]]];
     [params setObject:[NSNumber numberWithDouble:timestamp] forKey:@"ts"];
     // TODO - this assumes that idsite will never change for a given run of an app. bad idea?
     [params setObject:deviceInfo forKey:@"data"];
     [eventQueue addObject:params];
-    
+
     PLog(@"%@", params);
-    
+
     if([self queueSize] >= queueSizeLimit + 1){
         PLog(@"Queue size exceeded, expelling oldest event to persistent memory");
         [self persistQueue];
         [eventQueue removeObjectAtIndex:0];
     }
-    
+
     if([self storedEventsCount] > storageSizeLimit){
         [self expelStoredEvent];
     }
-    
+
     if(_timer == nil){
         [self setFlushTimer];
         PLog(@"Flush timer set to %d", self.flushInterval);
@@ -66,17 +66,17 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
 -(void)flush{
     PLog(@"%d events in queue, %d stored events", [eventQueue count], [[self getStoredQueue] count]);
-    
+
     if([eventQueue count] == 0 && [[self getStoredQueue] count] == 0){
         [self stopFlushTimer];
         return;
     }
-    
+
     if(![self isReachable]){
         PLog(@"Network unreachable. Not flushing.");
         return;
     }
-    
+
     // prepare to flush by merging the memory queue with the stored queue
     // NOTE: typically this merge will be fully redundant, except in the case where the app terminated with items still in the queue
     NSArray *storedQueue = [self getStoredQueue];
@@ -84,24 +84,21 @@ ParselyTracker *instance;  /*!< Singleton instance */
     if(storedQueue != nil){
         [newQueue addObjectsFromArray:storedQueue];
     }
-    
+
     PLog(@"Flushing queue...");
-    NSError *err = nil;
     if(shouldBatchRequests){
-        err = [self sendBatchRequest:newQueue];
+        [self sendBatchRequest:newQueue];
     } else {
         for(NSMutableDictionary *event in newQueue){
-            err = [self flushEvent:event];
+            [self flushEvent:event];
         }
     }
     PLog(@"done");
 
-    if(err == nil){
-        // now that we've sent the requests, vaporize them
-        [eventQueue removeAllObjects];
-        [self purgeStoredQueue];
-    }
-    
+    // now that we've sent the requests, vaporize them
+    [eventQueue removeAllObjects];
+    [self purgeStoredQueue];
+
     if([eventQueue count] == 0 && [[self getStoredQueue] count] == 0){
         PLog(@"Event queue empty, flush timer cleared.");
         [self stopFlushTimer];
@@ -116,13 +113,13 @@ ParselyTracker *instance;  /*!< Singleton instance */
  *  @param event A dictionary containing data for a single pageview event
  *  @return The HTTP request error encountered during the send, if any
  */
--(NSError *)flushEvent:(NSDictionary *)event{
+-(void)flushEvent:(NSDictionary *)event{
     PLog(@"Flushing event %@", event);
-    
+
     // add the timestamp to the data object for non-batched requests, since they are sent directly to the pixel server
     NSMutableDictionary *data = [event objectForKey:@"data"];
     [data addEntriesFromDictionary:@{@"ts": [event objectForKey:@"ts"]}];
-    
+
     NSString *url = [NSString stringWithFormat:@"%@?rand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
                      [NSString stringWithFormat:@"%@plogger", rootUrl],
                      1000000000 + arc4random() % 99999999999,
@@ -131,20 +128,19 @@ ParselyTracker *instance;  /*!< Singleton instance */
                      @"mobile",  // urlref
                      [self urlEncodeString:[self JSONWithDictionary:data]]];
 
-    NSError *err = [self apiConnectionWithURL:url];
+    [self apiConnectionWithURL:url];
     PLog(@"Requested %@", url);
-    return err;
 }
 
--(NSError *)sendBatchRequest:(NSSet *)queue{
+-(void)sendBatchRequest:(NSSet *)queue{
     // create an efficiently packed object for the GET parameters
     NSMutableDictionary *batchDict = [NSMutableDictionary dictionary];
     NSArray *queueArray = [queue allObjects];
-    
+
     // the object contains only one copy of the queue's invariant data
     [batchDict setObject:[[queueArray objectAtIndex:0] objectForKey:@"data"] forKey:@"data"];
     NSMutableArray *events = [NSMutableArray array];
-    
+
     // and a list of url/timestamp dictionaries
     for(NSDictionary *event in queueArray){
         NSString *field, *value;
@@ -163,10 +159,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [batchDict setObject:events forKey:@"events"];
 
     PLog(@"%@", [self JSONWithDictionary:batchDict]);
-    
-    NSError *err = [self apiConnectionWithURL:[NSString stringWithFormat:@"%@mobileproxy", rootUrl] andData:[self JSONWithDictionary:batchDict]];
+
+    [self apiConnectionWithURL:[NSString stringWithFormat:@"%@mobileproxy", rootUrl] andData:[self JSONWithDictionary:batchDict]];
     PLog(@"Requested %@mobileproxy", rootUrl);
-    return err;
 }
 
 -(void)persistQueue{
@@ -175,7 +170,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     // get the previously stored queue, merge current queue and re-store
     NSMutableSet *storedQueue = [NSMutableSet setWithArray:[self getStoredQueue]];
     [storedQueue addObjectsFromArray:eventQueue];
-    
+
     [[NSUserDefaults standardUserDefaults] setObject:[storedQueue allObjects] forKey:storageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -229,7 +224,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
 -(NSMutableDictionary *)collectDeviceInfo{
     NSMutableDictionary *dInfo = [NSMutableDictionary dictionary];
-    
+
     NSString *bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     if (bundleName == nil) {
         bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
@@ -238,11 +233,11 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
     [dInfo setObject:[self getSiteUuid] forKey:@"parsely_site_uuid"];
     [dInfo setObject:self.apiKey forKey:@"idsite"];
-    
+
     [dInfo setObject:@"Apple" forKey:@"manufacturer"];
     [dInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
     [dInfo setObject:[[UIDevice currentDevice] systemVersion] forKey:@"os_version"];
-    
+
     return dInfo;
 }
 
@@ -282,9 +277,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
             deviceInfo = [self collectDeviceInfo];
             //rootUrl = @"http://localhost:5001/";
             rootUrl = @"http://srv.pixel.parsely.com/";
-            
+
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
-            
+
             if([self getStoredQueue]){
                 [self setFlushTimer];
             }
@@ -363,41 +358,30 @@ ParselyTracker *instance;  /*!< Singleton instance */
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
--(NSError *)apiConnectionWithURL:(NSString *)endpoint{
+-(void)apiConnectionWithURL:(NSString *)endpoint{
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     [request setHTTPMethod:@"GET"];
-
-    __block NSError *err = nil;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:
-     ^(NSURLResponse *response, NSData *data, NSError *error){
-         err = error;
-     }
-     ];
-    return err;
+     ^(NSURLResponse *response, NSData *data, NSError *error){}];
 }
 
--(NSError *)apiConnectionWithURL:(NSString *)endpoint andData:(NSString *)data{
+-(void)apiConnectionWithURL:(NSString *)endpoint andData:(NSString *)data{
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpoint]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     NSString *requestString = [NSString stringWithFormat:@"rqs=%@", [self urlEncodeString:data]];
     NSMutableData *postData = [NSMutableData data];
     [postData appendData:[requestString dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     [request setHTTPMethod:@"POST"];
     [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
-    
-    __block NSError *err = nil;
+
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:
-     ^(NSURLResponse *response, NSData *data, NSError *error){
-         err = error;
-     }
-    ];
-    return err;
+     ^(NSURLResponse *response, NSData *data, NSError *error){}];
 }
 
 -(NSString *)generateSiteUuid{
@@ -409,7 +393,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     unsigned char result[16];
     CC_MD5( cStr, strlen(cStr), result );
     CFRelease(uuid);
-    
+
     _uuid = [NSString stringWithFormat:
              @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%08x",
              result[0], result[1], result[2], result[3],
@@ -417,12 +401,12 @@ ParselyTracker *instance;  /*!< Singleton instance */
              result[8], result[9], result[10], result[11],
              result[12], result[13], result[14], result[15],
              (NSUInteger)(arc4random() % NSUIntegerMax)];
-    
+
     [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:uuidKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+
     PLog(@"Generated UUID %@", _uuid);
-    
+
     return _uuid;
 }
 
