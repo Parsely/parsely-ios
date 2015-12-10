@@ -2,15 +2,10 @@ Parsely iOS SDK
 ===============
 
 This library provides an interface to Parsely's pageview tracking system. It
-provides similar functionality to the [Parsely Javascript tracker](http://www.parsely.com/docs/integration/tracking/basic.html)
-for iOS apps.
-
-Documentation
--------------
-
-Full class-level documentation of this library can be found at the
-[Parsely website](http://www.parsely.com/sdk/ios/index.html). This documentation
-is generated from the code itself using [Doxygen](http://www.stack.nl/~dimitri/doxygen/).
+provides similar functionality to the
+[Parsely Javascript tracker](http://www.parsely.com/docs/integration/tracking/basic.html)
+for iOS apps. Full class-level documentation of this library can be found at the
+[Parsely website](http://www.parsely.com/sdk/ios/index.html).
 
 Usage
 -----
@@ -29,18 +24,15 @@ This repository contains three main directories:
 Integrating with XCode
 ----------------------
 
-Adding Parsely to your iOS app is easy!
+To integrate Parse.ly mobile tracking with your iOS app:
 
 1. Drag and drop the ParselyiOS folder into your XCode project
 2. Check the box labeled "Copy items into destination Group's folder"
-3. Ensure that the following frameworks are included in the "Link Binary with Libraries" build phase
+3. Ensure that the `Foundation.framework` and `SystemConfiguration.framework` frameworks are included in the "Link Binary with Libraries" build phase
 
-*  `Foundation.framework`
 
-*  `SystemConfiguration.framework`
-
-Including the SDK
------------------
+Using the SDK
+-------------
 
 In any file that uses the Parsely SDK, be sure to add the line
 
@@ -48,22 +40,16 @@ In any file that uses the Parsely SDK, be sure to add the line
 
 at the top of the file.
 
-Parsely Initialization
-----------------------
-
-Before using the SDK, you must initialize the Parsely object with your public api key. This is usually best to do in the setup phase of your app, for example in the `applicationDidFinishLaunchingWithOptions:` method of the `AppDelegate`.
+Before using the SDK, you must initialize the Parsely object with your public api key.
+This is usually best to do in the setup phase of your app, for example in the
+`applicationDidFinishLaunchingWithOptions:` method of the `AppDelegate`.
 
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
         [ParselyTracker sharedInstanceWithApiKey:@"somesite.com"];  // initialize the Parsely tracker
-
         [self.window makeKeyAndVisible];
         return YES;
     }
-
-Pageview Tracking
------------------
 
 To register a pageview event with Parsely, simply use the `trackURL:` call.
 
@@ -74,7 +60,7 @@ This call requires the canonical URL of the page corresponding to the post curre
 License
 -------
 
-    Copyright 2014 Parse.ly, Inc.
+    Copyright 2015 Parse.ly, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
