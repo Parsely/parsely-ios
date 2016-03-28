@@ -275,11 +275,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey{
     @synchronized(self) {
         if (instance == nil) {
-#ifdef PARSELY_DEBUG
-            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:5];
-#else
             instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:DEFAULT_FLUSH_INTERVAL andUrlref:DEFAULT_URLREF];
-#endif
         }
         return instance;
     }
@@ -304,14 +300,8 @@ ParselyTracker *instance;  /*!< Singleton instance */
             if([self getStoredQueue]){
                 [self setFlushTimer];
             }
-#ifdef PARSELY_DEBUG
-            __debug_wifioff = NO;
-            queueSizeLimit = 5;
-            storageSizeLimit = 20;
-#else
             queueSizeLimit = 50;
             storageSizeLimit = 100;
-#endif
             [self addApplicationObservers];
         }
         return self;
@@ -347,16 +337,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
 -(BOOL)flushTimerIsActive{
     return _timer != nil && [_timer isValid];
 }
-
-#ifdef PARSELY_DEBUG
--(void)__debugWifiOff{
-    __debug_wifioff = YES;
-}
-
--(void)__debugWifiOn{
-    __debug_wifioff = NO;
-}
-#endif
 
 // helpers
 
@@ -433,11 +413,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
 -(BOOL)isReachable{
     return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] == ReachableViaWiFi
-            || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN)
-#ifdef PARSELY_DEBUG
-    && !__debug_wifioff
-#endif
-    ;
+            || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN);
 }
 
 // connection delegate methods

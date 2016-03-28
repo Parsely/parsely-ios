@@ -19,11 +19,7 @@
 
 #import <Foundation/Foundation.h>
 
-#ifdef PARSELY_DEBUG
-#define PLog( s, ... ) NSLog( @"<%@:(%d)> [Parsely] %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
-#else
 #define PLog(s, ...)
-#endif
 
 /*! \brief Manages pageview events and analytics data for Parsely on iOS
  *
@@ -41,9 +37,6 @@
         NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
         NSDictionary *idNameMap; /*!< Maps kIdTypes to request parameter strings */
         BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
-#ifdef PARSELY_DEBUG
-        BOOL __debug_wifioff;
-#endif
     @public
         NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
         NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */
@@ -182,10 +175,5 @@ typedef enum _kIdType {
  *  @return `YES` if the callback timer is currently running, `NO` otherwise
  */
 -(BOOL)flushTimerIsActive;
-
-#ifdef PARSELY_DEBUG
--(void)__debugWifiOn;
--(void)__debugWifiOff;
-#endif
 
 @end
