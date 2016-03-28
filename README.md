@@ -59,7 +59,7 @@ This call requires the canonical URL of the page corresponding to the post curre
 License
 -------
 
-    Copyright 2015 Parse.ly, Inc.
+    Copyright 2016 Parse.ly, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
