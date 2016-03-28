@@ -139,7 +139,7 @@ typedef enum _kIdType {
  *   @param queue The list of event dictionaries to serialize
  *   @return The HTTP request error encountered during the send, if any
  */
--(NSError *)sendBatchRequest:(NSSet *)queue;
+-(void)sendBatchRequest:(NSSet *)queue;
 
 /*! \brief Get the size of the queue
  *
