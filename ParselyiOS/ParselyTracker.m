@@ -2,7 +2,7 @@
     ParselyTracker.m
     ParselyiOS
 
-    Copyright 2014 Parse.ly
+    Copyright 2016 Parse.ly
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -42,7 +42,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:identifier forKey:[idNameMap objectForKey:[NSNumber numberWithInt:idtype]]];
     [params setObject:[NSNumber numberWithDouble:timestamp] forKey:@"ts"];
-    // TODO - this assumes that idsite will never change for a given run of an app. bad idea?
     [params setObject:deviceInfo forKey:@"data"];
     [eventQueue addObject:params];
     
@@ -123,9 +122,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
     NSMutableDictionary *data = [event objectForKey:@"data"];
     [data addEntriesFromDictionary:@{@"ts": [event objectForKey:@"ts"]}];
     
-    NSString *url = [NSString stringWithFormat:@"%@?rand=%lli&idsite=%@&url=%@&urlref=%@&data=%@",
+    NSString *url = [NSString stringWithFormat:@"%@?rand=%li&idsite=%@&url=%@&urlref=%@&data=%@",
                      [NSString stringWithFormat:@"%@plogger", rootUrl],
-                     1000000000 + arc4random() % 99999999999,
+                     (long)(1000000000 + arc4random() % 99999999999),
                      self.apiKey,
                      [self urlEncodeString:[event objectForKey:@"url"]],
                      @"mobile",  // urlref
@@ -280,7 +279,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
             shouldBatchRequests = YES;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
-            //rootUrl = @"http://localhost:5001/";
             rootUrl = @"http://srv.pixel.parsely.com/";
             
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
@@ -387,7 +385,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [postData appendData:[requestString dataUsingEncoding:NSUTF8StringEncoding]];
     
     [request setHTTPMethod:@"POST"];
-    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%d", (int)[postData length]] forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
@@ -407,7 +405,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     CFStringRef cfstring = CFUUIDCreateString(kCFAllocatorDefault, uuid);
     const char *cStr = CFStringGetCStringPtr(cfstring,CFStringGetFastestEncoding(cfstring));
     unsigned char result[16];
-    CC_MD5( cStr, strlen(cStr), result );
+    CC_MD5( cStr, (int)strlen(cStr), result );
     CFRelease(uuid);
     
     _uuid = [NSString stringWithFormat:
@@ -416,7 +414,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
              result[4], result[5], result[6], result[7],
              result[8], result[9], result[10], result[11],
              result[12], result[13], result[14], result[15],
-             (NSUInteger)(arc4random() % NSUIntegerMax)];
+             (int)(NSUInteger)(arc4random() % NSUIntegerMax)];
     
     [[NSUserDefaults standardUserDefaults] setObject:_uuid forKey:uuidKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -437,7 +435,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
 // connection delegate methods
 
-// TODO - these don't get called when flush is called as a background job
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     PLog(@"Pixel request successful");
 }
