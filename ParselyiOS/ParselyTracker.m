@@ -2,7 +2,7 @@
     ParselyTracker.m
     ParselyiOS
 
-    Copyright 2014 Parse.ly
+    Copyright 2016 Parse.ly
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -42,7 +42,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:identifier forKey:[idNameMap objectForKey:[NSNumber numberWithInt:idtype]]];
     [params setObject:[NSNumber numberWithDouble:timestamp] forKey:@"ts"];
-    // TODO - this assumes that idsite will never change for a given run of an app. bad idea?
     [params setObject:deviceInfo forKey:@"data"];
     [eventQueue addObject:params];
     
@@ -280,7 +279,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
             shouldBatchRequests = YES;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
-            //rootUrl = @"http://localhost:5001/";
             rootUrl = @"http://srv.pixel.parsely.com/";
             
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
@@ -437,7 +435,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
 
 // connection delegate methods
 
-// TODO - these don't get called when flush is called as a background job
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     PLog(@"Pixel request successful");
 }
