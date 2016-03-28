@@ -18,7 +18,6 @@ This repository contains three main directories:
 
 * `ParselyiOS` is the Parsely iOS SDK source code
 * `HiParsely` is an XCode project demonstrating how to integrate the SDK into an app
-* `Documentation` is the target directory for the Doxygen document generator
 
 
 Integrating with XCode
