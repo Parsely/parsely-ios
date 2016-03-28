@@ -36,7 +36,6 @@
         NSString *rootUrl;  /*!< Root of Parsely's pixel server URL (eg "http://pixel.parsely.com") */
         NSMutableDictionary *deviceInfo; /*!< Contains static information about the current app and device */
         NSDictionary *idNameMap; /*!< Maps kIdTypes to request parameter strings */
-        BOOL shouldBatchRequests;  /*!< If YES, the event queue is sent as a single request to a proxy server */
     @public
         NSInteger storageSizeLimit;  /*!< Maximum number of events held in persistent storage */
         NSInteger queueSizeLimit;  /*!< Maximum number of events held in the in-memory event queue */

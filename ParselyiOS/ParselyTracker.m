@@ -88,13 +88,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     }
 
     PLog(@"Flushing queue...");
-    if(shouldBatchRequests){
-        [self sendBatchRequest:newQueue];
-    } else {
-        for(NSMutableDictionary *event in newQueue){
-            [self flushEvent:event];
-        }
-    }
+    [self sendBatchRequest:newQueue];
     PLog(@"done");
 
     // now that we've sent the requests, vaporize them
@@ -105,33 +99,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
         PLog(@"Event queue empty, flush timer cleared.");
         [self stopFlushTimer];
     }
-}
-
-/*! \brief Send a single pixel request
- *
- *  Sends a single request directly to Parsely's pixel server, bypassing the proxy.
- *  Prefer `sendBatchRequest:` to this method, as `sendBatchRequest:` causes less battery usage
- *
- *  @param event A dictionary containing data for a single pageview event
- *  @return The HTTP request error encountered during the send, if any
- */
--(void)flushEvent:(NSDictionary *)event{
-    PLog(@"Flushing event %@", event);
-
-    // add the timestamp to the data object for non-batched requests, since they are sent directly to the pixel server
-    NSMutableDictionary *data = [event objectForKey:@"data"];
-    [data addEntriesFromDictionary:@{@"ts": [event objectForKey:@"ts"]}];
-
-    NSString *url = [NSString stringWithFormat:@"%@?rand=%li&idsite=%@&url=%@&urlref=%@&data=%@",
-                     [NSString stringWithFormat:@"%@plogger", rootUrl],
-                     (long)(1000000000 + arc4random() % 99999999999),
-                     self.apiKey,
-                     [self urlEncodeString:[event objectForKey:@"url"]],
-                     self.urlref,
-                     [self urlEncodeString:[self JSONWithDictionary:data]]];
-
-    [self apiConnectionWithURL:url];
-    PLog(@"Requested %@", url);
 }
 
 -(void)sendBatchRequest:(NSSet *)queue{
@@ -290,7 +257,6 @@ ParselyTracker *instance;  /*!< Singleton instance */
             uuidKey = @"parsely-site-uuid";
             self.shouldFlushOnBackground = YES;
             self.urlref = urlref_;
-            shouldBatchRequests = YES;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
             rootUrl = @"http://srv.pixel.parsely.com/";
