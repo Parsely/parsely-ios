@@ -55,14 +55,13 @@
 		AA157DB916FB8DD0000DB72C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AA157DBA16FB8DD0000DB72C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AA157DC616FB9046000DB72C /* mainpage.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainpage.dox; sourceTree = "<group>"; };
-		AA157DC716FB9046000DB72C /* protocol.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = protocol.dox; sourceTree = "<group>"; };
 		AA157DC916FB9046000DB72C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AA157DCA16FB9046000DB72C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AA157DCB16FB9046000DB72C /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
 		AA157DCC16FB9046000DB72C /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
 		AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_logo_horizontal.png; sourceTree = "<group>"; };
-		AAA9A85E16FBA68200923565 /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiParsely.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAAF5133172ABD29003CE442 /* SDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAA9A85E16FBA68200923565 /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HiParsely.app; path = "/Users/emmettbutler/git/parsely/parsely-ios/HiParsely/build/Release-iphoneos/HiParsely.app"; sourceTree = "<absolute>"; };
+		AAAF5133172ABD29003CE442 /* SDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SDKTests.octest; path = "/Users/emmettbutler/git/parsely/parsely-ios/HiParsely/build/Debug-iphoneos/SDKTests.octest"; sourceTree = "<absolute>"; };
 		AAAF5134172ABD29003CE442 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AAAF513A172ABD29003CE442 /* SDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SDKTests-Info.plist"; sourceTree = "<group>"; };
 		AAAF513C172ABD29003CE442 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -141,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				AA157DC616FB9046000DB72C /* mainpage.dox */,
-				AA157DC716FB9046000DB72C /* protocol.dox */,
 			);
 			path = docs;
 			sourceTree = "<group>";
@@ -184,8 +182,6 @@
 				AA157DAF16FB8DD0000DB72C /* HiParsely */,
 				AAAF5138172ABD29003CE442 /* SDKTests */,
 				AAE37F1F16EA66B300358E79 /* Frameworks */,
-				AAA9A85E16FBA68200923565 /* HiParsely.app */,
-				AAAF5133172ABD29003CE442 /* SDKTests.octest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -221,7 +217,7 @@
 			name = SDKTests;
 			productName = SDKTests;
 			productReference = AAAF5133172ABD29003CE442 /* SDKTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		AAE37F1C16EA66B300358E79 /* HiParsely */ = {
 			isa = PBXNativeTarget;
@@ -247,7 +243,7 @@
 		AAE37F1516EA66B300358E79 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Emmett Butler";
 			};
 			buildConfigurationList = AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "HiParsely" */;
@@ -317,7 +313,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../Documentation\n/Applications/Doxygen.app/Contents/Resources/doxygen";
+			shellScript = /Applications/Doxygen.app/Contents/Resources/doxygen;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -377,6 +373,7 @@
 				GCC_PREFIX_HEADER = "SDKTests/SDKTests-Prefix.pch";
 				INFOPLIST_FILE = "SDKTests/SDKTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.parsely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -395,6 +392,7 @@
 				GCC_PREFIX_HEADER = "SDKTests/SDKTests-Prefix.pch";
 				INFOPLIST_FILE = "SDKTests/SDKTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.parsely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -415,6 +413,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -426,7 +425,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -451,7 +450,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,6 +477,7 @@
 				);
 				INFOPLIST_FILE = "HiParsely/Resources/HiParsely-Info.plist";
 				INFOPLIST_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
+				PRODUCT_BUNDLE_IDENTIFIER = "parse.ly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = HiParsely;
 				PROVISIONING_PROFILE = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
@@ -495,6 +495,7 @@
 				GCC_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
 				INFOPLIST_FILE = "HiParsely/Resources/HiParsely-Info.plist";
 				INFOPLIST_PREFIX_HEADER = "HiParsely/Resources/HiParsely-Prefix.pch";
+				PRODUCT_BUNDLE_IDENTIFIER = "parse.ly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = HiParsely;
 				PROVISIONING_PROFILE = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56342F10-ACE9-456F-B1FE-C0D74B52E263";
@@ -512,6 +513,7 @@
 				AAAF5143172ABD29003CE442 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AAE37F1816EA66B300358E79 /* Build configuration list for PBXProject "HiParsely" */ = {
 			isa = XCConfigurationList;
