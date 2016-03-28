@@ -14,11 +14,10 @@ If you want to track activity on your iPhone app, first clone this repository wi
 
     git clone http://github.com/Parsely/parsely-ios.git
 
-This repository contains three main directories:
-
-* `ParselyiOS` is the Parsely iOS SDK source code
-* `HiParsely` is an XCode project demonstrating how to integrate the SDK into an app
-* `Documentation` is the target directory for the Doxygen document generator
+This repository's primary purpose is to host the open source Parse.ly iOS SDK,
+implemented as an Objective-C class in `/ParselyiOS`. This module is used in `/HiParsely`
+as an example of how to integrate the SDK in a typical XCode project. You can
+open `HiParsely` as an XCode project and explore a typical SDK integration.
 
 
 Integrating with XCode
@@ -60,7 +59,7 @@ This call requires the canonical URL of the page corresponding to the post curre
 License
 -------
 
-    Copyright 2015 Parse.ly, Inc.
+    Copyright 2016 Parse.ly, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -47,7 +47,7 @@
     queueStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, bounds.size.height-120, bounds.size.width, 90)];
     [queueStatusLabel setNumberOfLines:0];
     [queueStatusLabel setText:[NSString stringWithFormat:@"%d queued events\n%d stored events\nflush rate %ds",
-                               [[ParselyTracker sharedInstance] queueSize], [[ParselyTracker sharedInstance] storedEventsCount], [[ParselyTracker sharedInstance] flushInterval]]];
+                               (int)[[ParselyTracker sharedInstance] queueSize], (int)[[ParselyTracker sharedInstance] storedEventsCount], (int)[[ParselyTracker sharedInstance] flushInterval]]];
     [queueStatusLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:queueStatusLabel];
     
@@ -60,9 +60,9 @@
 
 -(void)updateQueueStatusLabel{
     [queueStatusLabel setText:[NSString stringWithFormat:@"%d queued events\n%d stored events\n%@",
-                               [[ParselyTracker sharedInstance] queueSize], [[ParselyTracker sharedInstance] storedEventsCount],
+                               (int)[[ParselyTracker sharedInstance] queueSize], (int)[[ParselyTracker sharedInstance] storedEventsCount],
                                [[ParselyTracker sharedInstance] flushTimerIsActive] ?
-                                    [NSString stringWithFormat:@"flush rate %ds", [[ParselyTracker sharedInstance] flushInterval]] :
+                                    [NSString stringWithFormat:@"flush rate %ds", (int)[[ParselyTracker sharedInstance] flushInterval]] :
                                     @"timer inactive"]];
 }
 
