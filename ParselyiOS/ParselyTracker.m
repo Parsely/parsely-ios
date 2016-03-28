@@ -22,6 +22,9 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
+#define DEFAULT_FLUSH_INTERVAL 60
+#define DEFAULT_URLREF @"parsely_mobile_sdk"
+
 @implementation ParselyTracker
 
 ParselyTracker *instance;  /*!< Singleton instance */
@@ -124,7 +127,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
                      (long)(1000000000 + arc4random() % 99999999999),
                      self.apiKey,
                      [self urlEncodeString:[event objectForKey:@"url"]],
-                     @"mobile",  // urlref
+                     self.urlref,
                      [self urlEncodeString:[self JSONWithDictionary:data]]];
 
     [self apiConnectionWithURL:url];
@@ -234,6 +237,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [dInfo setObject:self.apiKey forKey:@"idsite"];
 
     [dInfo setObject:@"Apple" forKey:@"manufacturer"];
+    [dInfo setObject:self.urlref forKey:@"urlref"];
     [dInfo setObject:[[UIDevice currentDevice] systemName] forKey:@"os"];
     [dInfo setObject:[[UIDevice currentDevice] systemVersion] forKey:@"os_version"];
 
@@ -250,20 +254,38 @@ ParselyTracker *instance;  /*!< Singleton instance */
     }
 }
 
++(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint andUrlref:(NSString *)urlref_ {
+    @synchronized(self) {
+        if (instance == nil) {
+            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:flushint andUrlref:urlref_];
+        }
+        return instance;
+    }
+}
+
++(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint {
+    @synchronized(self) {
+        if (instance == nil) {
+            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:flushint andUrlref:DEFAULT_URLREF];
+        }
+        return instance;
+    }
+}
+
 +(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey{
     @synchronized(self) {
         if (instance == nil) {
 #ifdef PARSELY_DEBUG
             instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:5];
 #else
-            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:60];
+            instance = [[ParselyTracker alloc] initWithApiKey:apikey andFlushInterval:DEFAULT_FLUSH_INTERVAL andUrlref:DEFAULT_URLREF];
 #endif
         }
         return instance;
     }
 }
 
--(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint{
+-(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint andUrlref:(NSString *)urlref_ {
     @synchronized(self){
         if(self=[super init]){
             self.apiKey = apikey;
@@ -271,6 +293,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
             storageKey = @"parsely-events";
             uuidKey = @"parsely-site-uuid";
             self.shouldFlushOnBackground = YES;
+            self.urlref = urlref_;
             shouldBatchRequests = YES;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];

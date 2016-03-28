@@ -58,6 +58,7 @@ typedef enum _kIdType {
 } kIdType;
 
 @property (nonatomic) NSString *apiKey;  /*!< Parsely public API key (eg "samplesite.com") */
+@property (nonatomic) NSString *urlref;  /*!< The "urlref" value sent with each event. Defaults to "parsely_mobile_sdk" */
 @property (nonatomic) NSInteger flushInterval;  /*!< The time between event queue flushes expressed in seconds */
 @property (nonatomic) BOOL shouldFlushOnBackground;  /*!< If YES, the event queue is automatically flushed when the app enters the background */
 
@@ -68,6 +69,27 @@ typedef enum _kIdType {
  *  @return The singleton instance
  */
 +(ParselyTracker *)sharedInstance;
+
+/*! \brief Singleton instance factory
+ *
+ *  **Note**: This must be called before `sharedInstance`
+ *
+ *  @param apikey The Parsely public API key (eg "samplesite.com")
+ *  @param flushint Interval between queue flushes, expressed in seconds
+ *  @return The singleton instance
+ */
++(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
+
+/*! \brief Singleton instance factory
+ *
+ *  **Note**: This must be called before `sharedInstance`
+ *
+ *  @param apikey The Parsely public API key (eg "samplesite.com")
+ *  @param flushint Interval between queue flushes, expressed in seconds
+ *  @param urlref_ The urlref value to send with each event
+ *  @return The singleton instance
+ */
++(ParselyTracker *)sharedInstanceWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint andUrlref:(NSString *)urlref_;
 
 /*! \brief Singleton instance factory
  *
@@ -127,9 +149,10 @@ typedef enum _kIdType {
  *
  *  @param apikey Parsely public API key (eg "samplesite.com")
  *  @param flushint Interval between queue flushes, expressed in seconds
+ *  @param urlref_ The urlref value to send with each event
  *  @return The singleton instance
  */
--(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint;
+-(id)initWithApiKey:(NSString *)apikey andFlushInterval:(NSInteger)flushint andUrlref:(NSString *)urlref_;
 
 /*!  \brief Send the entire queue as a single request
  *
