@@ -259,7 +259,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
             self.urlref = urlref_;
             self.flushInterval = flushint;
             deviceInfo = [self collectDeviceInfo];
-            rootUrl = @"http://srv.pixel.parsely.com/";
+            rootUrl = @"https://srv.pixel.parsely.com/";
 
             idNameMap = @{[NSNumber numberWithInt:kUrl]: @"url", [NSNumber numberWithInt:kPostId]: @"postid"};
 
