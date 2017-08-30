@@ -17,6 +17,8 @@
     limitations under the License.
 */
 
+#include <sys/sysctl.h>
+
 #import "ParselyTracker.h"
 #import "Reachability.h"
 
@@ -330,6 +332,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     [request setHTTPMethod:@"GET"];
+    [request addValue:[self getUserAgent] forHTTPHeaderField:@"User-Agent"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:
      ^(NSURLResponse *response, NSData *data, NSError *error){}];
 }
@@ -343,6 +346,7 @@ ParselyTracker *instance;  /*!< Singleton instance */
     [postData appendData:[requestString dataUsingEncoding:NSUTF8StringEncoding]];
 
     [request setHTTPMethod:@"POST"];
+    [request addValue:[self getUserAgent] forHTTPHeaderField:@"User-Agent"];
     [request setValue:[NSString stringWithFormat:@"%d", (int)[postData length]] forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
@@ -375,6 +379,31 @@ ParselyTracker *instance;  /*!< Singleton instance */
     PLog(@"Generated UUID %@", _uuid);
 
     return _uuid;
+}
+
+-(NSString *)getHardwareString{
+    int mib[] = {CTL_HW, HW_MACHINE};
+    size_t len = 0;
+    sysctl(mib, 2, NULL, &len, NULL, 0);
+    char *machine = malloc(len);
+    sysctl(mib, 2, machine, &len, NULL, 0);
+    NSString *platform = [NSString stringWithCString:machine encoding:NSASCIIStringEncoding];
+    free(machine);
+    return platform;
+}
+
+-(NSString *)getUserAgent{
+    NSDictionary *bundleDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *appName = [bundleDict objectForKey:@"CFBundleName"];
+    NSString *appVersion = [bundleDict objectForKey:@"CFBundleShortVersionString"];
+    NSString *appDescriptor = [[appName stringByAppendingString:@"/"] stringByAppendingString:appVersion];
+
+    UIDevice *currentDevice = [UIDevice currentDevice];
+    NSString *osDescriptor = [@"iOS/" stringByAppendingString:[currentDevice systemVersion]];
+
+    NSString *hardwareString = [self getHardwareString];
+    NSString *ua = [[[[[appDescriptor stringByAppendingString:@" "] stringByAppendingString:osDescriptor] stringByAppendingString:@" ("] stringByAppendingString:hardwareString] stringByAppendingString:@")"];
+    return ua;
 }
 
 -(BOOL)isReachable{
