@@ -104,6 +104,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
 }
 
 -(void)sendBatchRequest:(NSSet *)queue{
+    if([queue count] < 1) {
+        return;
+    }
     // create an efficiently packed object for the GET parameters
     NSMutableDictionary *batchDict = [NSMutableDictionary dictionary];
     NSArray *queueArray = [queue allObjects];
@@ -160,7 +163,10 @@ ParselyTracker *instance;  /*!< Singleton instance */
 }
 
 -(NSArray *)getStoredQueue{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:storageKey] != nil) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
+    }
+    return [NSArray array];
 }
 
 -(NSString *)getSiteUuid{

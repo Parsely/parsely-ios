@@ -69,15 +69,9 @@
 -(void)toggleSimulatedConnection{
     if(hasConnection){
         hasConnection = NO;
-#ifdef PARSELY_DEBUG
-        [[ParselyTracker sharedInstance] __debugWifiOff];
-#endif
         [connectionButton setTitle:@"Regain connection" forState:UIControlStateNormal];
     } else {
         hasConnection = YES;
-#ifdef PARSELY_DEBUG
-        [[ParselyTracker sharedInstance] __debugWifiOn];
-#endif
         [connectionButton setTitle:@"Lose connection" forState:UIControlStateNormal];
     }
 }
