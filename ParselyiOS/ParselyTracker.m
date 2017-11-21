@@ -163,8 +163,9 @@ ParselyTracker *instance;  /*!< Singleton instance */
 }
 
 -(NSArray *)getStoredQueue{
-    if([[NSUserDefaults standardUserDefaults] objectForKey:storageKey] != nil) {
-        return [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
+    id object = [[NSUserDefaults standardUserDefaults] objectForKey:storageKey];
+    if(![object isEqual:nil]){
+        return object;
     }
     return [NSArray array];
 }
