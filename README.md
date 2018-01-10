@@ -10,7 +10,9 @@ for iOS apps. Full class-level documentation of this library can be found at the
 Usage
 -----
 
-If you want to track activity on your iPhone app, first clone this repository with
+If your application uses Cocoapods you can use the [Parsely Pod](https://cocoapods.org/pods/Parsely) to integrate the SDK.
+
+If you want to track activity on your iPhone app and integrate this code manually, first clone this repository with
 
     git clone http://github.com/Parsely/parsely-ios.git
 
