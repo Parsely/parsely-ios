@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.3 (2017-11-27)
+---------------
+
+* Use HTTPS for requests
+* Improved user-agents sent on pixel requests
+* Add additional checking to fix threading problems
+
 2.2 (2016-3-28)
 ---------------
 
