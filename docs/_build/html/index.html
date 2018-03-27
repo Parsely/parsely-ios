@@ -31,17 +31,26 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <a class="reference internal image-reference" href="https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png"><img alt="https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png" src="https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png" style="width: 155px;" /></a>
-<div class="section" id="parsely-ios-s-quickstart-guide">
+  <div class="section" id="parsely-ios-s-quickstart-guide">
 <h1>Parsely iOS’s Quickstart Guide<a class="headerlink" href="#parsely-ios-s-quickstart-guide" title="Permalink to this headline">¶</a></h1>
-<p>Integrating with XCode
-To integrate Parse.ly mobile tracking with your iOS app:</p>
-<p>Drag and drop the ParselyiOS folder into your XCode project
-Check the box labeled “Copy items into destination Group’s folder”
-Ensure that the Foundation.framework and SystemConfiguration.framework frameworks are included in the “Link Binary with Libraries” build phase
-Using the SDK
-In any file that uses the Parsely SDK, be sure to add the line</p>
+<div class="section" id="integrating-with-xcode">
+<h2>Integrating with XCode<a class="headerlink" href="#integrating-with-xcode" title="Permalink to this headline">¶</a></h2>
+<p>To integrate Parse.ly mobile tracking with your iOS app:</p>
+<ol class="arabic simple">
+<li>Drag and drop the ParselyiOS folder into your XCode project</li>
+<li>Check the box labeled “Copy items into destination Group’s folder”</li>
+<li>Ensure that the <cite>Foundation.framework</cite> and <cite>SystemConfiguration.framework</cite> frameworks are included in the “Link Binary with Libraries” build phase</li>
+</ol>
+</div>
+<div class="section" id="using-the-sdk">
+<h2>Using the SDK<a class="headerlink" href="#using-the-sdk" title="Permalink to this headline">¶</a></h2>
+<p>In any file that uses the Parsely SDK, be sure to add the line</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>#import “ParselyTracker.h”</dd>
+</dl>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -61,7 +70,11 @@ In any file that uses the Parsely SDK, be sure to add the line</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Parsely iOS’s Quickstart Guide</a></li>
+<li><a class="reference internal" href="#">Parsely iOS’s Quickstart Guide</a><ul>
+<li><a class="reference internal" href="#integrating-with-xcode">Integrating with XCode</a></li>
+<li><a class="reference internal" href="#using-the-sdk">Using the SDK</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
