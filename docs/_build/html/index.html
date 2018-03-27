@@ -40,16 +40,30 @@
 <ol class="arabic simple">
 <li>Drag and drop the ParselyiOS folder into your XCode project</li>
 <li>Check the box labeled “Copy items into destination Group’s folder”</li>
-<li>Ensure that the <cite>Foundation.framework</cite> and <cite>SystemConfiguration.framework</cite> frameworks are included in the “Link Binary with Libraries” build phase</li>
+<li>Ensure that the <code class="docutils literal notranslate"><span class="pre">Foundation.framework</span></code> and <code class="docutils literal notranslate"><span class="pre">SystemConfiguration.framework</span></code> frameworks are included in the <cite>Link Binary with Libraries</cite> build phase</li>
 </ol>
 </div>
 <div class="section" id="using-the-sdk">
 <h2>Using the SDK<a class="headerlink" href="#using-the-sdk" title="Permalink to this headline">¶</a></h2>
 <p>In any file that uses the Parsely SDK, be sure to add the line</p>
-<dl class="docutils">
-<dt>::</dt>
-<dd>#import “ParselyTracker.h”</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="s2">&quot;ParselyTracker.h&quot;</span>
+</pre></div>
+</div>
+<p>at the top of the file.</p>
+<p>Before using the SDK, you must initialize the Parsely object with your public api key. This is usually best to do in the setup phase of your app, for example in the <code class="docutils literal notranslate"><span class="pre">applicationDidFinishLaunchingWithOptions:</span></code> method of the <code class="docutils literal notranslate"><span class="pre">AppDelegate</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="n">application</span><span class="p">:(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="n">didFinishLaunchingWithOptions</span><span class="p">:(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">launchOptions</span><span class="p">{</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">window</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIWindow</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithFrame</span><span class="p">:[[</span><span class="n">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">]];</span>
+  <span class="p">[</span><span class="n">ParselyTracker</span> <span class="n">sharedInstanceWithApiKey</span><span class="p">:</span><span class="o">@</span><span class="s2">&quot;somesite.com&quot;</span><span class="p">];</span>  <span class="o">//</span> <span class="n">initialize</span> <span class="n">the</span> <span class="n">Parsely</span> <span class="n">tracker</span>
+  <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">window</span> <span class="n">makeKeyAndVisible</span><span class="p">];</span>
+  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To register a pageview event with Parsely, simply use the <code class="docutils literal notranslate"><span class="pre">trackURL:</span></code> call.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">ParselyTracker</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">trackURL</span><span class="p">:</span><span class="o">@</span><span class="s2">&quot;http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>This call requires the canonical URL of the page corresponding to the post currently being viewed.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
