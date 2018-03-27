@@ -43,7 +43,7 @@ To register a pageview event with Parsely, simply use the ``trackURL:`` call.
 This call requires the canonical URL of the page corresponding to the post currently being viewed.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
 
