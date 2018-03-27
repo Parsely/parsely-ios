@@ -1,7 +1,8 @@
+.. image:: https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png
+  :width: 155px
+
 Parsely iOS's Quickstart Guide
 =======================================
-
-.. image:: https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png
 
 Integrating with XCode
 To integrate Parse.ly mobile tracking with your iOS app:
