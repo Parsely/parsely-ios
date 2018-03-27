@@ -1,11 +1,7 @@
-.. Parsely iOS documentation master file, created by
-   sphinx-quickstart on Tue Mar 27 08:58:22 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Parsely iOS's Quickstart Guide
 =======================================
-.. img:: https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png
+
+.. image:: https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png
 
 Integrating with XCode
 To integrate Parse.ly mobile tracking with your iOS app:
