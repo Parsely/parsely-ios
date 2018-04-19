@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1420BE4508AF8D30D812FD07 /* libPods-HiParsely.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949FFFC9BE2912A2D11E2D9F /* libPods-HiParsely.a */; };
+		4DC1E90C5F3FBF03E02DD5C7 /* libPods-SDKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A5C787BC4CADD21A12C7E9 /* libPods-SDKTests.a */; };
 		AA0A86D016EE621C001ECCAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */; };
 		AA0A86D216EE6C82001ECCAE /* parsely_appicon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */; };
 		AA0A86D416EE6CA2001ECCAE /* parsely_appicon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */; };
@@ -16,7 +18,6 @@
 		AA157DBE16FB8DD0000DB72C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AA157DB516FB8DD0000DB72C /* Default.png */; };
 		AA157DBF16FB8DD0000DB72C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA157DB616FB8DD0000DB72C /* Default@2x.png */; };
 		AA157DC116FB8DD0000DB72C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DBA16FB8DD0000DB72C /* ViewController.m */; };
-		AA157DD016FB9046000DB72C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCA16FB9046000DB72C /* Reachability.m */; };
 		AA157DD116FB9046000DB72C /* ParselyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AA157DCC16FB9046000DB72C /* ParselyTracker.m */; };
 		AAA9A85D16FBA41E00923565 /* parsely_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */; };
 		AAAF5135172ABD29003CE442 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAF5134172ABD29003CE442 /* SenTestingKit.framework */; };
@@ -41,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07E4708F9D400721EC4DBC3C /* Pods-SDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-SDKTests/Pods-SDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		11DFD16A0255DAA6DCB7E820 /* Pods-SDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-SDKTests/Pods-SDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6B0AC984C730972446443DFA /* Pods-HiParsely.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiParsely.release.xcconfig"; path = "../Pods/Target Support Files/Pods-HiParsely/Pods-HiParsely.release.xcconfig"; sourceTree = "<group>"; };
+		949FFFC9BE2912A2D11E2D9F /* libPods-HiParsely.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HiParsely.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0A86CF16EE621C001ECCAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AA0A86D116EE6C82001ECCAE /* parsely_appicon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_small.png; sourceTree = "<group>"; };
 		AA0A86D316EE6CA2001ECCAE /* parsely_appicon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_appicon_retina.png; sourceTree = "<group>"; };
@@ -55,13 +60,9 @@
 		AA157DB916FB8DD0000DB72C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AA157DBA16FB8DD0000DB72C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AA157DC616FB9046000DB72C /* mainpage.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainpage.dox; sourceTree = "<group>"; };
-		AA157DC916FB9046000DB72C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		AA157DCA16FB9046000DB72C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AA157DCB16FB9046000DB72C /* ParselyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParselyTracker.h; sourceTree = "<group>"; };
 		AA157DCC16FB9046000DB72C /* ParselyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParselyTracker.m; sourceTree = "<group>"; };
 		AAA9A85C16FBA41E00923565 /* parsely_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parsely_logo_horizontal.png; sourceTree = "<group>"; };
-		AAA9A85E16FBA68200923565 /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HiParsely.app; path = "/Users/emmettbutler/git/parsely/parsely-ios/HiParsely/build/Release-iphoneos/HiParsely.app"; sourceTree = "<absolute>"; };
-		AAAF5133172ABD29003CE442 /* SDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SDKTests.octest; path = "/Users/emmettbutler/git/parsely/parsely-ios/HiParsely/build/Debug-iphoneos/SDKTests.octest"; sourceTree = "<absolute>"; };
 		AAAF5134172ABD29003CE442 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AAAF513A172ABD29003CE442 /* SDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SDKTests-Info.plist"; sourceTree = "<group>"; };
 		AAAF513C172ABD29003CE442 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -71,6 +72,10 @@
 		AAE37F2016EA66B300358E79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAE37F2216EA66B300358E79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAE37F2416EA66B300358E79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C0052765EE86504CF6707B25 /* Pods-HiParsely.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiParsely.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-HiParsely/Pods-HiParsely.debug.xcconfig"; sourceTree = "<group>"; };
+		D1A5C787BC4CADD21A12C7E9 /* libPods-SDKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F41EA9792089433E00CC0128 /* HiParsely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiParsely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F41EA97A2089433E00CC0128 /* SDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +86,7 @@
 				AAAF5135172ABD29003CE442 /* SenTestingKit.framework in Frameworks */,
 				AAAF5136172ABD29003CE442 /* UIKit.framework in Frameworks */,
 				AAAF5137172ABD29003CE442 /* Foundation.framework in Frameworks */,
+				4DC1E90C5F3FBF03E02DD5C7 /* libPods-SDKTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,12 +98,24 @@
 				AAE37F2116EA66B300358E79 /* UIKit.framework in Frameworks */,
 				AAE37F2316EA66B300358E79 /* Foundation.framework in Frameworks */,
 				AAE37F2516EA66B300358E79 /* CoreGraphics.framework in Frameworks */,
+				1420BE4508AF8D30D812FD07 /* libPods-HiParsely.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		710A82DA36214B5AA8B280E5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C0052765EE86504CF6707B25 /* Pods-HiParsely.debug.xcconfig */,
+				6B0AC984C730972446443DFA /* Pods-HiParsely.release.xcconfig */,
+				11DFD16A0255DAA6DCB7E820 /* Pods-SDKTests.debug.xcconfig */,
+				07E4708F9D400721EC4DBC3C /* Pods-SDKTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AA157DAF16FB8DD0000DB72C /* HiParsely */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				AA157DC516FB9046000DB72C /* docs */,
-				AA157DC816FB9046000DB72C /* libs */,
 				AA157DCB16FB9046000DB72C /* ParselyTracker.h */,
 				AA157DCC16FB9046000DB72C /* ParselyTracker.m */,
 			);
@@ -142,15 +159,6 @@
 				AA157DC616FB9046000DB72C /* mainpage.dox */,
 			);
 			path = docs;
-			sourceTree = "<group>";
-		};
-		AA157DC816FB9046000DB72C /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				AA157DC916FB9046000DB72C /* Reachability.h */,
-				AA157DCA16FB9046000DB72C /* Reachability.m */,
-			);
-			path = libs;
 			sourceTree = "<group>";
 		};
 		AAAF5138172ABD29003CE442 /* SDKTests */ = {
@@ -182,6 +190,9 @@
 				AA157DAF16FB8DD0000DB72C /* HiParsely */,
 				AAAF5138172ABD29003CE442 /* SDKTests */,
 				AAE37F1F16EA66B300358E79 /* Frameworks */,
+				710A82DA36214B5AA8B280E5 /* Pods */,
+				F41EA9792089433E00CC0128 /* HiParsely.app */,
+				F41EA97A2089433E00CC0128 /* SDKTests.octest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -193,6 +204,8 @@
 				AAE37F2216EA66B300358E79 /* Foundation.framework */,
 				AAE37F2416EA66B300358E79 /* CoreGraphics.framework */,
 				AAAF5134172ABD29003CE442 /* SenTestingKit.framework */,
+				949FFFC9BE2912A2D11E2D9F /* libPods-HiParsely.a */,
+				D1A5C787BC4CADD21A12C7E9 /* libPods-SDKTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -204,6 +217,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAAF5144172ABD29003CE442 /* Build configuration list for PBXNativeTarget "SDKTests" */;
 			buildPhases = (
+				BFABCA8EA1B3BD8AA93D4692 /* [CP] Check Pods Manifest.lock */,
 				AAAF512E172ABD29003CE442 /* Sources */,
 				AAAF512F172ABD29003CE442 /* Frameworks */,
 				AAAF5130172ABD29003CE442 /* Resources */,
@@ -216,13 +230,14 @@
 			);
 			name = SDKTests;
 			productName = SDKTests;
-			productReference = AAAF5133172ABD29003CE442 /* SDKTests.octest */;
+			productReference = F41EA97A2089433E00CC0128 /* SDKTests.octest */;
 			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		AAE37F1C16EA66B300358E79 /* HiParsely */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAE37F4316EA66B400358E79 /* Build configuration list for PBXNativeTarget "HiParsely" */;
 			buildPhases = (
+				F9337C088CFD01DF55FDF4F9 /* [CP] Check Pods Manifest.lock */,
 				AAE37F1916EA66B300358E79 /* Sources */,
 				AAE37F1A16EA66B300358E79 /* Frameworks */,
 				AAE37F1B16EA66B300358E79 /* Resources */,
@@ -234,7 +249,7 @@
 			);
 			name = HiParsely;
 			productName = PixelTester;
-			productReference = AAA9A85E16FBA68200923565 /* HiParsely.app */;
+			productReference = F41EA9792089433E00CC0128 /* HiParsely.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -315,6 +330,42 @@
 			shellPath = /bin/sh;
 			shellScript = /Applications/Doxygen.app/Contents/Resources/doxygen;
 		};
+		BFABCA8EA1B3BD8AA93D4692 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SDKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9337C088CFD01DF55FDF4F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HiParsely-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -334,7 +385,6 @@
 				AA157DBB16FB8DD0000DB72C /* AppDelegate.m in Sources */,
 				AA157DBC16FB8DD0000DB72C /* main.m in Sources */,
 				AA157DC116FB8DD0000DB72C /* ViewController.m in Sources */,
-				AA157DD016FB9046000DB72C /* Reachability.m in Sources */,
 				AA157DD116FB9046000DB72C /* ParselyTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +413,7 @@
 /* Begin XCBuildConfiguration section */
 		AAAF5142172ABD29003CE442 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11DFD16A0255DAA6DCB7E820 /* Pods-SDKTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HiParsely.app/HiParsely";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -382,6 +433,7 @@
 		};
 		AAAF5143172ABD29003CE442 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07E4708F9D400721EC4DBC3C /* Pods-SDKTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HiParsely.app/HiParsely";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -460,6 +512,7 @@
 		};
 		AAE37F4416EA66B400358E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0052765EE86504CF6707B25 /* Pods-HiParsely.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
@@ -487,6 +540,7 @@
 		};
 		AAE37F4516EA66B400358E79 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B0AC984C730972446443DFA /* Pods-HiParsely.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Emmet Butler (96JS2MCL4J)";
