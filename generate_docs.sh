@@ -2,4 +2,4 @@
 
 cd HiParsely
 doxygen Doxyfile
-rsync -Pavz html_docs/* parsely.com:/data/vhosts/www.parsely.com/sdk/ios
+rsync -Pavz html_docs/* parse.ly:/data/vhosts/parse.ly/sdk/ios
