@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name           = 'Parsely'
-  s.version        = '2.3'
+  s.version        = '2.4'
   s.license        = 'Apache License, Version 2.0'
   s.summary        = 'Parsely analytics library for iOS.'
   s.homepage       = 'https://www.parsely.com/docs/tools/mobile_sdk.html'
