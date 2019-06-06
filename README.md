@@ -1,3 +1,7 @@
+**NOTICE: this library is deprecated and has been replaced by
+[the Swift-based Parse.ly SDK](https://github.com/parsely/analyticssdk-ios). If
+integrating with Parse.ly for the first time, do not use this library.**
+
 Parsely iOS SDK
 ===============
 
