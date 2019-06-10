@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage       = 'https://www.parsely.com/docs/tools/mobile_sdk.html'
   s.author         = { 'Parsely' => 'https://parsely.com' }
 
-  s.source         = { :git => 'https://github.com/Parsely/parsely-ios.git', :tag => '2.3' }
+  s.source         = { :git => 'https://github.com/Parsely/parsely-ios.git', :tag => '2.4' }
   s.source_files   = 'ParselyiOS/*.{h,m}', 'ParselyiOS/libs/*.{h,m}'
   s.frameworks     = 'SystemConfiguration', 'Foundation'
 
