@@ -1,0 +1,56 @@
+.. image:: https://www.parse.ly/static/img/brand/logo-parsely-green-horizontal.png
+  :width: 155px
+|
+
+Parsely iOS's Quickstart Guide
+=======================================
+
+Integrating with XCode
+-----------------------
+To integrate Parse.ly mobile tracking with your iOS app:
+
+#. Drag and drop the ParselyiOS folder into your XCode project
+#. Check the box labeled "Copy items into destination Group's folder"
+#. Ensure that the ``Foundation.framework`` and ``SystemConfiguration.framework`` frameworks are included in the `Link Binary with Libraries` build phase
+
+Using the SDK
+---------------
+In any file that uses the Parsely SDK, be sure to add the line
+
+::
+
+  import "ParselyTracker.h"
+
+at the top of the file.
+
+Before using the SDK, you must initialize the Parsely object with your public api key. This is usually best to do in the setup phase of your app, for example in the ``applicationDidFinishLaunchingWithOptions:`` method of the ``AppDelegate``.
+
+::
+
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ParselyTracker sharedInstanceWithApiKey:@"somesite.com"];  // initialize the Parsely tracker
+    [self.window makeKeyAndVisible];
+    return YES;
+  }
+
+To register a pageview event with Parsely, simply use the ``trackURL:`` call.
+
+::
+
+  [[ParselyTracker sharedInstance] trackURL:@"http://dailycaller.com/2013/03/19/alison-brie-is-the-future-of-television-photos/"];
+
+This call requires the canonical URL of the page corresponding to the post currently being viewed.
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Contents:
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
